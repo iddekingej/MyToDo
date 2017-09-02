@@ -1,0 +1,50 @@
+<resources>
+    <string name="failure_title">Failure</string>
+    <string name="app_name">My todo / Projects</string>
+
+    <string name="projects">Projects</string>
+    <string name="edit_project">Edit project</string>
+    <string name="delete_project">Delete project</string>
+    <string name="title_activity_edit_project">Edit project</string>
+    <string name="Project_information">Project information</string>
+    <string name="Project_name">Project name</string>
+    <string name="Start_adding_todo">Start adding todo after save?</string>
+    <string name="title_activity_todo">Overview of todo items</string>
+    <string name="title_activity_edit_todo">Edit a todo</string>
+    <string name="todo_title">Title of todo item</string>
+    <string name="todo_comment">Comment</string>
+    <string name="enter_todo">Enter todo item</string>
+    <string name="delete_todo_question">Delete todo item?</string>
+    <string name="delete_todo">Delete todo item</string>
+    <string name="keep_todo">Keep this todo</string>
+    <string name="action_add_project">Add project</string>
+    <string name="action_search">Search</string>
+    <string name="action_back">Back</string>
+    <string name="action_save_todo">Save todo</string>
+    <string name="no_todo_items">No todo items found</string>
+    <string name="action_add_status">Add status</string>
+    <string name="position">Position</string>
+    <!-- Status -->
+    <string name="label_status">Status</string>
+    <string name="label_action_type">Action type</string>
+    <string name="action_save_status">Save status</string>
+    <string name="action_delete_status">Delete status</string>
+    <string name="status_description">Status description</string>
+    <string name="action_status">Status</string>
+    <string name="title_activity_edit_status">Edit status</string>
+    <string name="title_activity_status">Status maintenance</string>
+    <string name="warning_status_description_mandatory">Description is mandatory</string>
+    <string name="warning_position_number_mandatory">Position must be a positive number and is mandatory.</string>
+    <string name="warning_cant_delete_status_used">Can\'t delete status because it\'s already used.</string>
+    <!-- Generic -->
+    <string name="help">Help</string>
+    <string name="title_activity_help">Help</string>
+    <string name="close">Close</string>
+    <string name="ok">OK</string>
+    <!-- Action types -->
+    <string name="at_not_started">Not yet started</string>
+    <string name="at_started">Started</string>
+    <string name="at_not_active">Not active</string>
+    <string name="at_removed">Removed</string>
+    <string name="at_finished">Finished</string>
+</resources>

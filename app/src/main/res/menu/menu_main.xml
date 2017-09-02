@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="org.elaya.mytodo.MainActivity">
+    <item
+        android:id="@+id/action_status"
+        android:orderInCategory="100"
+        android:title="@string/action_status"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/help"
+        android:title="@string/help"
+        android:icon="@drawable/help"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/search"
+        android:title="Search"
+        android:icon="@drawable/search"
+        app:showAsAction="always"
+    />
+    <item
+        android:id="@+id/add_project"
+        android:title="@string/action_add_project"
+        android:icon="@drawable/add"
+        app:showAsAction="always"
+        />
+</menu>
