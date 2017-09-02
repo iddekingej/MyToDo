@@ -122,18 +122,38 @@ final class DataSource {
         return lTodoCursor;
     }
 
+    /**
+     * Add project to database
+     *
+     * @param pProjectName  Naam/description of project
+     */
     public void addProject(String pProjectName){
         ContentValues lValues=new ContentValues();
         lValues.put("projectname",pProjectName);
         db.insert("projects",null,lValues);
     }
 
+    /**
+     * Update project data with id=pId into database.
+     *
+     * @param pId           Id of project
+     * @param pProjectName  New project name
+     */
     public void editProject(long pId,String pProjectName)
     {
         ContentValues lValues = new ContentValues();
         lValues.put("projectname",pProjectName);
         db.update("projects",lValues,"_id=?",new String[]{Long.toString(pId)});
     }
+
+    /**
+     * Add new to do item to database
+     *
+     * @param pIdProject   This to do item belongs to project with this id
+     * @param pIdStatus    To Do item status id
+     * @param pTitle       Title of to do
+     * @param pComment     To do Comment
+     */
 
     public void addTodo(long pIdProject,long pIdStatus,String pTitle,String pComment)
     {

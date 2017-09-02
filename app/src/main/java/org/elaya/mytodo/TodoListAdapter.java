@@ -9,7 +9,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 /**
- * Used for listing all todo's belonging to a project
+ * Used for listing all to do's belonging to a project
  */
 
 class TodoListAdapter extends CursorAdapter {

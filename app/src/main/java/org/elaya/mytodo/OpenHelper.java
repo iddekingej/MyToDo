@@ -42,7 +42,7 @@ class OpenHelper extends SQLiteOpenHelper {
         createStatus(pDatabase);
         createTodoItems(pDatabase);
     }
-    public void onUpgrade(SQLiteDatabase pDatabase,int p_oldversion,int p_newVersion){
+    public void onUpgrade(SQLiteDatabase pDatabase,int pOldversion,int pNewVersion){
 
 
     }

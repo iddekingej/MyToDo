@@ -34,5 +34,5 @@ abstract class StatusBaseAdapter extends CursorAdapter {
         fillView(pView,lStatusItem);
     }
 
-    abstract protected void fillView(View pView,StatusItem pStatus);
+    protected abstract void fillView(View pView,StatusItem pStatus);
 }
