@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Display Activity for editings status list.
+     * Display Activity for editing status list.
      */
     private void showEditStatus()
     {
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * When the user long clicks a project, a popup menu apears
+     * When the user long clicks a project, a popup menu appears
      * The user can select edit of delete project
      *
      * @param pView   ListView item that is selected
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param pProject Project to be deleted
      */
-    public void deleteProject(ProjectItem pProject)
+    private void deleteProject(ProjectItem pProject)
     {
         ds.deleteProject(pProject.getId());
         refreshList();
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
      * Displays the edit project form
      * @param pProject Project data that's going o be edited.
      */
-    public void editProject(ProjectItem pProject)
+    private void editProject(ProjectItem pProject)
     {
         Intent lIntent= new Intent(this,EditProjectActivity.class);
         lIntent.putExtra("_id",pProject.getId());
@@ -205,13 +205,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void openNewProject()
+    private void openNewProject()
     {
         Intent lIntent= new Intent(this,EditProjectActivity.class);
         startActivityForResult(lIntent,ACT_NEW_PROJECT);
     }
 
-    public void openProject(View pView)
+    private void openProject(View pView)
     {
         ProjectItem lProject=(ProjectItem)pView.getTag();
         Intent lIntent = new Intent(this,TodoActivity.class);

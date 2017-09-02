@@ -31,8 +31,8 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Project_name" />
-
+            android:text="@string/Project_name"
+            android:labelFor="@+id/projectName"/>
         <EditText
             android:id="@+id/projectName"
             android:layout_width="match_parent"

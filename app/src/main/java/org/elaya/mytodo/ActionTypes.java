@@ -3,11 +3,11 @@ package org.elaya.mytodo;
 import android.app.Activity;
 
 /**
- * Created by jeroen on 9/1/17.
+ * Action types used in the status table
  */
 
-public class ActionTypes {
-    public final static Integer actionTypesId[]={ R.string.at_not_started,R.string.at_not_active,R.string.at_started,R.string.at_finished,R.string.at_removed};
+class ActionTypes {
+    private final static Integer actionTypesId[]={ R.string.at_not_started,R.string.at_not_active,R.string.at_started,R.string.at_finished,R.string.at_removed};
     private static String actionTypes[]=null;
     public final long NOT_STARTED=0;
     public final long NOT_ACTIVE=1;

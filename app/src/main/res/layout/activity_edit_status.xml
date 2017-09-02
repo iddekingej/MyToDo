@@ -19,15 +19,18 @@
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        <TextView
-            android:id="@+id/textView"
-            style="@style/formLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/status_description" />
+
     </android.support.design.widget.AppBarLayout>
 
+    <TextView
+        android:id="@+id/textView"
+        style="@style/formLabel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/status_description"
+        android:labelFor="@+id/description"
+        />
     <EditText
         android:id="@+id/description"
         android:layout_width="match_parent"
@@ -40,7 +43,9 @@
         style="@style/formLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/label_action_type" />
+        android:text="@string/label_action_type"
+        android:labelFor="@+id/actionType"
+        />
 
     <Spinner
         android:id="@+id/actionType"
@@ -52,7 +57,9 @@
         style="@style/formLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/position" />
+        android:text="@string/position"
+        android:labelFor="@+id/position"
+        />
 
     <EditText
         android:id="@+id/position"

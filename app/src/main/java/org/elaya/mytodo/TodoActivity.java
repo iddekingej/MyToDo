@@ -16,12 +16,9 @@ public class TodoActivity extends AppCompatActivity {
     private static final int ACT_NEW_TODO=100;
     private static final int ACT_EDIT_TODO=101;
     public static  final int RES_DELETE_TODO=RESULT_FIRST_USER+1000;
-    long id;
-    ProjectItem projectItem;
-    DataSource ds;
-    TextView projectName;
-    ListView todoList;
-    TodoListAdapter adapter;
+    private long id;
+    private DataSource ds;
+    private TodoListAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,14 +27,14 @@ public class TodoActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        projectName=(TextView)findViewById(R.id.projectName);
-        todoList=(ListView)findViewById(R.id.todoList);
+        TextView projectName=(TextView)findViewById(R.id.projectName);
+        ListView todoList=(ListView)findViewById(R.id.todoList);
 
         ds=DataSource.getSource();
 
         Intent lIntent=getIntent();
         id=lIntent.getLongExtra("_id",0);
-        projectItem=ds.getProjectById(id);
+        ProjectItem projectItem=ds.getProjectById(id);
         projectName.setText(projectItem.getProjectName());
         adapter=new TodoListAdapter(this,ds.getTodoCursor(id),todoList);
         todoList.setAdapter(adapter);
@@ -62,17 +59,19 @@ public class TodoActivity extends AppCompatActivity {
         switch (pItem.getItemId()) {
             case R.id.back:
                 finish();
-                return true;
+                break;
 
             case R.id.add_todo:
                 newToDo();
-                return true;
+                break;
+
             default:
-                return getParent().onOptionsItemSelected(pItem);
+                return super.onOptionsItemSelected(pItem);
         }
 
+        return true;
     }
-    public void warning(String pWarning) {
+    private void warning(String pWarning) {
         AlertDialog.Builder lBuilder = new AlertDialog.Builder(this);
         lBuilder.setTitle(R.string.failure_title);
         lBuilder.setMessage(pWarning);
@@ -81,14 +80,14 @@ public class TodoActivity extends AppCompatActivity {
         lDialog.show();
     }
 
-    public void newToDo()
+    private void newToDo()
     {
         Intent lIntent= new Intent(this,EditToDoActivity.class);
         lIntent.putExtra("id_project",id);
         startActivityForResult(lIntent,ACT_NEW_TODO);
     }
 
-    public void openEditToDo(View pItem){
+    private void openEditToDo(View pItem){
         TodoItem lItem=(TodoItem)pItem.getTag();
         Intent lIntent= new Intent(this,EditToDoActivity.class);
         lIntent.putExtra("_id",lItem.getId());

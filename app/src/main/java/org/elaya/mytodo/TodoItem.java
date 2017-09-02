@@ -4,12 +4,12 @@ package org.elaya.mytodo;
  * Class representing a to do item belonging to a project
  */
 
-public class TodoItem {
-    private long id;
-    private long idProject;
-    private long idStatus;
-    private String title;
-    private String comment;
+class TodoItem {
+    private final long id;
+    private final long idProject;
+    private final long idStatus;
+    private final String title;
+    private final String comment;
 
     public TodoItem(long pId,long pIdProject,long pIdStatus,String pTitle,String pComment)
     {

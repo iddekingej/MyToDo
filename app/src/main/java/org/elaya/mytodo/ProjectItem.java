@@ -14,10 +14,6 @@ class ProjectItem {
         id=pId;
     }
 
-    public void setProjectName(String pProjectName){
-        projectName=pProjectName;
-    }
-
     public String getProjectName()
     {
         return projectName;

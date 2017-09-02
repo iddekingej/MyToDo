@@ -62,7 +62,7 @@ final class DataSource {
         return source;
     }
 
-    public void open(Context pContext)
+    private void open(Context pContext)
     {
         OpenHelper lHelper=new OpenHelper(pContext);
         db = lHelper.getWritableDatabase();
@@ -145,12 +145,12 @@ final class DataSource {
         db.insert("todoitems",null,lValues);
     }
 
-    public void updateToDo(long pId,long pIdProject,long pIdStatus,String pTitel,String pComment)
+    public void updateToDo(long pId,long pIdProject,long pIdStatus,String pTitle,String pComment)
     {
         ContentValues lValues = new ContentValues();
         lValues.put("id_project",pIdProject);
         lValues.put("id_status",pIdStatus);
-        lValues.put("title",pTitel);
+        lValues.put("title",pTitle);
         lValues.put("comment",pComment);
         db.update("todoitems",lValues,"_id=?",new String[]{Long.toString(pId)});
     }

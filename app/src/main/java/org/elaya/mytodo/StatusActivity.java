@@ -12,9 +12,8 @@ import android.widget.ListView;
 
 public class StatusActivity extends AppCompatActivity {
 
-    ListView statusList;
-    StatusListAdapter adapter;
-    DataSource ds;
+    private StatusListAdapter adapter;
+    private DataSource ds;
 
     private static final int RES_NEW_STATUS=100;
     private static final int RES_EDIT_STATUS=101;
@@ -26,7 +25,7 @@ public class StatusActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ds=DataSource.getSource();
-        statusList=(ListView) findViewById(R.id.statusList);
+        ListView statusList=(ListView) findViewById(R.id.statusList);
         adapter=new StatusListAdapter(this,ds.getStatusCursor());
         statusList.setAdapter(adapter);
         statusList.setOnItemClickListener(new ListView.OnItemClickListener(){
@@ -67,7 +66,7 @@ public class StatusActivity extends AppCompatActivity {
 
     }
 
-    public void editStatusClicked(StatusItem pItem)
+    private void editStatusClicked(StatusItem pItem)
     {
         Intent lIntent=new Intent(this,EditStatusActivity.class);
         lIntent.putExtra("id",pItem.getId());
@@ -76,7 +75,8 @@ public class StatusActivity extends AppCompatActivity {
         lIntent.putExtra("description",pItem.getDescription());
         startActivityForResult(lIntent,RES_EDIT_STATUS);
     }
-    public void newStatusClicked()
+
+    private void newStatusClicked()
     {
         Intent lIntent=new Intent(this,EditStatusActivity.class);
         startActivityForResult(lIntent,RES_NEW_STATUS);

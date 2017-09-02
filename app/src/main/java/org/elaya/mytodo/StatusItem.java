@@ -4,11 +4,11 @@ package org.elaya.mytodo;
  * Class representing a Status item
  */
 
-public class StatusItem {
-    private long id;
-    private long position;
-    private long actionType;
-    private String description;
+class StatusItem {
+    private final long id;
+    private final long position;
+    private final long actionType;
+    private final String description;
 
     public StatusItem(long pId,long pPosition,long pActionType,String pDescription)
     {

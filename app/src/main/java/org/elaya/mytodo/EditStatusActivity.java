@@ -17,7 +17,7 @@ public class EditStatusActivity extends AppCompatActivity {
     private EditText descriptionElement;
     private EditText positionElement;
     private Spinner  actionType;
-    boolean statusIsUsed;
+    private boolean statusIsUsed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

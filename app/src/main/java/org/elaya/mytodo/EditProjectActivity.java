@@ -2,26 +2,24 @@ package org.elaya.mytodo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 public class EditProjectActivity extends AppCompatActivity {
 
     private TextView projectName;
     private long     id;
-    @Override
 
-    /**
-     * Create activity and setup form.
-     *
-     * Set the toolbar and fill the form elements
+    /***
+     * Set op de Activity:
+     * -Setup toolbar
+     * -Setup form elements
+     * @param savedInstanceState Saved instance state
      */
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_project);
@@ -49,19 +47,21 @@ public class EditProjectActivity extends AppCompatActivity {
     }
 
     /**
-     * When the back button in the toolbar is pressed.
+     * When the back button in the toolbar is pressed, the activity is finished
+     *
      */
 
-    public void onPressCancel()
+    private void onPressCancel()
     {
         setResult(RESULT_CANCELED);
         finish();
     }
 
     /**
-     * When the save button is pressed.
+     * When the save button is pressed all form data is send back to the calling  Activity
+     * In ProjectActivity the data is saved
      */
-    public void onPressSave()
+    private void onPressSave()
     {
         Intent lIntent = new Intent();
         String lText=projectName.getText().toString();
@@ -77,8 +77,8 @@ public class EditProjectActivity extends AppCompatActivity {
      * R.id.save - Save button
      * R.id.help - Help button
      *
-     * @param pItem
-     * @return
+     * @param pItem Menu item clicked
+     * @return      True - event is handled
      */
     public boolean onOptionsItemSelected(MenuItem pItem) {
         switch (pItem.getItemId()) {

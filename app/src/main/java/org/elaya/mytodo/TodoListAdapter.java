@@ -12,13 +12,13 @@ import android.widget.TextView;
  * Used for listing all todo's belonging to a project
  */
 
-public class TodoListAdapter extends CursorAdapter {
+class TodoListAdapter extends CursorAdapter {
 
-    int idIndex;
-    int idProjectIndex;
-    int idStatusIndex;
-    int titleIndex;
-    int commentIndex;
+    private final int idIndex;
+    private final int idProjectIndex;
+    private final int idStatusIndex;
+    private final int titleIndex;
+    private final int commentIndex;
 
     public TodoListAdapter(Context pContext,Cursor pCursor, View pParent){
         super(pContext,pCursor,0);

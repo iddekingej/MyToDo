@@ -13,15 +13,13 @@ import android.widget.Spinner;
 
 public class EditToDoActivity extends AppCompatActivity {
 
-    boolean isNew=false;
-    long id;
-    long idProject;
-    long idStatus;
-    EditText title;
-    EditText comment;
-    Spinner  statusElement;
-    DataSource ds;
-    StatusSpinnerAdapter spinnerAdapter;
+    private boolean isNew=false;
+    private long id;
+    private long idProject;
+    private EditText title;
+    private EditText comment;
+    private Spinner  statusElement;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,12 +28,12 @@ public class EditToDoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Intent lIntent=getIntent();
-        ds= DataSource.getSource();
+        DataSource ds= DataSource.getSource();
 
         isNew = !lIntent.hasExtra("_id");
         id=lIntent.getLongExtra("_id",-1);
         idProject=lIntent.getLongExtra("id_project",-1);
-        idStatus=lIntent.getLongExtra("id_status",-1);
+        long idStatus=lIntent.getLongExtra("id_status",-1);
         title=(EditText)findViewById(R.id.title);
         title.setText(lIntent.getStringExtra("title"));
         comment=(EditText)findViewById(R.id.comment);
@@ -43,7 +41,7 @@ public class EditToDoActivity extends AppCompatActivity {
 
 
         statusElement=(Spinner)findViewById(R.id.status);
-        spinnerAdapter=new StatusSpinnerAdapter(this,ds.getStatusCursor());
+        StatusSpinnerAdapter spinnerAdapter=new StatusSpinnerAdapter(this,ds.getStatusCursor());
         statusElement.setAdapter(spinnerAdapter);
         int lNum=spinnerAdapter.getCount();
         for(int lCnt=0;lCnt<lNum;lCnt++) {
@@ -84,7 +82,7 @@ public class EditToDoActivity extends AppCompatActivity {
         return true;
     }
 
-    public void onDeleteTodoClicked()
+    private void onDeleteTodoClicked()
     {
         AlertDialog.Builder lBuilder = new AlertDialog.Builder(this);
         lBuilder.setTitle(R.string.failure_title);
@@ -101,20 +99,20 @@ public class EditToDoActivity extends AppCompatActivity {
         lDialog.show();
     }
 
-    public void doDelete()
+    private void doDelete()
     {
         Intent lIntent = new Intent();
         lIntent.putExtra("_id",id);
         setResult(TodoActivity.RES_DELETE_TODO,lIntent);
         finish();
     }
-    public void onCancelClicked()
+    private void onCancelClicked()
     {
         setResult(RESULT_CANCELED);
         finish();
     }
 
-    public void onSaveClicked()
+    private void onSaveClicked()
     {
         Intent lIntent = new Intent();
         lIntent.putExtra("_id",id);

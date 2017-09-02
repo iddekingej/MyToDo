@@ -6,16 +6,16 @@ import android.view.View;
 import android.widget.CursorAdapter;
 
 /**
- * Created by jeroen on 9/1/17.
+ * Base class of @see CursorAdapter for the Status table
  */
 
-public abstract class StatusBaseAdapter extends CursorAdapter {
-    protected final int idIndex;
-    protected final int positionIndex;
-    protected final int actionTypeIndex;
-    protected final int descriptionIndex;
+abstract class StatusBaseAdapter extends CursorAdapter {
+    private final int idIndex;
+    private final int positionIndex;
+    private final int actionTypeIndex;
+    private final int descriptionIndex;
 
-    public StatusBaseAdapter(Context pContext, Cursor pCursor) {
+    StatusBaseAdapter(Context pContext, Cursor pCursor) {
         super(pContext,pCursor,0);
         idIndex = pCursor.getColumnIndex("_id");
         positionIndex=pCursor.getColumnIndex("position");
