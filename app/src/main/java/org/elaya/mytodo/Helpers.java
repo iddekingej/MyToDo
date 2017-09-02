@@ -1,6 +1,7 @@
 package org.elaya.mytodo;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 
@@ -31,6 +32,17 @@ class Helpers {
         lBuilder.setTitle(R.string.failure_title);
         lBuilder.setMessage(pWarning);
         lBuilder.setPositiveButton(R.string.ok, null);
+        AlertDialog lDialog = lBuilder.create();
+        lDialog.show();
+    }
+
+    public static void confirmDelete(Activity pActivity,int pTitle, DialogInterface.OnClickListener pConfirmed)
+    {
+        AlertDialog.Builder lBuilder = new AlertDialog.Builder(pActivity);
+        lBuilder.setTitle(R.string.title_delete);
+        lBuilder.setMessage(R.string.delete_todo_question);
+        lBuilder.setPositiveButton(R.string.delete,pConfirmed);
+        lBuilder.setNegativeButton(R.string.keep,null);
         AlertDialog lDialog = lBuilder.create();
         lDialog.show();
     }

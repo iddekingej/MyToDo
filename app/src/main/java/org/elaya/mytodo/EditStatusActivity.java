@@ -1,5 +1,6 @@
 package org.elaya.mytodo;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +33,12 @@ public class EditStatusActivity extends AppCompatActivity {
         positionElement=(EditText)findViewById(R.id.position);
         Intent lIntent=getIntent();
         id=lIntent.getLongExtra("id",-1);
-        positionElement.setText(String.valueOf(lIntent.getLongExtra("position",0)));
+
+        if(lIntent.hasExtra("position")) {
+            positionElement.setText(String.valueOf(lIntent.getLongExtra("position", 0)));
+        } else {
+            positionElement.setText("");
+        }
 
         descriptionElement=(EditText)findViewById(R.id.description);
         descriptionElement.setText(lIntent.getStringExtra("description"));
@@ -43,6 +49,10 @@ public class EditStatusActivity extends AppCompatActivity {
         actionType.setAdapter(actionTypeAdapter);
 
         long lActionType=lIntent.getLongExtra("actionType",0);
+
+        if(lActionType >= ActionTypes.MAX){
+            lActionType = 0;
+        }
         actionType.setSelection((int)lActionType);
 
         statusIsUsed=ds.statusIsUsed(id);
@@ -94,10 +104,17 @@ public class EditStatusActivity extends AppCompatActivity {
         if(statusIsUsed){
             Helpers.warning(this,R.string.warning_cant_delete_status_used);
         } else {
-            Intent lIntent = new Intent();
-            lIntent.putExtra("id", id);
-            setResult(StatusActivity.RESULT_DELETE_STATUS,lIntent);
-            finish();
+
+            Helpers.confirmDelete(this,R.string.ask_delete_status,
+                    new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface pDialog,int pId){
+                            Intent lIntent = new Intent();
+                            lIntent.putExtra("id", id);
+                            setResult(StatusActivity.RESULT_DELETE_STATUS,lIntent);
+                            finish();
+                        }
+                    }
+            );
         }
     }
 

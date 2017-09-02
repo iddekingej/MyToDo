@@ -21,6 +21,10 @@
     <string name="no_todo_items">No todo items found</string>
     <string name="action_add_status">Add status</string>
     <string name="position">Position</string>
+    <!-- To do -->
+    <string name="label_todo_title">Title:</string>
+    <string name="label_todo_status">Status:</string>
+    <string name="label_todo_comment">Comment:</string>
     <!-- Project -->
     <string name="project_information">Information about project</string>
     <!-- Status -->
@@ -35,15 +39,20 @@
     <string name="warning_status_description_mandatory">Description is mandatory</string>
     <string name="warning_position_number_mandatory">Position must be a positive number and is mandatory.</string>
     <string name="warning_cant_delete_status_used">Can\'t delete status because it\'s already used.</string>
+    <string name="ask_delete_status">Delete this status?</string>
     <!-- Generic -->
     <string name="help">Help</string>
     <string name="title_activity_help">Help</string>
     <string name="close">Close</string>
     <string name="ok">OK</string>
+    <string name="title_delete">Delete?</string>
+    <string name="keep">Keep</string>
+    <string name="delete">Delete</string>
     <!-- Action types -->
     <string name="at_not_started">Not yet started</string>
     <string name="at_started">Started</string>
     <string name="at_not_active">Not active</string>
     <string name="at_removed">Removed</string>
     <string name="at_finished">Finished</string>
+
 </resources>

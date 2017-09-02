@@ -84,19 +84,13 @@ public class EditToDoActivity extends AppCompatActivity {
 
     private void onDeleteTodoClicked()
     {
-        AlertDialog.Builder lBuilder = new AlertDialog.Builder(this);
-        lBuilder.setTitle(R.string.failure_title);
-        lBuilder.setMessage(R.string.delete_todo_question);
-        lBuilder.setPositiveButton(R.string.delete_todo,
+        Helpers.confirmDelete(this,R.string.delete_todo,
                 new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface pDialog,int pId){
                         doDelete();
                     }
                 }
         );
-        lBuilder.setNegativeButton(R.string.keep_todo,null);
-        AlertDialog lDialog = lBuilder.create();
-        lDialog.show();
     }
 
     private void doDelete()

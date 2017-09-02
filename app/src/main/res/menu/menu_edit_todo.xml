@@ -4,9 +4,9 @@
     >
 
     <item
-        android:id="@+id/delete"
-        android:title="@string/delete_todo"
-        android:icon="@drawable/delete"
+        android:id="@+id/back"
+        android:title="@string/action_back"
+        android:icon="@drawable/back"
         app:showAsAction="always"
         />
     <item
@@ -22,9 +22,12 @@
         app:showAsAction="always"
         />
     <item
-        android:id="@+id/back"
-        android:title="@string/action_back"
-        android:icon="@drawable/back"
+        android:id="@+id/delete"
+        android:title="@string/delete_todo"
+        android:icon="@drawable/delete"
         app:showAsAction="always"
         />
+
+
+
 </menu>

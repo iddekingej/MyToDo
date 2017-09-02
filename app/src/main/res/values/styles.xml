@@ -1,6 +1,5 @@
 <resources>
-    <color name="sectionTitleLine">#FF0000BB</color>
-    <color name="windowBackground">#FFF</color>
+
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -8,18 +7,20 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:editTextStyle">@style/MyEditTextStyle</item>
+
     </style>
 
 
     <style name="MyEditTextStyle" parent="android:Widget.EditText">
-        <item name='android:textSize'>12dp</item>
+        <item name='android:textSize'>14sp</item>
     </style>
 
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:editTextStyle">@style/MyEditTextStyle</item>
+        <item name="editTextStyle">@style/MyEditTextStyle</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
@@ -28,16 +29,16 @@
 
     <style name="title" parent="android:Widget.TextView">
         <item name='android:textColor'>#000</item>
-        <item name='android:background'>#e4c71e</item>
+        <item name='android:background'>#dad9d4</item>
         <item name='android:textSize'>20dp</item>
     </style>
 
     <style name="formLabel" parent="android:Widget.TextView">
         <item name='android:textColor'>#777</item>
-        <item name='android:background'>@drawable/border</item>
+        <!--<item name='android:background'>@drawable/border</item>-->
         <item name="android:textStyle">bold</item>
-        <item name='android:textSize'>16dp</item>
-        <item name="android:layout_marginTop">6dp</item>
+        <item name='android:textSize'>20sp</item>
+        <item name="android:layout_marginTop">12dp</item>
         <item name="android:layout_marginBottom">3dp</item>
     </style>
 
