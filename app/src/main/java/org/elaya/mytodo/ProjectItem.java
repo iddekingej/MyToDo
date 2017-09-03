@@ -5,7 +5,8 @@ package org.elaya.mytodo;
  */
 
 class ProjectItem {
-    private String projectName;
+
+    private final String projectName;
     private final long id;
 
     public ProjectItem(long pId,String pProjectName)

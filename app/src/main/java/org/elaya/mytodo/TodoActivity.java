@@ -36,7 +36,7 @@ public class TodoActivity extends AppCompatActivity {
         id=lIntent.getLongExtra("_id",0);
         ProjectItem projectItem=ds.getProjectById(id);
         projectName.setText(projectItem.getProjectName());
-        adapter=new TodoListAdapter(this,ds.getTodoCursor(id),todoList);
+        adapter=new TodoListAdapter(this,ds.getTodoCursor(id));
         todoList.setAdapter(adapter);
         todoList.setOnItemClickListener(new ListView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> pParent, View pView, int pPosition, long pId){

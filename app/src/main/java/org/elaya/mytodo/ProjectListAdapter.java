@@ -19,7 +19,7 @@ class ProjectListAdapter extends CursorAdapter {
     private final int numActiveIndex;
     private final int numNotActiveIndex;
 
-    public ProjectListAdapter(Context pContext,Cursor pCursor, View pParent){
+    public ProjectListAdapter(Context pContext,Cursor pCursor){
         super(pContext,pCursor,0);
         idIndex=pCursor.getColumnIndex("_id");
         projectNameIndex=pCursor.getColumnIndex("projectname");

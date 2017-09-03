@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * */
 
 class OpenHelper extends SQLiteOpenHelper {
-    Context context;
+    private final Context context;
     public OpenHelper(Context pContext){
         super(pContext,"main",null,1);
         context=pContext;

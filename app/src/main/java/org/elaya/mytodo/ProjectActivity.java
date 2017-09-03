@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity {
+public class ProjectActivity extends AppCompatActivity {
     private static final int ACT_NEW_PROJECT=100;
     private static final int ACT_EDIT_PROJECT=101;
     private static final int ACT_EDIT_TODO=102;
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_project);
         ds=DataSource.makeSource(getApplicationContext());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -39,14 +39,13 @@ public class MainActivity extends AppCompatActivity {
                     return longClickProject(pView);
             }
         });
-        adapter=new ProjectListAdapter(this,ds.getProjectCursor(),lProjectList);
+        adapter=new ProjectListAdapter(this,ds.getProjectCursor());
         lProjectList.setAdapter(adapter);
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }

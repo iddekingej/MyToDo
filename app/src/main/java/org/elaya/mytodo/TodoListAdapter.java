@@ -20,7 +20,7 @@ class TodoListAdapter extends CursorAdapter {
     private final int titleIndex;
     private final int commentIndex;
 
-    public TodoListAdapter(Context pContext,Cursor pCursor, View pParent){
+    public TodoListAdapter(Context pContext,Cursor pCursor){
         super(pContext,pCursor,0);
         idIndex=pCursor.getColumnIndex("_id");
         idProjectIndex=pCursor.getColumnIndex("id_project");
