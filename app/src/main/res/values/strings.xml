@@ -43,7 +43,7 @@
     <string name="title_activity_help">Help</string>
     <string name="close">Close</string>
     <string name="ok">OK</string>
-    <string name="title_delete">Delete?</string>
+    <string name="title_delete">Confirm deletion</string>
     <string name="keep">Keep</string>
     <string name="delete">Delete</string>
     <!-- Action types -->

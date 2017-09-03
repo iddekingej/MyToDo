@@ -83,7 +83,7 @@ public class EditToDoActivity extends AppCompatActivity {
 
     private void onDeleteTodoClicked()
     {
-        Helpers.confirmDelete(this,R.string.delete_todo,
+        Helpers.confirmDelete(this,R.string.delete_todo_question,
                 new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface pDialog,int pId){
                         doDelete();

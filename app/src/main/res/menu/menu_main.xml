@@ -14,12 +14,6 @@
         app:showAsAction="always"
         />
     <item
-        android:id="@+id/search"
-        android:title="Search"
-        android:icon="@drawable/search"
-        app:showAsAction="always"
-    />
-    <item
         android:id="@+id/add_project"
         android:title="@string/action_add_project"
         android:icon="@drawable/add"

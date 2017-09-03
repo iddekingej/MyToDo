@@ -26,11 +26,11 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
+<!--- Used for project name in to do Activity -->
     <style name="title" parent="android:Widget.TextView">
         <item name='android:textColor'>#000</item>
         <item name='android:background'>#dad9d4</item>
-        <item name='android:textSize'>20dp</item>
+        <item name='android:textSize'>20sp</item>
     </style>
 
     <style name="formLabel" parent="android:Widget.TextView">
