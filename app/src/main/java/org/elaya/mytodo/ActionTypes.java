@@ -26,4 +26,8 @@ class ActionTypes {
         return actionTypesCache;
     }
 
+    private ActionTypes()
+    {
+
+    }
 }

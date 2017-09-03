@@ -1,6 +1,6 @@
 <resources>
     <string name="failure_title">Failure</string>
-    <string name="app_name">My todo / Projects</string>
+    <string name="app_name">My Todo</string>
     <string name="edit_project">Edit project</string>
     <string name="delete_project">Delete project</string>
     <string name="title_activity_edit_project">Edit project</string>
@@ -8,12 +8,10 @@
     <string name="Start_adding_todo">Start adding todo after save?</string>
     <string name="title_activity_todo">Overview of todo items</string>
     <string name="title_activity_edit_todo">Edit a todo</string>
-    <string name="todo_title">Title of todo item</string>
-    <string name="todo_comment">Comment</string>
-    <string name="enter_todo">Enter todo item</string>
+
     <string name="delete_todo_question">Delete todo item?</string>
     <string name="delete_todo">Delete todo item</string>
-    <string name="keep_todo">Keep this todo</string>
+
     <string name="action_add_project">Add project</string>
     <string name="action_search">Search</string>
     <string name="action_back">Back</string>
@@ -26,9 +24,9 @@
     <string name="label_todo_status">Status:</string>
     <string name="label_todo_comment">Comment:</string>
     <!-- Project -->
-    <string name="project_information">Information about project</string>
+    <string name="title_main">Projects</string>
     <!-- Status -->
-    <string name="label_status">Status</string>
+
     <string name="label_action_type">Action type</string>
     <string name="action_save_status">Save status</string>
     <string name="action_delete_status">Delete status</string>

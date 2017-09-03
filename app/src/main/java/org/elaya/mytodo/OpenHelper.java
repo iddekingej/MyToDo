@@ -1,5 +1,6 @@
 package org.elaya.mytodo;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -9,9 +10,29 @@ import android.database.sqlite.SQLiteOpenHelper;
  * */
 
 class OpenHelper extends SQLiteOpenHelper {
-
+    Context context;
     public OpenHelper(Context pContext){
         super(pContext,"main",null,1);
+        context=pContext;
+    }
+
+    private void insertStatus(SQLiteDatabase pDb,long pPosition,long pActionType,int pDescription)
+    {
+        ContentValues lValues=new ContentValues();
+        lValues.put("position",pPosition);
+        lValues.put("action_type",pActionType);
+        lValues.put("description",context.getResources().getString(pDescription));
+        pDb.insert("status",null,lValues);
+    }
+
+    private void statusDefaults(SQLiteDatabase pDb)
+    {
+        insertStatus(pDb,0 ,ActionTypes.NOT_STARTED,R.string.at_not_active);
+        insertStatus(pDb,1 ,ActionTypes.NOT_ACTIVE ,R.string.at_not_started);
+        insertStatus(pDb,2, ActionTypes.STARTED, R.string.at_started);
+        insertStatus(pDb,3, ActionTypes.FINISHED, R.string.at_finished);
+        insertStatus(pDb,4, ActionTypes.REMOVED, R.string.at_removed);
+
     }
 
     private void createStatus(SQLiteDatabase pDatabase){
@@ -22,6 +43,7 @@ class OpenHelper extends SQLiteOpenHelper {
                 ",action_type integer not null"+
                 ",description text" +
                 ")");
+        statusDefaults(pDatabase);
     }
     private void createTodoItems(SQLiteDatabase pDatabase)
     {

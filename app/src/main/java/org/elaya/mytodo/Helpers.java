@@ -40,7 +40,7 @@ class Helpers {
     {
         AlertDialog.Builder lBuilder = new AlertDialog.Builder(pActivity);
         lBuilder.setTitle(R.string.title_delete);
-        lBuilder.setMessage(R.string.delete_todo_question);
+        lBuilder.setMessage(pTitle);
         lBuilder.setPositiveButton(R.string.delete,pConfirmed);
         lBuilder.setNegativeButton(R.string.keep,null);
         AlertDialog lDialog = lBuilder.create();
