@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class EditProjectActivity extends AppCompatActivity {
@@ -60,15 +61,23 @@ public class EditProjectActivity extends AppCompatActivity {
     /**
      * When the save button is pressed all form data is send back to the calling  Activity
      * In ProjectActivity the data is saved
+     *
+     * @param pAddTodo When true After save (in ProjectActivity) the To Do activity is started
      */
-    private void onPressSave()
+    private void onPressSave(boolean pAddTodo)
     {
         Intent lIntent = new Intent();
         String lText=projectName.getText().toString();
         lIntent.putExtra("_id",id);
         lIntent.putExtra("projectName",lText);
+        lIntent.putExtra("addTodo",pAddTodo);
         setResult(RESULT_OK,lIntent);
         finish();
+    }
+
+    public void saveGotoTodo(View pView)
+    {
+        onPressSave(true);
     }
 
     /**
@@ -87,7 +96,7 @@ public class EditProjectActivity extends AppCompatActivity {
                 break;
 
             case R.id.save:
-                onPressSave();
+                onPressSave(false);
                 break;
 
             case R.id.help:

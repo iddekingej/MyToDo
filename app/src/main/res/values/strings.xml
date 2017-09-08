@@ -5,7 +5,6 @@
     <string name="delete_project">Delete project</string>
     <string name="title_activity_edit_project">Edit project</string>
     <string name="Project_name">Project name</string>
-    <string name="Start_adding_todo">Start adding todo after save?</string>
     <string name="title_activity_todo">Overview of todo items</string>
     <string name="title_activity_edit_todo">Edit a todo</string>
 
@@ -25,6 +24,10 @@
     <string name="label_todo_comment">Comment:</string>
     <!-- Project -->
     <string name="title_main">Projects</string>
+    <string name="no_project">No projects found. Please add one or more project first and than add todo items.</string>
+    <string name="Start_adding_todo">Save project and start adding todo\'s</string>
+    <string name="cant_delete_has_todo">Can\'t delete project because it has todo items </string>
+
     <!-- Status -->
 
     <string name="label_action_type">Action type</string>
@@ -38,6 +41,7 @@
     <string name="warning_position_number_mandatory">Position must be a positive number and is mandatory.</string>
     <string name="warning_cant_delete_status_used">Can\'t delete status because it\'s already used.</string>
     <string name="ask_delete_status">Delete this status?</string>
+    <string name="is_status_active">Is status active?</string>
     <!-- Generic -->
     <string name="help">Help</string>
     <string name="title_activity_help">Help</string>

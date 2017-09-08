@@ -73,6 +73,7 @@ public class StatusActivity extends AppCompatActivity {
         lIntent.putExtra("position",pItem.getPosition());
         lIntent.putExtra("actionType",pItem.getActionType());
         lIntent.putExtra("description",pItem.getDescription());
+        lIntent.putExtra("active",pItem.getActive());
         startActivityForResult(lIntent,RES_EDIT_STATUS);
     }
 
@@ -87,7 +88,8 @@ public class StatusActivity extends AppCompatActivity {
         long lPosition=pIntent.getLongExtra("position",0);
         long lActionType=pIntent.getLongExtra("actionType",0);
         String lDescription=pIntent.getStringExtra("description");
-        ds.addStatus(lActionType,lPosition,lDescription);
+        boolean lActive=pIntent.getBooleanExtra("active",true);
+        ds.addStatus(lActionType,lPosition,lDescription,lActive);
         refreshList();
     }
 
@@ -97,7 +99,8 @@ public class StatusActivity extends AppCompatActivity {
         long lPosition=pIntent.getLongExtra("position",0);
         long lActionType=pIntent.getLongExtra("actionType",0);
         String lDescription=pIntent.getStringExtra("description");
-        ds.updateStatus(lId,lPosition,lActionType,lDescription);
+        boolean lActive=pIntent.getBooleanExtra("active",true);
+        ds.updateStatus(lId,lPosition,lActionType,lDescription,lActive);
         refreshList();
     }
 

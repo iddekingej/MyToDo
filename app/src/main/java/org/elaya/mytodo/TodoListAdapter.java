@@ -19,6 +19,7 @@ class TodoListAdapter extends CursorAdapter {
     private final int idStatusIndex;
     private final int titleIndex;
     private final int commentIndex;
+    private final int statusdescIndex;
 
     public TodoListAdapter(Context pContext,Cursor pCursor){
         super(pContext,pCursor,0);
@@ -27,6 +28,7 @@ class TodoListAdapter extends CursorAdapter {
         idStatusIndex=pCursor.getColumnIndex("id_status");
         titleIndex=pCursor.getColumnIndex("title");
         commentIndex=pCursor.getColumnIndex("comment");
+        statusdescIndex=pCursor.getColumnIndex("statusdesc");
     }
     @Override
     public View newView(Context pContext, Cursor pCursor, ViewGroup pViewGroup) {
@@ -41,8 +43,11 @@ class TodoListAdapter extends CursorAdapter {
         long lIdStatus=pCursor.getLong(idStatusIndex);
         String lTitle=pCursor.getString(titleIndex);
         String lComment=pCursor.getString(commentIndex);
+        String lStatus=pCursor.getString(statusdescIndex);
         TextView lTitleWidget=(TextView)pView.findViewById(R.id.title);
         lTitleWidget.setText(lTitle);
+        TextView lStatusWidget=(TextView)pView.findViewById(R.id.status);
+        lStatusWidget.setText(lStatus);
         pView.setTag(new TodoItem(lId,lIdProject,lIdStatus,lTitle,lComment));
 
     }

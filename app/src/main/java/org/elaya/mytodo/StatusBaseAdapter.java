@@ -14,6 +14,7 @@ abstract class StatusBaseAdapter extends CursorAdapter {
     private final int positionIndex;
     private final int actionTypeIndex;
     private final int descriptionIndex;
+    private final int activeIndex;
 
     StatusBaseAdapter(Context pContext, Cursor pCursor) {
         super(pContext,pCursor,0);
@@ -21,6 +22,7 @@ abstract class StatusBaseAdapter extends CursorAdapter {
         positionIndex=pCursor.getColumnIndex("position");
         actionTypeIndex=pCursor.getColumnIndex("action_type");
         descriptionIndex=pCursor.getColumnIndex("description");
+        activeIndex=pCursor.getColumnIndex("active");
     }
 
     @Override
@@ -28,8 +30,9 @@ abstract class StatusBaseAdapter extends CursorAdapter {
         long lId=pCursor.getLong(idIndex);
         long lPosition=pCursor.getLong(positionIndex);
         long lActionType=pCursor.getLong(actionTypeIndex);
+        boolean lActive=pCursor.getLong(activeIndex)==1;
         String lDescription=pCursor.getString(descriptionIndex);
-        StatusItem lStatusItem=new StatusItem(lId,lPosition,lActionType,lDescription);
+        StatusItem lStatusItem=new StatusItem(lId,lPosition,lActionType,lDescription,lActive);
         pView.setTag(lStatusItem);
         fillView(pView,lStatusItem);
     }

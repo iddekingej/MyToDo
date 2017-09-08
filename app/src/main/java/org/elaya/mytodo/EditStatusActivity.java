@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -19,7 +20,7 @@ public class EditStatusActivity extends AppCompatActivity {
     private EditText positionElement;
     private Spinner  actionType;
     private boolean statusIsUsed;
-
+    private CheckBox  activeElement;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +33,8 @@ public class EditStatusActivity extends AppCompatActivity {
 
         positionElement=(EditText)findViewById(R.id.position);
         Intent lIntent=getIntent();
+
+
         id=lIntent.getLongExtra("id",-1);
 
         if(lIntent.hasExtra("position")) {
@@ -54,6 +57,11 @@ public class EditStatusActivity extends AppCompatActivity {
             lActionType = 0;
         }
         actionType.setSelection((int)lActionType);
+
+        boolean lActive=lIntent.getBooleanExtra("active",true);
+        activeElement=(CheckBox)findViewById(R.id.active) ;
+        activeElement.setChecked(lActive);
+
 
         statusIsUsed=ds.statusIsUsed(id);
     }
@@ -91,6 +99,7 @@ public class EditStatusActivity extends AppCompatActivity {
         lIntent.putExtra("position",lPosition);
         lIntent.putExtra("actionType",(long)actionType.getSelectedItemPosition());
         lIntent.putExtra("description",lDescription);
+        lIntent.putExtra("active",activeElement.isChecked());
         setResult(RESULT_OK,lIntent);
         finish();
     }

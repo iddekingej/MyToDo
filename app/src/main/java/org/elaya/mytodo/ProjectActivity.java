@@ -1,5 +1,6 @@
 package org.elaya.mytodo;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +42,7 @@ public class ProjectActivity extends AppCompatActivity {
         });
         adapter=new ProjectListAdapter(this,ds.getProjectCursor());
         lProjectList.setAdapter(adapter);
+        lProjectList.setEmptyView(findViewById(R.id.noProject));
 
     }
 
@@ -121,10 +123,20 @@ public class ProjectActivity extends AppCompatActivity {
      *
      * @param pProject Project to be deleted
      */
-    private void deleteProject(ProjectItem pProject)
+    private void deleteProject(final ProjectItem pProject)
     {
-        ds.deleteProject(pProject.getId());
-        refreshList();
+        if(ds.projectHasTodo(pProject)){
+            Helpers.warning(this,R.string.cant_delete_has_todo);
+        } else {
+            Helpers.confirmDelete(this, R.string.ask_delete_status,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface pDialog, int pId) {
+                            ds.deleteProject(pProject.getId());
+                            refreshList();
+                        }
+                    }
+            );
+        }
     }
 
     /**
@@ -155,7 +167,11 @@ public class ProjectActivity extends AppCompatActivity {
      */
     private void newProject(Bundle pData)
     {
-        ds.addProject(pData.getString("projectName"));
+        long l_idProject=ds.addProject(pData.getString("projectName"));
+        refreshList();
+        if(pData.getBoolean("addTodo")){
+            openProjectById(l_idProject);
+        }
     }
 
     /**
@@ -180,7 +196,7 @@ public class ProjectActivity extends AppCompatActivity {
             {
                 case ACT_NEW_PROJECT:
                     newProject(pData.getExtras());
-                    refreshList();
+
                     break;
 
                 case ACT_EDIT_PROJECT:
@@ -202,19 +218,41 @@ public class ProjectActivity extends AppCompatActivity {
     }
 
 
+//----( Open other activities )-------------------------------------------
 
-
+    /**
+     * Open dialog for entering a new project
+     */
     private void openNewProject()
     {
         Intent lIntent= new Intent(this,EditProjectActivity.class);
         startActivityForResult(lIntent,ACT_NEW_PROJECT);
     }
 
+    /**
+     * When selecting a project in the ListView the To Do activity is started.
+     * This activity displays all to do's belonging to a project.
+     *
+     * @param pView  View from ListView that was selected
+     */
     private void openProject(View pView)
     {
         ProjectItem lProject=(ProjectItem)pView.getTag();
+        openProjectById(lProject.getId());
+    }
+
+    /**
+    * When selecting a project in the ListView the To Do activity is started.
+     * This activity displays all to do's belonging to a project.
+    *
+    * @param pId Id of project to open
+    */
+
+    private void openProjectById(long pId)
+    {
         Intent lIntent = new Intent(this,TodoActivity.class);
-        lIntent.putExtra("_id",lProject.getId());
+        lIntent.putExtra("_id",pId);
         startActivityForResult(lIntent,ACT_EDIT_TODO);
+
     }
 }

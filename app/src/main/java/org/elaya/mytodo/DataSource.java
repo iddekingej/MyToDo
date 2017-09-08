@@ -109,6 +109,16 @@ final class DataSource {
         return lProjectCursor;
     }
 
+    public boolean projectHasTodo(ProjectItem pProject)
+    {
+        Cursor lHasToDoCursor=db.rawQuery("select 1 as dm where exists(select 1 from todoitems where id_project=?)",new String[]{String.valueOf(pProject.getId())});
+        lHasToDoCursor.moveToFirst();
+        boolean lHas=!lHasToDoCursor.isAfterLast();
+        lHasToDoCursor.close();
+        return lHas;
+    }
+
+
     /**
      * List all to do items belonging to a project
      *
@@ -117,7 +127,22 @@ final class DataSource {
      */
     public Cursor getTodoCursor(long pIdProject)
     {
-        Cursor lTodoCursor=db.rawQuery("select * from todoitems where id_project=? order by _id desc",new String[]{Long.toString(pIdProject)});
+        Cursor lTodoCursor=db.rawQuery("" +
+                "select t._id " +
+                ",      t.id_project" +
+                ",      t.id_status" +
+                ",      t.title "+
+                ",      t.comment" +
+                ",      s.description statusdesc "+
+                "from todoitems t " +
+                "left join status s on (t.id_status = s._id) " +
+                "where id_project=? " +
+                "order by " +
+                "   case " +
+                "   when action_type=2 then 1 " +
+                "   when action_type in (0,1,4) then 2 " +
+                "   else 3 end" +
+                ", t._id desc",new String[]{Long.toString(pIdProject)});
         lTodoCursor.moveToFirst();
         return lTodoCursor;
     }
@@ -127,10 +152,10 @@ final class DataSource {
      *
      * @param pProjectName  Naam/description of project
      */
-    public void addProject(String pProjectName){
+    public long addProject(String pProjectName){
         ContentValues lValues=new ContentValues();
         lValues.put("projectname",pProjectName);
-        db.insert("projects",null,lValues);
+        return db.insert("projects",null,lValues);
     }
 
     /**
@@ -180,22 +205,23 @@ final class DataSource {
         deleteById("todoitems",pId);
     }
 
-    public void addStatus(long pPosition,long pActionType,String pDescription)
+    public void addStatus(long pPosition,long pActionType,String pDescription,boolean pActive)
     {
         ContentValues lValues = new ContentValues();
         lValues.put("position",pPosition);
         lValues.put("action_type",pActionType);
         lValues.put("description",pDescription);
-
+        lValues.put("active",pActive?1:0);
         db.insert("status",null,lValues);
     }
 
-    public void updateStatus(long pId,long pPosition,long pActionType,String pDescription)
+    public void updateStatus(long pId,long pPosition,long pActionType,String pDescription,boolean pActive)
     {
         ContentValues lValues = new ContentValues();
         lValues.put("position",pPosition);
         lValues.put("action_type",pActionType);
         lValues.put("description",pDescription);
+        lValues.put("active",pActive?1:0);
         updateById("status",lValues,pId);
     }
 
@@ -220,6 +246,12 @@ final class DataSource {
         return lStatusCursor;
     }
 
+    public Cursor getActiveStatusCursor(long pIdCurrent)
+    {
+        Cursor lStatusCursor=db.rawQuery("select * from status where active=1 or _id=? order by position",new String[]{String.valueOf(pIdCurrent)});
+        lStatusCursor.moveToFirst();
+        return lStatusCursor;
+    }
 
     public void deleteProject(long pId)
     {

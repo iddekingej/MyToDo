@@ -24,15 +24,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Project_name"
-            android:labelFor="@+id/projectName"/>
+            android:labelFor="@+id/projectName"
+            android:text="@string/Project_name" />
+
         <EditText
             android:id="@+id/projectName"
             android:layout_width="match_parent"
@@ -40,11 +40,27 @@
             android:ems="10"
             android:inputType="textPersonName" />
 
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Start_adding_todo" />
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="saveGotoTodo"
+                app:srcCompat="@drawable/save" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/Start_adding_todo" />
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -22,6 +22,7 @@ class OpenHelper extends SQLiteOpenHelper {
         lValues.put("position",pPosition);
         lValues.put("action_type",pActionType);
         lValues.put("description",context.getResources().getString(pDescription));
+        lValues.put("active",1);
         pDb.insert("status",null,lValues);
     }
 
@@ -41,7 +42,9 @@ class OpenHelper extends SQLiteOpenHelper {
                 "_id integer primary key autoincrement" +
                 ",position integer not null"+
                 ",action_type integer not null"+
+                ",active integer not null"+
                 ",description text" +
+                ",constraint chk_status_1 check(active in (0,1))"+
                 ")");
         statusDefaults(pDatabase);
     }

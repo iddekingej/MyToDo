@@ -40,7 +40,7 @@ public class EditToDoActivity extends AppCompatActivity {
 
 
         statusElement=(Spinner)findViewById(R.id.status);
-        StatusSpinnerAdapter spinnerAdapter=new StatusSpinnerAdapter(this,ds.getStatusCursor());
+        StatusSpinnerAdapter spinnerAdapter=new StatusSpinnerAdapter(this,ds.getActiveStatusCursor(idStatus));
         statusElement.setAdapter(spinnerAdapter);
         int lNum=spinnerAdapter.getCount();
         for(int lCnt=0;lCnt<lNum;lCnt++) {
