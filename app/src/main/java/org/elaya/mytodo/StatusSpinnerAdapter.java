@@ -2,6 +2,7 @@ package org.elaya.mytodo;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 
 public class StatusSpinnerAdapter extends StatusBaseAdapter {
 
-    public StatusSpinnerAdapter(Context pContext,Cursor pCursor) {
+    public StatusSpinnerAdapter(Context pContext,@NonNull Cursor pCursor) {
         super(pContext, pCursor);
     }
 
@@ -24,7 +25,7 @@ public class StatusSpinnerAdapter extends StatusBaseAdapter {
     }
 
     @Override
-    protected void fillView(View pView, StatusItem pStatus) {
+    protected void fillView(@NonNull View pView, @NonNull  StatusItem pStatus) {
         TextView lView=(TextView)(pView.findViewById(R.id.description));
         lView.setText(pStatus.getDescription());
 

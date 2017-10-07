@@ -3,6 +3,7 @@ package org.elaya.mytodo;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -139,7 +140,7 @@ public class EditStatusActivity extends AppCompatActivity {
      * @return       True if handled
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem pItem) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
         switch (pItem.getItemId()) {
 
             case R.id.back:

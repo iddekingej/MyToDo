@@ -24,6 +24,7 @@
     <string name="label_todo_comment">Comment:</string>
     <string name="label_start_date">Start date:</string>
     <string name="label_end_date">End date</string>
+    <string name="err_end_before_start_date">End date of todo can be empty or must be later than the start date</string>
     <!-- Project -->
     <string name="title_main">Projects</string>
     <string name="no_project">No projects found. Please add one or more project first and than add todo items.</string>
@@ -71,6 +72,7 @@
     <string name="menu_save_settings">Save settings</string>
     <!-- Main menu -->
     <string name="mo_settings">Settings</string>
-    <!--- Show todo -->
+    <!--- Show to do -->
     <string name="show_edit_todo">Edit todo</string>
+    <string name="title_show_todo">Todo details</string>
 </resources>

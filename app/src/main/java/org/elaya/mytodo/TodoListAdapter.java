@@ -2,6 +2,7 @@ package org.elaya.mytodo;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ class TodoListAdapter extends CursorAdapter {
     private final int startDateIndex;
     private final int endDateIndex;
 
-    public TodoListAdapter(Context pContext,Cursor pCursor){
+    public TodoListAdapter(Context pContext,@NonNull Cursor pCursor){
         super(pContext,pCursor,0);
         idIndex=pCursor.getColumnIndex("_id");
         idProjectIndex=pCursor.getColumnIndex("id_project");
@@ -45,7 +46,7 @@ class TodoListAdapter extends CursorAdapter {
         return lInflater.inflate(R.layout.todo_item, pViewGroup, false);
     }
     @Override
-    public void bindView(View pView, Context pContext, Cursor pCursor) {
+    public void bindView(@NonNull  View pView, Context pContext,@NonNull  Cursor pCursor) {
         long lId=pCursor.getLong(idIndex);
         long lIdProject=pCursor.getLong(idProjectIndex);
         long lIdStatus=pCursor.getLong(idStatusIndex);

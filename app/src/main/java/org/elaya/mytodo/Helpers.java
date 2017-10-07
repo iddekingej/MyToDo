@@ -3,6 +3,8 @@ package org.elaya.mytodo;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 
 /**
@@ -20,7 +22,7 @@ class Helpers {
      * @param pFrom  Activity that requested the help page
      * @param pPage  Help page name
      */
-    public static void openHelp(Activity pFrom,String pPage){
+    public static void openHelp(@NonNull Activity pFrom,@NonNull String pPage){
         Intent lIntent=new Intent(pFrom,HelpActivity.class);
         lIntent.putExtra("page",pPage);
         pFrom.startActivity(lIntent);
@@ -31,7 +33,7 @@ class Helpers {
      * @param pActivity Activity that opened the message box
      * @param pWarning  Message to display (Is a string resource)
      */
-    public static void warning(Activity pActivity,int pWarning) {
+    public static void warning(@NonNull Activity pActivity, @StringRes int pWarning) {
         AlertDialog.Builder lBuilder = new AlertDialog.Builder(pActivity);
         lBuilder.setTitle(R.string.failure_title);
         lBuilder.setMessage(pWarning);
@@ -40,7 +42,7 @@ class Helpers {
         lDialog.show();
     }
 
-    public static void confirmDelete(Activity pActivity,int pTitle, DialogInterface.OnClickListener pConfirmed)
+    public static void confirmDelete(@NonNull Activity pActivity, @StringRes int pTitle, DialogInterface.OnClickListener pConfirmed)
     {
         AlertDialog.Builder lBuilder = new AlertDialog.Builder(pActivity);
         lBuilder.setTitle(R.string.title_delete);

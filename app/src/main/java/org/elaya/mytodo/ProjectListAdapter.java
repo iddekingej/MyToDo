@@ -2,6 +2,7 @@ package org.elaya.mytodo;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ class ProjectListAdapter extends CursorAdapter {
     private final int numActiveIndex;
     private final int numNotActiveIndex;
 
-    public ProjectListAdapter(Context pContext,Cursor pCursor){
+    public ProjectListAdapter(Context pContext,@NonNull Cursor pCursor){
         super(pContext,pCursor,0);
         idIndex=pCursor.getColumnIndex("_id");
         projectNameIndex=pCursor.getColumnIndex("projectname");
@@ -28,7 +29,7 @@ class ProjectListAdapter extends CursorAdapter {
         numNotActiveIndex=pCursor.getColumnIndex("num_not_active");
     }
 
-    public void bindView(View pView,Context pContext,Cursor pCursor)
+    public void bindView(@NonNull View pView, Context pContext, @NonNull Cursor pCursor)
     {
         long lId=pCursor.getLong(idIndex);
         String lProjectName=pCursor.getString(projectNameIndex);

@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 /**
 *Creates or updates the database
@@ -16,7 +18,7 @@ class OpenHelper extends SQLiteOpenHelper {
         context=pContext;
     }
 
-    private void insertStatus(SQLiteDatabase pDb,long pPosition,long pActionType,int pDescription)
+    private void insertStatus(@NonNull SQLiteDatabase pDb, long pPosition, long pActionType, @StringRes int pDescription)
     {
         ContentValues lValues=new ContentValues();
         lValues.put("position",pPosition);
@@ -26,7 +28,7 @@ class OpenHelper extends SQLiteOpenHelper {
         pDb.insert("status",null,lValues);
     }
 
-    private void statusDefaults(SQLiteDatabase pDb)
+    private void statusDefaults(@NonNull SQLiteDatabase pDb)
     {
         insertStatus(pDb,0 ,ActionTypes.NOT_STARTED,R.string.at_not_active);
         insertStatus(pDb,1 ,ActionTypes.NOT_ACTIVE ,R.string.at_not_started);
@@ -36,7 +38,7 @@ class OpenHelper extends SQLiteOpenHelper {
 
     }
 
-    private void createStatus(SQLiteDatabase pDatabase){
+    private void createStatus(@NonNull  SQLiteDatabase pDatabase){
         pDatabase.execSQL("" +
                 "create table status(" +
                 "_id integer primary key autoincrement" +
@@ -48,7 +50,7 @@ class OpenHelper extends SQLiteOpenHelper {
                 ")");
         statusDefaults(pDatabase);
     }
-    private void createTodoItems(SQLiteDatabase pDatabase)
+    private void createTodoItems(@NonNull SQLiteDatabase pDatabase)
     {
         pDatabase.execSQL("" +
                 "create table todoitems(" +
@@ -63,13 +65,13 @@ class OpenHelper extends SQLiteOpenHelper {
                 ",constraint fk_todoitems_2 foreign key(id_project) references projects(_id));");
         pDatabase.execSQL("create index ind_todoitems_1 on todoitems(id_project)");
     }
-    public void onCreate(SQLiteDatabase pDatabase) {
+    public void onCreate(@NonNull SQLiteDatabase pDatabase) {
 
         pDatabase.execSQL("create table projects(_id integer primary key autoincrement,projectname text);");
         createStatus(pDatabase);
         createTodoItems(pDatabase);
     }
-    public void onUpgrade(SQLiteDatabase pDatabase,int pOldversion,int pNewVersion){
+    public void onUpgrade(@NonNull SQLiteDatabase pDatabase,int pOldVersion,int pNewVersion){
 
 
     }

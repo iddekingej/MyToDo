@@ -1,6 +1,7 @@
 package org.elaya.mytodo;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -30,7 +31,7 @@ public class StatusActivity extends AppCompatActivity {
         statusList.setAdapter(adapter);
         statusList.setOnItemClickListener(new ListView.OnItemClickListener(){
             @Override
-            public void onItemClick(AdapterView<?> pAdapterView, View pView, int pPosition, long pId) {
+            public void onItemClick(AdapterView<?> pAdapterView, @NonNull View pView, int pPosition, long pId) {
                 editStatusClicked((StatusItem)pView.getTag());
             }
         });
@@ -45,7 +46,7 @@ public class StatusActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem pItem) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
         switch (pItem.getItemId()) {
             case R.id.back:
                 finish();
@@ -66,7 +67,7 @@ public class StatusActivity extends AppCompatActivity {
 
     }
 
-    private void editStatusClicked(StatusItem pItem)
+    private void editStatusClicked(@NonNull StatusItem pItem)
     {
         Intent lIntent=new Intent(this,EditStatusActivity.class);
         lIntent.putExtra("id",pItem.getId());
@@ -83,7 +84,7 @@ public class StatusActivity extends AppCompatActivity {
         startActivityForResult(lIntent,RES_NEW_STATUS);
     }
 
-    private void saveNewStatus(Intent pIntent)
+    private void saveNewStatus(@NonNull Intent pIntent)
     {
         long lPosition=pIntent.getLongExtra("position",0);
         long lActionType=pIntent.getLongExtra("actionType",0);
@@ -93,7 +94,7 @@ public class StatusActivity extends AppCompatActivity {
         refreshList();
     }
 
-    private void updateStatus(Intent pIntent)
+    private void updateStatus(@NonNull Intent pIntent)
     {
         long lId=pIntent.getLongExtra("id",0);
         long lPosition=pIntent.getLongExtra("position",0);
@@ -104,13 +105,13 @@ public class StatusActivity extends AppCompatActivity {
         refreshList();
     }
 
-    private void deleteStatus(Intent pIntent)
+    private void deleteStatus(@NonNull Intent pIntent)
     {
         long lId=pIntent.getLongExtra("id",0);
         ds.deleteStatus(lId);
         refreshList();
     }
-    protected void onActivityResult(int pRequestCode,int pResultCode,Intent pData) {
+    protected void onActivityResult(int pRequestCode,int pResultCode,@NonNull Intent pData) {
         switch(pResultCode){
             case RESULT_OK:
 

@@ -2,6 +2,7 @@ package org.elaya.mytodo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -89,7 +90,7 @@ public class EditProjectActivity extends AppCompatActivity {
      * @param pItem Menu item clicked
      * @return      True - event is handled
      */
-    public boolean onOptionsItemSelected(MenuItem pItem) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
         switch (pItem.getItemId()) {
             case R.id.back:
                 onPressCancel();

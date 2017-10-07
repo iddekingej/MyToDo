@@ -1,5 +1,6 @@
 package org.elaya.mytodo;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -83,7 +84,7 @@ public class SettingsEditor extends AppCompatActivity {
      * @param pItem Menu item clicked
      * @return      True - event is handled
      */
-    public boolean onOptionsItemSelected(MenuItem pItem) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
         switch (pItem.getItemId()) {
             case R.id.back:
                 finish();

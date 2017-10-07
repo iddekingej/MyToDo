@@ -2,6 +2,7 @@ package org.elaya.mytodo;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 
 /**
  * Class for reading and writing persistent app settings
@@ -13,7 +14,7 @@ class Settings {
     private static SharedPreferences settingsFile;
     private static String dateFormat=null;
 
-    static void make(Context pContext)
+    static void make(@NonNull Context pContext)
     {
         settingsFile = pContext.getSharedPreferences("main", Context.MODE_PRIVATE);
     }
@@ -46,7 +47,7 @@ class Settings {
         return dateFormat;
     }
 
-    public static void setDateFormatType(String pFormat)
+    public static void setDateFormatType(@NonNull String pFormat)
     {
         SharedPreferences.Editor lEditor=settingsFile.edit();
         dateFormat=null;
@@ -59,7 +60,7 @@ class Settings {
         return settingsFile.getString("separator","-");
     }
 
-    public static void setSeparator(String pSeparator)
+    public static void setSeparator(@NonNull String pSeparator)
     {
         dateFormat=null;
         SharedPreferences.Editor lEditor=settingsFile.edit();

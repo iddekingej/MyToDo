@@ -2,6 +2,7 @@ package org.elaya.mytodo;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.CursorAdapter;
 
@@ -16,7 +17,7 @@ abstract class StatusBaseAdapter extends CursorAdapter {
     private final int descriptionIndex;
     private final int activeIndex;
 
-    StatusBaseAdapter(Context pContext, Cursor pCursor) {
+    StatusBaseAdapter(Context pContext, @NonNull Cursor pCursor) {
         super(pContext,pCursor,0);
         idIndex = pCursor.getColumnIndex("_id");
         positionIndex=pCursor.getColumnIndex("position");
@@ -26,7 +27,7 @@ abstract class StatusBaseAdapter extends CursorAdapter {
     }
 
     @Override
-    public void bindView(View pView, Context pContext, Cursor pCursor) {
+    public void bindView(@NonNull View pView, Context pContext,@NonNull Cursor pCursor) {
         long lId=pCursor.getLong(idIndex);
         long lPosition=pCursor.getLong(positionIndex);
         long lActionType=pCursor.getLong(actionTypeIndex);

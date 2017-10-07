@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
 
 /**
  * Interface to SqlLite database
@@ -109,7 +110,7 @@ final class DataSource {
         return lProjectCursor;
     }
 
-    public boolean projectHasTodo(ProjectItem pProject)
+    public boolean projectHasTodo(@NonNull  ProjectItem pProject)
     {
         Cursor lHasToDoCursor=db.rawQuery("select 1 as dm where exists(select 1 from todoitems where id_project=?)",new String[]{String.valueOf(pProject.getId())});
         lHasToDoCursor.moveToFirst();

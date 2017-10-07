@@ -3,6 +3,7 @@ package org.elaya.mytodo;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -69,7 +70,7 @@ public class EditToDoActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_edit_todo, menu);
         if(isNew) {
@@ -80,7 +81,7 @@ public class EditToDoActivity extends AppCompatActivity {
         return true;
     }
     @Override
-    public boolean onOptionsItemSelected(MenuItem pItem) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
         switch (pItem.getItemId()) {
             case R.id.back:
                 onCancelClicked();
@@ -138,6 +139,10 @@ public class EditToDoActivity extends AppCompatActivity {
     {
         Date lStartDate=DateHandler.getDateFromText(startDateElement.getText().toString());
         Date lEndDate=DateHandler.getDateFromText(endDateElement.getText().toString());
+        if(lEndDate != null && lStartDate!= null && lEndDate.before(lStartDate)){
+            Helpers.warning(this,R.string.err_end_before_start_date);
+            return;
+        }
         Intent lIntent = new Intent();
         lIntent.putExtra("_id",id);
         lIntent.putExtra("id_project",idProject);

@@ -3,6 +3,7 @@ package org.elaya.mytodo;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
@@ -30,12 +31,12 @@ public class ProjectActivity extends AppCompatActivity {
 
         ListView lProjectList=(ListView)findViewById(R.id.projectList);
         lProjectList.setOnItemClickListener(new ListView.OnItemClickListener(){
-            public void onItemClick(AdapterView<?> pParent,View pView,int pPosition,long pId){
+            public void onItemClick(AdapterView<?> pParent,@NonNull View pView,int pPosition,long pId){
                 openProject(pView);
             }
         });
         lProjectList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-            public boolean onItemLongClick(AdapterView<?> pParent,final View pView, int pPosition, long pId)
+            public boolean onItemLongClick(AdapterView<?> pParent,@NonNull final View pView, int pPosition, long pId)
             {
                     return longClickProject(pView);
             }
@@ -53,7 +54,7 @@ public class ProjectActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem pItem) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
         switch (pItem.getItemId()) {
 
             case R.id.action_status:
@@ -95,7 +96,7 @@ public class ProjectActivity extends AppCompatActivity {
      * @param pView   ListView item that is selected
      * @return        true->event is handled
      */
-    private boolean longClickProject(View pView)
+    private boolean longClickProject(@NonNull View pView)
     {
         final ProjectItem lProject=(ProjectItem)pView.getTag();
         if(lProject != null) {
@@ -103,7 +104,7 @@ public class ProjectActivity extends AppCompatActivity {
             lPopup.getMenuInflater().inflate(R.menu.edit_project_menu,lPopup.getMenu());
             lPopup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
 
-                public boolean onMenuItemClick(MenuItem pItem){
+                public boolean onMenuItemClick(@NonNull MenuItem pItem){
 
                     switch(pItem.getItemId()) {
                         case R.id.editProject:
@@ -127,7 +128,7 @@ public class ProjectActivity extends AppCompatActivity {
      *
      * @param pProject Project to be deleted
      */
-    private void deleteProject(final ProjectItem pProject)
+    private void deleteProject(@NonNull final ProjectItem pProject)
     {
         if(ds.projectHasTodo(pProject)){
             Helpers.warning(this,R.string.cant_delete_has_todo);
@@ -147,7 +148,7 @@ public class ProjectActivity extends AppCompatActivity {
      * Displays the edit project form
      * @param pProject Project data that's going o be edited.
      */
-    private void editProject(ProjectItem pProject)
+    private void editProject(@NonNull ProjectItem pProject)
     {
         Intent lIntent= new Intent(this,EditProjectActivity.class);
         lIntent.putExtra("_id",pProject.getId());
@@ -169,7 +170,7 @@ public class ProjectActivity extends AppCompatActivity {
      * Saves data in database after user entered net project.
      * @param pData Data returned from the project form
      */
-    private void newProject(Bundle pData)
+    private void newProject(@NonNull Bundle pData)
     {
         long lIdProject=ds.addProject(pData.getString("projectName"));
         refreshList();
@@ -182,7 +183,7 @@ public class ProjectActivity extends AppCompatActivity {
      * Saves data in databases after user edited the project
      * @param pData Data returned from the project form
      */
-    private void editProject(Bundle pData){
+    private void editProject(@NonNull Bundle pData){
         ds.editProject(pData.getLong("_id",-1),pData.getString("projectName"));
     }
 
@@ -193,7 +194,7 @@ public class ProjectActivity extends AppCompatActivity {
      * @param pResultCode  RESULT_OK if the user didn't press cancel
      * @param pData        Data returned from other activity
      */
-    protected void onActivityResult(int pRequestCode,int pResultCode,Intent pData)
+    protected void onActivityResult(int pRequestCode,int pResultCode,@NonNull Intent pData)
     {
         if(pResultCode == RESULT_OK){
             switch(pRequestCode)
@@ -239,7 +240,7 @@ public class ProjectActivity extends AppCompatActivity {
      *
      * @param pView  View from ListView that was selected
      */
-    private void openProject(View pView)
+    private void openProject(@NonNull View pView)
     {
         ProjectItem lProject=(ProjectItem)pView.getTag();
         openProjectById(lProject.getId());

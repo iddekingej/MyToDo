@@ -50,6 +50,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ShowTodo"
+            android:label="@string/title_show_todo"
             android:theme="@style/AppTheme.NoActionBar"
             />
     </application>

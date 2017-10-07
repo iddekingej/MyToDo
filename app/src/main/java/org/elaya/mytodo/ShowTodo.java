@@ -1,6 +1,7 @@
 package org.elaya.mytodo;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,13 +11,9 @@ import android.widget.TextView;
 
 public class ShowTodo extends AppCompatActivity {
 
-    final static int REQ_EDIT =100;
-    TextView titleElement;
-    TextView statusElement;
-    TextView startDateElement;
-    TextView endDateElement;
-    TextView commentElement;
-    DataSource ds;
+    private  static final int REQ_EDIT =100;
+
+    private DataSource ds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,22 +24,22 @@ public class ShowTodo extends AppCompatActivity {
 
         ds=DataSource.getSource();
 
-        titleElement=(TextView)findViewById(R.id.title);
-        statusElement=(TextView)findViewById(R.id.status);
-        startDateElement=(TextView)findViewById(R.id.startDate);
-        endDateElement=(TextView)findViewById(R.id.endDate);
-        commentElement=(TextView)findViewById(R.id.comment);
+        TextView lTitleElement=(TextView)findViewById(R.id.title);
+        TextView lStatusElement=(TextView)findViewById(R.id.status);
+        TextView lStartDateElement=(TextView)findViewById(R.id.startDate);
+        TextView lEndDateElement=(TextView)findViewById(R.id.endDate);
+        TextView lCommentElement=(TextView)findViewById(R.id.comment);
 
         Intent lIntent=getIntent();
-        titleElement.setText(lIntent.getStringExtra("title"));
-        statusElement.setText(ds.getStatusTextById(lIntent.getLongExtra("id_status",-1)));
+        lTitleElement.setText(lIntent.getStringExtra("title"));
+        lStatusElement.setText(ds.getStatusTextById(lIntent.getLongExtra("id_status",-1)));
         if(lIntent.hasExtra("startDate")) {
-            startDateElement.setText(DateHandler.getDateFromLong(lIntent.getLongExtra("startDate",-1)));
+            lStartDateElement.setText(DateHandler.getDateFromLong(lIntent.getLongExtra("startDate",-1)));
         }
         if(lIntent.hasExtra("endDate")){
-            endDateElement.setText(DateHandler.getDateFromLong(lIntent.getLongExtra("endDate",-1)));
+            lEndDateElement.setText(DateHandler.getDateFromLong(lIntent.getLongExtra("endDate",-1)));
         }
-        commentElement.setText(lIntent.getStringExtra("comment"));
+        lCommentElement.setText(lIntent.getStringExtra("comment"));
     }
 
     @Override
@@ -54,7 +51,9 @@ public class ShowTodo extends AppCompatActivity {
     public void editTodo()
     {
         Intent lIntent = new Intent(this,EditToDoActivity.class);
-        lIntent.putExtras(getIntent().getExtras());
+        if(null != getIntent().getExtras()) {
+            lIntent.putExtras(getIntent().getExtras());
+        }
         startActivityForResult(lIntent, REQ_EDIT);
     }
 
@@ -66,7 +65,7 @@ public class ShowTodo extends AppCompatActivity {
      * @param pData Data returned from the To Do edit form
      */
 
-    private void updateTodo(Intent pData)
+    private void updateTodo(@NonNull Intent pData)
     {
         long lId=pData.getLongExtra("_id",-1);
         long lIdProject=pData.getLongExtra("id_project",-1);
@@ -86,13 +85,11 @@ public class ShowTodo extends AppCompatActivity {
 
 
     protected void onActivityResult(final int pRequestCode,
-                                    final int pResultCode, final Intent pIntent) {
-        if(RESULT_OK == pResultCode) {
-            if (REQ_EDIT == pRequestCode) {
+                                    final int pResultCode, @NonNull final Intent pIntent) {
+        if(RESULT_OK == pResultCode && REQ_EDIT == pRequestCode) {
                 updateTodo(pIntent);
                 setResult(RESULT_OK);
                 finish();
-            }
         }
 
     }
@@ -101,7 +98,7 @@ public class ShowTodo extends AppCompatActivity {
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem pItem) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
         switch (pItem.getItemId()) {
             case R.id.edit:
                 editTodo();

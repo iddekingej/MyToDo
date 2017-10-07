@@ -2,6 +2,7 @@ package org.elaya.mytodo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -39,7 +40,7 @@ public class TodoActivity extends AppCompatActivity {
         adapter=new TodoListAdapter(this,ds.getTodoCursor(id));
         todoList.setAdapter(adapter);
         todoList.setOnItemClickListener(new ListView.OnItemClickListener(){
-            public void onItemClick(AdapterView<?> pParent, View pView, int pPosition, long pId){
+            public void onItemClick(AdapterView<?> pParent, @NonNull View pView, int pPosition, long pId){
                 openShowToDo(pView);
             }
         });
@@ -55,7 +56,7 @@ public class TodoActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem pItem) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
         switch (pItem.getItemId()) {
             case R.id.back:
                 finish();
@@ -87,7 +88,7 @@ public class TodoActivity extends AppCompatActivity {
         startActivityForResult(lIntent,ACT_NEW_TODO);
     }
 
-    private void openShowToDo(View pItem){
+    private void openShowToDo(@NonNull View pItem){
         TodoItem lItem=(TodoItem)pItem.getTag();
         Intent lIntent= new Intent(this,ShowTodo.class);
         lIntent.putExtra("_id",lItem.getId());
@@ -104,7 +105,7 @@ public class TodoActivity extends AppCompatActivity {
         startActivityForResult(lIntent,ACT_SHOW_TODO);
     }
 
-    private void addTodo(Intent pData)
+    private void addTodo(@NonNull  Intent pData)
     {
         long lIdProject=pData.getLongExtra("id_project",-1);
         long lIdStatus=pData.getLongExtra("id_status",-1);
@@ -127,13 +128,13 @@ public class TodoActivity extends AppCompatActivity {
     }
 
 
-    private void deleteTodo(Intent pData)
+    private void deleteTodo(@NonNull Intent pData)
     {
         long lId=pData.getLongExtra("_id",-1);
         ds.deleteToDo(lId);
         refreshList();
     }
-    protected void onActivityResult(int pRequestCode,int pResultCode,Intent pData) {
+    protected void onActivityResult(int pRequestCode,int pResultCode,@NonNull Intent pData) {
         try {
             switch (pResultCode) {
 

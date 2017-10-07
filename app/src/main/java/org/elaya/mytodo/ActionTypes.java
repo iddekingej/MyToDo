@@ -2,6 +2,7 @@ package org.elaya.mytodo;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 /**
  * Action types used in the status table
@@ -16,7 +17,7 @@ class ActionTypes {
     public static final long FINISHED=3;
     public static final long REMOVED=4;
     public static final long MAX=4;
-    public static  String[] getActionTypes(Activity pActivity){
+    public static  String[] getActionTypes(@NonNull Activity pActivity){
         if(actionTypesCache == null){
             actionTypesCache =new String[actionTypesId.length];
 
@@ -27,7 +28,7 @@ class ActionTypes {
         return actionTypesCache;
     }
 
-    public static String getActionTypesById(Context pContext, long pId)
+    public static String getActionTypesById(@NonNull  Context pContext, long pId)
     {
         if(pId< actionTypesId.length){
             return pContext.getResources().getString(actionTypesId[(int)pId]);
