@@ -43,7 +43,7 @@ public class ProjectActivity extends AppCompatActivity {
         adapter=new ProjectListAdapter(this,ds.getProjectCursor());
         lProjectList.setAdapter(adapter);
         lProjectList.setEmptyView(findViewById(R.id.noProject));
-
+        Settings.make(this);
     }
 
     @Override
@@ -62,6 +62,10 @@ public class ProjectActivity extends AppCompatActivity {
 
             case R.id.add_project:
                 openNewProject();
+                break;
+
+            case R.id.action_settings:
+                openSettings();
                 break;
 
             case R.id.help:
@@ -152,7 +156,7 @@ public class ProjectActivity extends AppCompatActivity {
     }
 
     /**
-     * Refrehses the project list.
+     * Refreshes the project list.
      */
     private void refreshList()
     {
@@ -175,7 +179,7 @@ public class ProjectActivity extends AppCompatActivity {
     }
 
     /**
-     * Saves data in daabases after user edited the project
+     * Saves data in databases after user edited the project
      * @param pData Data returned from the project form
      */
     private void editProject(Bundle pData){
@@ -254,5 +258,11 @@ public class ProjectActivity extends AppCompatActivity {
         lIntent.putExtra("_id",pId);
         startActivityForResult(lIntent,ACT_EDIT_TODO);
 
+    }
+
+    private void openSettings()
+    {
+        Intent lIntent= new Intent(this,SettingsEditor.class);
+        startActivity(lIntent);
     }
 }

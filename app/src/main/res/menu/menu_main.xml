@@ -8,6 +8,11 @@
         android:title="@string/action_status"
         app:showAsAction="never" />
     <item
+        android:id="@+id/action_settings"
+        android:title="@string/mo_settings"
+        app:showAsAction="never"
+        />
+    <item
         android:id="@+id/help"
         android:title="@string/help"
         android:icon="@drawable/help"
@@ -19,4 +24,5 @@
         android:icon="@drawable/add"
         app:showAsAction="always"
         />
+
 </menu>

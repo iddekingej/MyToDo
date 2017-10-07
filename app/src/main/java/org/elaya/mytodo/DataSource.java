@@ -133,7 +133,10 @@ final class DataSource {
                 ",      t.id_status" +
                 ",      t.title "+
                 ",      t.comment" +
-                ",      s.description statusdesc "+
+                ",      t.start_date "+
+                ",      t.end_date "+
+                ",      s.description statusdesc " +
+                ",      case when s.action_type==? then 1 else 0 end isfinished "+
                 "from todoitems t " +
                 "left join status s on (t.id_status = s._id) " +
                 "where id_project=? " +
@@ -142,7 +145,7 @@ final class DataSource {
                 "   when action_type=2 then 1 " +
                 "   when action_type in (0,1,4) then 2 " +
                 "   else 3 end" +
-                ", t._id desc",new String[]{Long.toString(pIdProject)});
+                ", t._id desc",new String[]{Long.toString(ActionTypes.FINISHED),Long.toString(pIdProject)});
         lTodoCursor.moveToFirst();
         return lTodoCursor;
     }
@@ -168,7 +171,7 @@ final class DataSource {
     {
         ContentValues lValues = new ContentValues();
         lValues.put("projectname",pProjectName);
-        db.update("projects",lValues,"_id=?",new String[]{Long.toString(pId)});
+        updateById("projects",lValues,pId);
     }
 
     /**
@@ -180,24 +183,36 @@ final class DataSource {
      * @param pComment     To do Comment
      */
 
-    public void addTodo(long pIdProject,long pIdStatus,String pTitle,String pComment)
+    public void addTodo(long pIdProject,long pIdStatus,String pTitle,String pComment,Long pStartDate,Long pEndDate)
     {
         ContentValues lValues=new ContentValues();
         lValues.put("id_project",pIdProject);
         lValues.put("id_status",pIdStatus);
         lValues.put("title",pTitle);
         lValues.put("comment",pComment);
+        if(pStartDate != null){
+            lValues.put("start_date",pStartDate);
+        }
+        if(pEndDate != null){
+            lValues.put("end_date",pEndDate);
+        }
         db.insert("todoitems",null,lValues);
     }
 
-    public void updateToDo(long pId,long pIdProject,long pIdStatus,String pTitle,String pComment)
+    public void updateToDo(long pId,long pIdProject,long pIdStatus,String pTitle,String pComment,Long pStartDate,Long pEndDate)
     {
         ContentValues lValues = new ContentValues();
         lValues.put("id_project",pIdProject);
         lValues.put("id_status",pIdStatus);
         lValues.put("title",pTitle);
         lValues.put("comment",pComment);
-        db.update("todoitems",lValues,"_id=?",new String[]{Long.toString(pId)});
+        if(pStartDate != null){
+            lValues.put("start_date",pStartDate);
+        }
+        if(pEndDate != null){
+            lValues.put("end_date",pEndDate);
+        }
+        updateById("todoitems",lValues,pId);
     }
 
     public void deleteToDo(long pId)

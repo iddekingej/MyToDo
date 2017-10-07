@@ -26,13 +26,13 @@ class StatusItem {
     private final String description;
 
     /**
-     * Is status active (=selectable for new todo's
+     * Is status active (=selectable for new to do's
      */
     private final boolean active;
 
 
     /**
-     * Setus uptatus object
+     * Setup status object
      * @param pId                Unique ID of status (primary key)
      * @param pPosition          Position inside status selection list
      * @param pActionType        Action type

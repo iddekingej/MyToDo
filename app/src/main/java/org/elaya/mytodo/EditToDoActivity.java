@@ -7,8 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import java.util.Date;
 
 public class EditToDoActivity extends AppCompatActivity {
 
@@ -16,6 +19,8 @@ public class EditToDoActivity extends AppCompatActivity {
     private long id;
     private long idProject;
     private EditText title;
+    private EditText startDateElement;
+    private EditText endDateElement;
     private EditText comment;
     private Spinner  statusElement;
 
@@ -33,11 +38,22 @@ public class EditToDoActivity extends AppCompatActivity {
         id=lIntent.getLongExtra("_id",-1);
         idProject=lIntent.getLongExtra("id_project",-1);
         long idStatus=lIntent.getLongExtra("id_status",-1);
+
         title=(EditText)findViewById(R.id.title);
         title.setText(lIntent.getStringExtra("title"));
+
         comment=(EditText)findViewById(R.id.comment);
         comment.setText(lIntent.getStringExtra("comment"));
 
+        startDateElement=(EditText)findViewById(R.id.startDate);
+        if(lIntent.hasExtra("startDate")){
+            startDateElement.setText(DateHandler.getDateFromLong(lIntent.getLongExtra("startDate",-1)));
+        }
+
+        endDateElement=(EditText)findViewById(R.id.endDate);
+        if(lIntent.hasExtra("endDate")){
+            endDateElement.setText(DateHandler.getDateFromLong(lIntent.getLongExtra("endDate",-1)));
+        }
 
         statusElement=(Spinner)findViewById(R.id.status);
         StatusSpinnerAdapter spinnerAdapter=new StatusSpinnerAdapter(this,ds.getActiveStatusCursor(idStatus));
@@ -105,8 +121,23 @@ public class EditToDoActivity extends AppCompatActivity {
         finish();
     }
 
+    public void  startDatePicker(View pView)
+    {
+        DatePickerFragment lFragment=DatePickerFragment.newInstance(startDateElement);
+        lFragment.show(getFragmentManager(), "datePicker");
+    }
+
+    public void  endDatePicker(View pView)
+    {
+        DatePickerFragment lFragment=DatePickerFragment.newInstance(endDateElement);
+        lFragment.show(getFragmentManager(), "datePicker");
+    }
+
+
     private void onSaveClicked()
     {
+        Date lStartDate=DateHandler.getDateFromText(startDateElement.getText().toString());
+        Date lEndDate=DateHandler.getDateFromText(endDateElement.getText().toString());
         Intent lIntent = new Intent();
         lIntent.putExtra("_id",id);
         lIntent.putExtra("id_project",idProject);
@@ -114,7 +145,14 @@ public class EditToDoActivity extends AppCompatActivity {
         lIntent.putExtra("id_status",lItem.getId());
         lIntent.putExtra("title",title.getText().toString());
         lIntent.putExtra("comment",comment.getText().toString());
+        if(lStartDate != null){
+            lIntent.putExtra("startDate",lStartDate.getTime());
+        }
+        if(lEndDate != null){
+            lIntent.putExtra("endDate",lEndDate.getTime());
+        }
         setResult(RESULT_OK,lIntent);
         finish();
     }
+
 }

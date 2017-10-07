@@ -16,6 +16,7 @@ public class StatusListAdapter extends StatusBaseAdapter {
     public StatusListAdapter(Context pContext, Cursor pCursor)
     {
         super(pContext,pCursor);
+
     }
 
     /**
@@ -43,6 +44,10 @@ public class StatusListAdapter extends StatusBaseAdapter {
         TextView lPositionLabel=(TextView)(pView.findViewById(R.id.position));
         lView.setText(pStatus.getDescription());
         lPositionLabel.setText(String.valueOf(pStatus.getPosition()));
+        TextView lActionType=(TextView)(pView.findViewById(R.id.actionType));
+        lActionType.setText(ActionTypes.getActionTypesById(pView.getContext(),pStatus.getActionType()));
+        TextView lActiveElement=(TextView)pView.findViewById(R.id.active);
+        lActiveElement.setText(pStatus.getActive()?"O":"X");
     }
 
 }

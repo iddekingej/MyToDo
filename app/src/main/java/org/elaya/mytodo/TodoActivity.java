@@ -95,6 +95,12 @@ public class TodoActivity extends AppCompatActivity {
         lIntent.putExtra("id_status",lItem.getIdStatus());
         lIntent.putExtra("title",lItem.getTitle());
         lIntent.putExtra("comment",lItem.getComment());
+        if(lItem.startDate() != null){
+            lIntent.putExtra("startDate",lItem.startDate());
+        }
+        if(lItem.endDate() != null){
+            lIntent.putExtra("endDate",lItem.endDate());
+        }
         startActivityForResult(lIntent,ACT_EDIT_TODO);
     }
 
@@ -104,8 +110,16 @@ public class TodoActivity extends AppCompatActivity {
         long lIdStatus=pData.getLongExtra("id_status",-1);
         String lTitle=pData.getStringExtra("title");
         String lComment=pData.getStringExtra("comment");
+        Long lStartDate=null;
+        if(pData.hasExtra("startDate")){
+            lStartDate=pData.getLongExtra("startDate",-1);
+        }
+        Long lEndDate=null;
+        if(pData.hasExtra("endDate")){
+            lEndDate=pData.getLongExtra("endDate",-1);
+        }
         try {
-            ds.addTodo(lIdProject,lIdStatus, lTitle, lComment);
+            ds.addTodo(lIdProject,lIdStatus, lTitle, lComment,lStartDate,lEndDate);
         }catch(Exception e){
             warning(e.getMessage());
         }
@@ -126,7 +140,15 @@ public class TodoActivity extends AppCompatActivity {
         long lIdStatus=pData.getLongExtra("id_status",-1);
         String lTitle=pData.getStringExtra("title");
         String lComment=pData.getStringExtra("comment");
-        ds.updateToDo(lId,lIdProject,lIdStatus,lTitle,lComment);
+        Long lStartDate=null;
+        if(pData.hasExtra("startDate")){
+            lStartDate=pData.getLongExtra("startDate",-1);
+        }
+        Long lEndDate=null;
+        if(pData.hasExtra("endDate")){
+            lEndDate=pData.getLongExtra("endDate",-1);
+        }
+        ds.updateToDo(lId,lIdProject,lIdStatus,lTitle,lComment,lStartDate,lEndDate);
         refreshList();
     }
 

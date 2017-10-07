@@ -57,6 +57,8 @@ class OpenHelper extends SQLiteOpenHelper {
                 ",id_status  integer"+
                 ",title text" +
                 ",comment text" +
+                ",start_date integer"+
+                ",end_date integer"+
                 ",constraint fk_todoitems_1 foreign key(id_status) references status(_id)"+
                 ",constraint fk_todoitems_2 foreign key(id_project) references projects(_id));");
         pDatabase.execSQL("create index ind_todoitems_1 on todoitems(id_project)");

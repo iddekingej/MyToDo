@@ -1,6 +1,7 @@
 package org.elaya.mytodo;
 
 import android.app.Activity;
+import android.content.Context;
 
 /**
  * Action types used in the status table
@@ -24,6 +25,14 @@ class ActionTypes {
             }
         }
         return actionTypesCache;
+    }
+
+    public static String getActionTypesById(Context pContext, long pId)
+    {
+        if(pId< actionTypesId.length){
+            return pContext.getResources().getString(actionTypesId[(int)pId]);
+        }
+        return null;
     }
 
     private ActionTypes()

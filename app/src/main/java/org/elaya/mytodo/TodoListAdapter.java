@@ -20,6 +20,9 @@ class TodoListAdapter extends CursorAdapter {
     private final int titleIndex;
     private final int commentIndex;
     private final int statusdescIndex;
+    private final int isFinishedIndex;
+    private final int startDateIndex;
+    private final int endDateIndex;
 
     public TodoListAdapter(Context pContext,Cursor pCursor){
         super(pContext,pCursor,0);
@@ -29,13 +32,18 @@ class TodoListAdapter extends CursorAdapter {
         titleIndex=pCursor.getColumnIndex("title");
         commentIndex=pCursor.getColumnIndex("comment");
         statusdescIndex=pCursor.getColumnIndex("statusdesc");
+        isFinishedIndex=pCursor.getColumnIndex("isfinished");
+        startDateIndex=pCursor.getColumnIndex("start_date");
+        endDateIndex=pCursor.getColumnIndex("end_date");
     }
+
+
+
     @Override
     public View newView(Context pContext, Cursor pCursor, ViewGroup pViewGroup) {
         LayoutInflater lInflater=LayoutInflater.from(pContext);
-        return lInflater.inflate(R.layout.todo_item,pViewGroup,false);
+        return lInflater.inflate(R.layout.todo_item, pViewGroup, false);
     }
-
     @Override
     public void bindView(View pView, Context pContext, Cursor pCursor) {
         long lId=pCursor.getLong(idIndex);
@@ -46,9 +54,22 @@ class TodoListAdapter extends CursorAdapter {
         String lStatus=pCursor.getString(statusdescIndex);
         TextView lTitleWidget=(TextView)pView.findViewById(R.id.title);
         lTitleWidget.setText(lTitle);
+        if(pCursor.getLong(isFinishedIndex)==1){
+            lTitleWidget.setBackgroundResource(R.drawable.strike);
+        } else {
+            lTitleWidget.setBackgroundResource(0);
+        }
+        Long lStartDate=null;
+        if(!pCursor.isNull(startDateIndex)){
+            lStartDate=pCursor.getLong(startDateIndex);
+        }
+        Long lEndDate=null;
+        if(!pCursor.isNull(endDateIndex)){
+            lEndDate=pCursor.getLong(endDateIndex);
+        }
         TextView lStatusWidget=(TextView)pView.findViewById(R.id.status);
         lStatusWidget.setText(lStatus);
-        pView.setTag(new TodoItem(lId,lIdProject,lIdStatus,lTitle,lComment));
+        pView.setTag(new TodoItem(lId,lIdProject,lIdStatus,lTitle,lComment,lStartDate,lEndDate));
 
     }
 }

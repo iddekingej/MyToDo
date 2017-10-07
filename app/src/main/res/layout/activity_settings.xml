@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="org.elaya.mytodo.SettingsEditor">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:id="@+id/textView6"
+        style="@style/formLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_dateFormat" />
+
+
+
+        <RadioGroup
+            android:id="@+id/dateFormat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/date_dmy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/opt_date_dmy" />
+
+            <RadioButton
+                android:id="@+id/date_mdy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/opt_date_mdy" />
+
+            <RadioButton
+                android:id="@+id/date_ymd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/opt_date_ymd" />
+        </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/textView11"
+        style="@style/formLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_separator" />
+
+
+
+    <RadioGroup
+        android:id="@+id/dateSep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radioButton6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/opt_minus" />
+
+            <RadioButton
+                android:id="@+id/radioButton5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/opt_slash" />
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/opt_dot" />
+  </RadioGroup>
+
+
+</LinearLayout>
