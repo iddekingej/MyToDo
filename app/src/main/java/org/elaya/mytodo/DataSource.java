@@ -118,6 +118,19 @@ final class DataSource {
         return lHas;
     }
 
+    public String getStatusTextById(long pId)
+    {
+            Cursor lStatusCursor=db.rawQuery("select description from status where _id=?",new String[]{String.valueOf(pId)});
+            lStatusCursor.moveToFirst();
+            String lDescription;
+            if(!lStatusCursor.isAfterLast()){
+                lDescription=lStatusCursor.getString(0);
+            } else {
+                lDescription="";
+            }
+            lStatusCursor.close();
+            return lDescription;
+    }
 
     /**
      * List all to do items belonging to a project
@@ -149,6 +162,8 @@ final class DataSource {
         lTodoCursor.moveToFirst();
         return lTodoCursor;
     }
+
+
 
     /**
      * Add project to database

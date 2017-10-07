@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class TodoActivity extends AppCompatActivity {
     private static final int ACT_NEW_TODO=100;
-    private static final int ACT_EDIT_TODO=101;
+    private static final int ACT_SHOW_TODO=101;
     public static  final int RES_DELETE_TODO=RESULT_FIRST_USER+1000;
     private long id;
     private DataSource ds;
@@ -40,7 +40,7 @@ public class TodoActivity extends AppCompatActivity {
         todoList.setAdapter(adapter);
         todoList.setOnItemClickListener(new ListView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> pParent, View pView, int pPosition, long pId){
-                openEditToDo(pView);
+                openShowToDo(pView);
             }
         });
         todoList.setEmptyView(findViewById(R.id.noItemsMessage));
@@ -87,9 +87,9 @@ public class TodoActivity extends AppCompatActivity {
         startActivityForResult(lIntent,ACT_NEW_TODO);
     }
 
-    private void openEditToDo(View pItem){
+    private void openShowToDo(View pItem){
         TodoItem lItem=(TodoItem)pItem.getTag();
-        Intent lIntent= new Intent(this,EditToDoActivity.class);
+        Intent lIntent= new Intent(this,ShowTodo.class);
         lIntent.putExtra("_id",lItem.getId());
         lIntent.putExtra("id_project",id);
         lIntent.putExtra("id_status",lItem.getIdStatus());
@@ -101,7 +101,7 @@ public class TodoActivity extends AppCompatActivity {
         if(lItem.endDate() != null){
             lIntent.putExtra("endDate",lItem.endDate());
         }
-        startActivityForResult(lIntent,ACT_EDIT_TODO);
+        startActivityForResult(lIntent,ACT_SHOW_TODO);
     }
 
     private void addTodo(Intent pData)
@@ -126,31 +126,6 @@ public class TodoActivity extends AppCompatActivity {
         refreshList();
     }
 
-    /**
-     * When an existing to do is edited this method saves the
-     * the data in the database
-     *
-     * @param pData Data returned from the To Do edit form
-     */
-
-    private void updateTodo(Intent pData)
-    {
-        long lId=pData.getLongExtra("_id",-1);
-        long lIdProject=pData.getLongExtra("id_project",-1);
-        long lIdStatus=pData.getLongExtra("id_status",-1);
-        String lTitle=pData.getStringExtra("title");
-        String lComment=pData.getStringExtra("comment");
-        Long lStartDate=null;
-        if(pData.hasExtra("startDate")){
-            lStartDate=pData.getLongExtra("startDate",-1);
-        }
-        Long lEndDate=null;
-        if(pData.hasExtra("endDate")){
-            lEndDate=pData.getLongExtra("endDate",-1);
-        }
-        ds.updateToDo(lId,lIdProject,lIdStatus,lTitle,lComment,lStartDate,lEndDate);
-        refreshList();
-    }
 
     private void deleteTodo(Intent pData)
     {
@@ -172,8 +147,8 @@ public class TodoActivity extends AppCompatActivity {
                             addTodo(pData);
                             break;
 
-                        case ACT_EDIT_TODO:
-                            updateTodo(pData);
+                        case ACT_SHOW_TODO:
+                            refreshList();
                             break;
                     }
 

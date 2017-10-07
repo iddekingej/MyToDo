@@ -10,13 +10,15 @@ import android.widget.RadioGroup;
 public class SettingsEditor extends AppCompatActivity {
 
     private RadioGroup dateFormatElement;
+    private RadioGroup separatorElement;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        dateFormatElement =(RadioGroup)findViewById(R.id.dateFormat);
+        dateFormatElement = (RadioGroup)findViewById(R.id.dateFormat);
+        separatorElement  = (RadioGroup)findViewById(R.id.dateSep);
         int lFormat=R.id.date_dmy;
         String lFormatSettings=Settings.getDateFormatType();
         if("MDY".equals(lFormatSettings)){
@@ -25,6 +27,17 @@ public class SettingsEditor extends AppCompatActivity {
             lFormat=R.id.date_ymd;
         }
         dateFormatElement.check(lFormat);
+
+        String lSeparatorSettings= Settings.getSeparator();
+
+        int lSeparator=R.id.sep_minus;
+        if("/".equals(lSeparatorSettings)){
+            lSeparator = R.id.sep_slash;
+        } else if(".".equals(lSeparatorSettings)){
+            lSeparator = R.id.sep_dot;
+        }
+
+        separatorElement.check(lSeparator);
     }
 
     /**
@@ -50,6 +63,14 @@ public class SettingsEditor extends AppCompatActivity {
             lFormatType="YMD";
         }
         Settings.setDateFormatType(lFormatType);
+        lId=separatorElement.getCheckedRadioButtonId();
+        String lSep="-";
+        if(lId==R.id.sep_slash){
+            lSep="/";
+        } else if(lId==R.id.sep_dot){
+            lSep=".";
+        }
+        Settings.setSeparator(lSep);
         finish();
     }
 

@@ -10,6 +10,10 @@ import android.support.v7.app.AlertDialog;
  */
 
 class Helpers {
+    private Helpers()
+    {
+
+    }
     /**
      * Open help pages
      *

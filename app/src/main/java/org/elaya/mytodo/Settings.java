@@ -11,6 +11,7 @@ class Settings {
 
 
     private static SharedPreferences settingsFile;
+    private static String dateFormat=null;
 
     static void make(Context pContext)
     {
@@ -18,10 +19,11 @@ class Settings {
     }
 
 
-    private Settings(Context pContext)
+    private Settings()
     {
 
     }
+
 
     public static String getDateFormatType()
     {
@@ -30,21 +32,38 @@ class Settings {
 
     public static String getDateFormat()
     {
+        String lSep=getSeparator();
         String lFormat=getDateFormatType();
-        if("MDY".equals(lFormat)){
-            return "MM-dd-yyyy";
+        if(null==dateFormat) {
+            if ("MDY".equals(lFormat)) {
+                dateFormat="MM" + lSep + "dd" + lSep + "yyyy";
+            } else if ("YMD".equals(lFormat)) {
+                dateFormat="yyy"+lSep+"MM"+lSep+"dd";
+            } else {
+                dateFormat="dd" + lSep + "MM" + lSep + "yyyy";
+            }
         }
-        if("YMD".equals(lFormat)){
-            return "yyy-MM-dd";
-        }
-        return "dd-MM-yyyy";
+        return dateFormat;
     }
 
     public static void setDateFormatType(String pFormat)
     {
         SharedPreferences.Editor lEditor=settingsFile.edit();
-
+        dateFormat=null;
         lEditor.putString("dateFormat",pFormat);
+        lEditor.apply();
+    }
+
+    public static String getSeparator()
+    {
+        return settingsFile.getString("separator","-");
+    }
+
+    public static void setSeparator(String pSeparator)
+    {
+        dateFormat=null;
+        SharedPreferences.Editor lEditor=settingsFile.edit();
+        lEditor.putString("separator",pSeparator);
         lEditor.apply();
     }
 

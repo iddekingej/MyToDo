@@ -171,10 +171,10 @@ public class ProjectActivity extends AppCompatActivity {
      */
     private void newProject(Bundle pData)
     {
-        long l_idProject=ds.addProject(pData.getString("projectName"));
+        long lIdProject=ds.addProject(pData.getString("projectName"));
         refreshList();
         if(pData.getBoolean("addTodo")){
-            openProjectById(l_idProject);
+            openProjectById(lIdProject);
         }
     }
 

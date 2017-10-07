@@ -69,19 +69,19 @@
         android:layout_height="wrap_content">
 
             <RadioButton
-                android:id="@+id/radioButton6"
+                android:id="@+id/sep_minus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/opt_minus" />
 
             <RadioButton
-                android:id="@+id/radioButton5"
+                android:id="@+id/sep_slash"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/opt_slash" />
 
             <RadioButton
-                android:id="@+id/radioButton4"
+                android:id="@+id/sep_dot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/opt_dot" />

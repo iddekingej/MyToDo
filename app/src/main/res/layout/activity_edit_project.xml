@@ -43,6 +43,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/Start_adding_todo"
             android:orientation="horizontal">
 
             <ImageButton
@@ -51,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="saveGotoTodo"
+                android:contentDescription="@string/Start_adding_todo"
                 android:src="@drawable/save" />
 
             <TextView

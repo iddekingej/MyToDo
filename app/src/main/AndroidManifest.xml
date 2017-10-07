@@ -29,9 +29,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditToDoActivity"
-            android:windowSoftInputMode="adjustResize"
             android:label="@string/title_activity_edit_todo"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".StatusActivity"
             android:label="@string/title_activity_status"
@@ -47,11 +47,11 @@
         <activity
             android:name=".SettingsEditor"
             android:label="@string/title_settings"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ShowTodo"
             android:theme="@style/AppTheme.NoActionBar"
-            />
-
-
-
+            ></activity>
     </application>
 
 </manifest>

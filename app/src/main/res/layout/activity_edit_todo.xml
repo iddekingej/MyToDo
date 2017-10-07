@@ -76,6 +76,7 @@
         style="@style/formLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:labelFor="@+id/startDate"
         android:text="@string/label_start_date" />
 
     <LinearLayout
@@ -95,6 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="startDatePicker"
+            android:contentDescription="@string/label_start_date"
             android:src="@drawable/date" />
     </LinearLayout>
 
@@ -103,6 +105,7 @@
         style="@style/formLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:labelFor="@+id/endDate"
         android:text="@string/label_end_date" />
 
     <LinearLayout
@@ -122,6 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="endDatePicker"
+            android:contentDescription="@string/label_end_date"
             android:src="@drawable/date" />
 
     </LinearLayout>
