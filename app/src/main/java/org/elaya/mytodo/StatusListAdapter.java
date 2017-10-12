@@ -3,10 +3,10 @@ package org.elaya.mytodo;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
+
+
 
 /**
  * Used for displaying the list of status defined in the app
@@ -14,25 +14,23 @@ import android.widget.TextView;
 
 public class StatusListAdapter extends StatusBaseAdapter {
 
-    public StatusListAdapter(Context pContext,@NonNull  Cursor pCursor)
+
+    public StatusListAdapter(Context pContext, @NonNull  Cursor pCursor)
     {
         super(pContext,pCursor);
-
     }
 
     /**
-     * Create view for each item displayed in list.
+     * Get View resource
      *
-     * @param pContext    Context in which the list is used
-     * @param pCursor     Cursor used in this list
-     * @param pViewGroup  Parent of the new view
-     * @return            Return a new view
+     * @return View resource used in list
      */
-    @Override
-    public View newView(Context pContext, Cursor pCursor, ViewGroup pViewGroup) {
-            LayoutInflater lInflater=LayoutInflater.from(pContext);
-            return lInflater.inflate(R.layout.status_item,pViewGroup,false);
+
+    protected int getViewResource()
+    {
+        return R.layout.status_item;
     }
+
 
     /**
      * Fill the view
@@ -49,6 +47,7 @@ public class StatusListAdapter extends StatusBaseAdapter {
         lActionType.setText(ActionTypes.getActionTypesById(pView.getContext(),pStatus.getActionType()));
         TextView lActiveElement=(TextView)pView.findViewById(R.id.active);
         lActiveElement.setText(pStatus.getActive()?"O":"X");
+
     }
 
 }

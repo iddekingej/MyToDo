@@ -29,6 +29,24 @@
         android:gravity="center_horizontal"
         android:text="" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="openFilter"
+            app:srcCompat="@drawable/filter" />
+
+        <Spinner
+            android:id="@+id/todoFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/noItemsMessage"
         android:layout_width="match_parent"

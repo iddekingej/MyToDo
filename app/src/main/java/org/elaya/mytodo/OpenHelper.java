@@ -14,7 +14,7 @@ import android.support.annotation.StringRes;
 class OpenHelper extends SQLiteOpenHelper {
     private final Context context;
     public OpenHelper(Context pContext){
-        super(pContext,"main",null,1);
+        super(pContext,"main",null,2);
         context=pContext;
     }
 
@@ -70,9 +70,28 @@ class OpenHelper extends SQLiteOpenHelper {
         pDatabase.execSQL("create table projects(_id integer primary key autoincrement,projectname text);");
         createStatus(pDatabase);
         createTodoItems(pDatabase);
+        createToDoFilter(pDatabase);
     }
-    public void onUpgrade(@NonNull SQLiteDatabase pDatabase,int pOldVersion,int pNewVersion){
 
+    public void createToDoFilter(@NonNull SQLiteDatabase pDatabase)
+    {
+        pDatabase.execSQL("alter table projects add filter_type integer");
+        pDatabase.execSQL("create table project_statusfilters(" +
+                " _id integer primary key autoincrement" +
+                ",id_project integer not null" +
+                ",id_status integer not null" +
+                ",constraint fk_project_statusfilters_1 foreign key(id_project) references projects(_id)" +
+                ",constraint fk_project_statusfilters_2 foreign key(id_status) references status(_id)" +
+                ") ");
+        pDatabase.execSQL("create index ind_project_statusfilters_1 on project_statusfilters(id_project)");
+        pDatabase.execSQL("create index ind_project_statusfilters_2 on project_statusfilters(id_status)");
+
+    }
+
+    public void onUpgrade(@NonNull SQLiteDatabase pDatabase,int pOldVersion,int pNewVersion){
+        if(pOldVersion==1 && pNewVersion>=1){
+            createToDoFilter(pDatabase);
+        }
 
     }
 }

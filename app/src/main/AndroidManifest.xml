@@ -8,11 +8,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+
+
+        android:theme="@style/AppTheme.NoActionBar"
+        >
         <activity
             android:name=".ProjectActivity"
             android:label="@string/title_main"
-            android:theme="@style/AppTheme.NoActionBar">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,28 +25,28 @@
         <activity
             android:name=".EditProjectActivity"
             android:label="@string/title_activity_edit_project"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
         <activity
             android:name=".TodoActivity"
             android:label="@string/title_activity_todo"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
         <activity
             android:name=".EditToDoActivity"
             android:label="@string/title_activity_edit_todo"
-            android:theme="@style/AppTheme.NoActionBar"
+
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".StatusActivity"
             android:label="@string/title_activity_status"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
         <activity
             android:name=".EditStatusActivity"
             android:label="@string/title_activity_edit_status"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
         <activity
             android:name=".HelpActivity"
             android:label="@string/title_activity_help"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
         <activity
             android:name=".SettingsEditor"
             android:label="@string/title_settings"
@@ -51,7 +54,11 @@
         <activity
             android:name=".ShowTodo"
             android:label="@string/title_show_todo"
-            android:theme="@style/AppTheme.NoActionBar"
+             />
+        <activity
+            android:name=".TodoFilterActivity"
+            android:label="@string/title_activity_todo_filter"
+
             />
     </application>
 

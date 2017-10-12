@@ -17,11 +17,10 @@ public class StatusSpinnerAdapter extends StatusBaseAdapter {
     public StatusSpinnerAdapter(Context pContext,@NonNull Cursor pCursor) {
         super(pContext, pCursor);
     }
-
+    
     @Override
-    public View newView(Context pContext, Cursor pCursor, ViewGroup pViewGroup) {
-        LayoutInflater lInflater=LayoutInflater.from(pContext);
-        return lInflater.inflate(R.layout.status_spinner,pViewGroup,false);
+    protected int getViewResource() {
+        return R.layout.status_spinner;
     }
 
     @Override

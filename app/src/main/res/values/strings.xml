@@ -75,4 +75,18 @@
     <!--- Show to do -->
     <string name="show_edit_todo">Edit todo</string>
     <string name="title_show_todo">Todo details</string>
+    <string name="title_activity_todo_filter">TodoFilterActivity</string>
+    <!-- filter settings -->
+    <string name="choose_status">Status:</string>
+    <string name="choose_date_status">Status regarding start/end date:</string>
+    <string name="choose_buildin">Build in filters:</string>
+    <string name="label_filter">Filter:</string>
+    <string name="label_customFilter">Custom filers</string>
+    <!-- filter types -->
+    <string name="ft_all">All</string>
+    <string name="ft_custom">Custom</string>
+    <string name="ft_active_todo">Active todo\'s</string>
+    <string name="ft_finished">Finished todos\'s</string>
+    <string name="ft_to_late">To late</string>
+    <string name="ft_should_start">Should start</string>
 </resources>

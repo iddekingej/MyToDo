@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Interface to SqlLite database
  */
@@ -50,7 +53,7 @@ final class DataSource {
      * @param pContext  Application activity
      * @return          Created data source
      */
-    public static DataSource makeSource(Context pContext)
+    static DataSource makeSource(Context pContext)
     {
         if(source == null){
             source=new DataSource(pContext);
@@ -58,7 +61,7 @@ final class DataSource {
         return source;
     }
 
-    public static DataSource getSource()
+    static DataSource getSource()
     {
         return source;
     }
@@ -75,13 +78,13 @@ final class DataSource {
         db.close();
     }
 
-    public ProjectItem getProjectById(long pId)
+    ProjectItem getProjectById(long pId)
     {
-        Cursor lProjectCursor=db.rawQuery("select projectname from projects where _id=?",new String[]{Long.toString(pId)});
+        Cursor lProjectCursor=db.rawQuery("select projectname,filter_type from projects where _id=?",new String[]{Long.toString(pId)});
         lProjectCursor.moveToFirst();
         ProjectItem lProjectItem=null;
         if(!lProjectCursor.isAfterLast()){
-            lProjectItem=new ProjectItem(pId,lProjectCursor.getString(0));
+            lProjectItem=new ProjectItem(pId,lProjectCursor.getString(0),lProjectCursor.getLong(1));
 
         }
         lProjectCursor.close();
@@ -93,11 +96,12 @@ final class DataSource {
      *
      * @return Initialized cursor that retrieves all projects
      */
-    public Cursor getProjectCursor()
+    Cursor getProjectCursor()
     {
         Cursor lProjectCursor=db.rawQuery("" +
                 "select p._id" +
                 ",      p.projectname " +
+                ",      p.filter_type "+
                 ",      sum(case when action_type in (0,1,4) then 1 else 0 end) num_not_active "+
                 ",      sum(case when action_type =2  then 1 else 0 end) num_active "+
                 ",      sum(case when action_type =3  then 1 else 0 end) num_finished "+
@@ -110,7 +114,7 @@ final class DataSource {
         return lProjectCursor;
     }
 
-    public boolean projectHasTodo(@NonNull  ProjectItem pProject)
+    boolean projectHasTodo(@NonNull  ProjectItem pProject)
     {
         Cursor lHasToDoCursor=db.rawQuery("select 1 as dm where exists(select 1 from todoitems where id_project=?)",new String[]{String.valueOf(pProject.getId())});
         lHasToDoCursor.moveToFirst();
@@ -119,7 +123,7 @@ final class DataSource {
         return lHas;
     }
 
-    public String getStatusTextById(long pId)
+    String getStatusTextById(long pId)
     {
             Cursor lStatusCursor=db.rawQuery("select description from status where _id=?",new String[]{String.valueOf(pId)});
             lStatusCursor.moveToFirst();
@@ -139,7 +143,7 @@ final class DataSource {
      * @param pIdProject Project ID. The to do's of this project are retrieved
      * @return           Cursor that retrieves all to do belonging to a project
      */
-    public Cursor getTodoCursor(long pIdProject)
+    Cursor getTodoCursor(long pIdProject)
     {
         Cursor lTodoCursor=db.rawQuery("" +
                 "select t._id " +
@@ -171,7 +175,7 @@ final class DataSource {
      *
      * @param pProjectName  Naam/description of project
      */
-    public long addProject(String pProjectName){
+    long addProject(String pProjectName){
         ContentValues lValues=new ContentValues();
         lValues.put("projectname",pProjectName);
         return db.insert("projects",null,lValues);
@@ -183,10 +187,11 @@ final class DataSource {
      * @param pId           Id of project
      * @param pProjectName  New project name
      */
-    public void editProject(long pId,String pProjectName)
+    void editProject(long pId,String pProjectName)
     {
         ContentValues lValues = new ContentValues();
         lValues.put("projectname",pProjectName);
+        lValues.put("filter_type",FilterTypes.FT_NONE);
         updateById("projects",lValues,pId);
     }
 
@@ -199,7 +204,7 @@ final class DataSource {
      * @param pComment     To do Comment
      */
 
-    public void addTodo(long pIdProject,long pIdStatus,String pTitle,String pComment,Long pStartDate,Long pEndDate)
+    void addTodo(long pIdProject,long pIdStatus,String pTitle,String pComment,Long pStartDate,Long pEndDate)
     {
         ContentValues lValues=new ContentValues();
         lValues.put("id_project",pIdProject);
@@ -215,7 +220,7 @@ final class DataSource {
         db.insert("todoitems",null,lValues);
     }
 
-    public void updateToDo(long pId,long pIdProject,long pIdStatus,String pTitle,String pComment,Long pStartDate,Long pEndDate)
+    void updateToDo(long pId,long pIdProject,long pIdStatus,String pTitle,String pComment,Long pStartDate,Long pEndDate)
     {
         ContentValues lValues = new ContentValues();
         lValues.put("id_project",pIdProject);
@@ -267,6 +272,8 @@ final class DataSource {
 
     public void deleteStatus(long pId)
     {
+        db.delete("project_statusfilters","id_status=?",new String[]{String.valueOf(pId)});
+
         deleteById("status",pId);
     }
 
@@ -287,5 +294,39 @@ final class DataSource {
     public void deleteProject(long pId)
     {
         deleteById("projects",pId);
+    }
+
+    public Set<Long> getStatusSet(long pIdProject)
+    {
+        long lId;
+        Set<Long> lStatusSet=new HashSet<>();
+        Cursor lStatusCursor=db.rawQuery("select id_status from project_statusfilters where id_project=?",new String[]{String.valueOf(pIdProject)});
+        lStatusCursor.moveToFirst();
+
+        while(!lStatusCursor.isAfterLast()){
+            lStatusSet.add(lStatusCursor.getLong(0));
+            lStatusCursor.moveToNext();
+        }
+        return lStatusSet;
+    }
+
+    public void removeStatusFilter(long pIdProject)
+    {
+            db.delete("project_statusfilters","id_project=?",new String[]{String.valueOf(pIdProject)});
+    }
+
+    public void addStatusFilter(long pIdProject,long pIdStatus)
+    {
+        ContentValues lValues = new ContentValues();
+        lValues.put("id_project",pIdProject) ;
+        lValues.put("id_status",pIdStatus);
+        db.insert("project_statusfilters",null,lValues);
+    }
+
+    public void setProjectFilterType(long pIdProject,long pProjectStatus)
+    {
+        ContentValues lValues=new ContentValues();
+        lValues.put("filter_type",pProjectStatus);
+        updateById("projects",lValues,pIdProject);
     }
 }

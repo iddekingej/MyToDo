@@ -11,32 +11,45 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-public class TodoActivity extends AppCompatActivity {
+public class TodoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private static final int ACT_NEW_TODO=100;
     private static final int ACT_SHOW_TODO=101;
+    private static final int ACT_FILTER=102;
     public static  final int RES_DELETE_TODO=RESULT_FIRST_USER+1000;
+
     private long id;
     private DataSource ds;
     private TodoListAdapter adapter;
+    private Spinner todoFilterElement;
+    private ProjectItem projectItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
+
+        ds=DataSource.getSource();
+        Intent lIntent=getIntent();
+        id=lIntent.getLongExtra("_id",0);
+        projectItem=ds.getProjectById(id);
+
 
         TextView projectName=(TextView)findViewById(R.id.projectName);
         ListView todoList=(ListView)findViewById(R.id.todoList);
 
-        ds=DataSource.getSource();
 
-        Intent lIntent=getIntent();
-        id=lIntent.getLongExtra("_id",0);
-        ProjectItem projectItem=ds.getProjectById(id);
+
+        todoFilterElement = (Spinner) findViewById(R.id.todoFilter);
+        FilterTypes.setSpinner(this,todoFilterElement);
+        todoFilterElement.setOnItemSelectedListener(this);
+
+        todoFilterElement.setSelection((int)projectItem.getFilterType());
         projectName.setText(projectItem.getProjectName());
+
         adapter=new TodoListAdapter(this,ds.getTodoCursor(id));
         todoList.setAdapter(adapter);
         todoList.setOnItemClickListener(new ListView.OnItemClickListener(){
@@ -148,9 +161,14 @@ public class TodoActivity extends AppCompatActivity {
                             addTodo(pData);
                             break;
 
+                        case ACT_FILTER:
+                            refreshList();
+                            break;
+
                         case ACT_SHOW_TODO:
                             refreshList();
                             break;
+
                     }
 
                     break;
@@ -160,10 +178,42 @@ public class TodoActivity extends AppCompatActivity {
         }
     }
 
+    public void openFilter(View pView)
+    {
+        Intent lIntent=new Intent(this,TodoFilterActivity.class);
+        lIntent.putExtra("projectId",id);
+        startActivityForResult(lIntent,ACT_SHOW_TODO);
+    }
+
+    private void refreshListFilter()
+    {
+        ProjectItem projectItem=ds.getProjectById(id);
+        todoFilterElement.setSelection((int)projectItem.getFilterType());
+        refreshList();
+    }
+
     private void refreshList()
     {
         adapter.getCursor().close();
         adapter.swapCursor(ds.getTodoCursor(id));
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        if(projectItem != null) {
+            long lSelectedType = adapterView.getSelectedItemPosition();
+            if (lSelectedType != projectItem.getFilterType()) {
+                projectItem.setFilterType(lSelectedType);
+                ds.setProjectFilterType(projectItem.getId(), lSelectedType);
+                refreshList();
+            }
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }
