@@ -5,7 +5,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 /**
- * Created by jeroen on 10/12/17.
+ * FilterTypes
  */
 
 final class FilterTypes {

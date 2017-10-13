@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import org.elaya.mytodo.Models.StatusItem;
+import org.elaya.mytodo.Adapters.StatusListAdapter;
+
 public class StatusActivity extends AppCompatActivity {
 
     private StatusListAdapter adapter;

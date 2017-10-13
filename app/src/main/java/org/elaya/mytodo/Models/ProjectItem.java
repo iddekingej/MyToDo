@@ -1,10 +1,10 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.Models;
 
 /**
  * Object representing a project
  */
 
-class ProjectItem {
+public class ProjectItem {
 
 
     private final String projectName;

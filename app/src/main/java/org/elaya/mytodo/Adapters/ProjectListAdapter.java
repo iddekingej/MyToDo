@@ -1,4 +1,4 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.Adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,11 +9,14 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
+import org.elaya.mytodo.Models.ProjectItem;
+import org.elaya.mytodo.R;
+
 /**
  * Adapter for project list
  */
 
-class ProjectListAdapter extends CursorAdapter {
+public class ProjectListAdapter extends CursorAdapter {
     private final int idIndex;
     private final int projectNameIndex;
     private final int numFinishedIndex;

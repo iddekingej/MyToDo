@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
+import org.elaya.mytodo.Models.ProjectItem;
+
 import java.util.HashSet;
 import java.util.Set;
 

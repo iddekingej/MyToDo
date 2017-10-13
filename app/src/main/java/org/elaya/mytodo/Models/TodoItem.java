@@ -1,10 +1,10 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.Models;
 
 /**
  * Class representing a to do item belonging to a project
  */
 
-class TodoItem {
+public class TodoItem {
     private final long id;
     private final long idProject;
     private final long idStatus;

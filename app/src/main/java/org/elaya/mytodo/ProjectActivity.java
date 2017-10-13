@@ -13,6 +13,9 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import org.elaya.mytodo.Models.ProjectItem;
+import org.elaya.mytodo.Adapters.ProjectListAdapter;
+
 public class ProjectActivity extends AppCompatActivity {
     private static final int ACT_NEW_PROJECT=100;
     private static final int ACT_EDIT_PROJECT=101;

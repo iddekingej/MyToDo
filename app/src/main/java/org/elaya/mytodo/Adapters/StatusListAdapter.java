@@ -1,4 +1,4 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.Adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -6,6 +6,9 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
 
+import org.elaya.mytodo.ActionTypes;
+import org.elaya.mytodo.R;
+import org.elaya.mytodo.Models.StatusItem;
 
 
 /**
@@ -38,7 +41,7 @@ public class StatusListAdapter extends StatusBaseAdapter {
      * @param pView     View with the elements
      * @param pStatus   StatusItem used for filling the data
      */
-    public void fillView(@NonNull View pView,@NonNull  StatusItem pStatus) {
+    public void fillView(@NonNull View pView,@NonNull StatusItem pStatus) {
         TextView lView=(TextView)(pView.findViewById(R.id.description));
         TextView lPositionLabel=(TextView)(pView.findViewById(R.id.position));
         lView.setText(pStatus.getDescription());

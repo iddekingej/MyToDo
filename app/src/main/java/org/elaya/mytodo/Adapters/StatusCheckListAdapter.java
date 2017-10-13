@@ -1,10 +1,13 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.Adapters;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.CheckBox;
+
+import org.elaya.mytodo.R;
+import org.elaya.mytodo.Models.StatusItem;
 
 import java.util.Set;
 

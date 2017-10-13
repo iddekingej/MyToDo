@@ -14,6 +14,10 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
+import org.elaya.mytodo.Models.ProjectItem;
+import org.elaya.mytodo.Models.StatusItem;
+import org.elaya.mytodo.Adapters.StatusCheckListAdapter;
+
 
 public class TodoFilterActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 

@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
  * Action types used in the status table
  */
 
-final class ActionTypes {
+public final class ActionTypes {
     private static final Integer[] actionTypesId={ R.string.at_not_started,R.string.at_not_active,R.string.at_started,R.string.at_finished,R.string.at_removed};
     private static String[] actionTypesCache =null;
     public static final long NOT_STARTED=0;

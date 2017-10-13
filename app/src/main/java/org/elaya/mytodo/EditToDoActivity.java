@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import org.elaya.mytodo.Models.StatusItem;
+import org.elaya.mytodo.Adapters.StatusSpinnerAdapter;
+
 import java.util.Date;
 
 public class EditToDoActivity extends AppCompatActivity {

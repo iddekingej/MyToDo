@@ -1,10 +1,10 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.Models;
 
 /**
  * Class representing a Status item
  */
 
-class StatusItem {
+public class StatusItem {
     /**
      * Unique ID of status
      */

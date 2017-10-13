@@ -1,10 +1,13 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.Adapters;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
+
+import org.elaya.mytodo.R;
+import org.elaya.mytodo.Models.StatusItem;
 
 /**
  * Adapter used for filling the Status Dropdown list.
@@ -22,7 +25,7 @@ public class StatusSpinnerAdapter extends StatusBaseAdapter {
     }
 
     @Override
-    protected void fillView(@NonNull View pView, @NonNull  StatusItem pStatus) {
+    protected void fillView(@NonNull View pView, @NonNull StatusItem pStatus) {
         TextView lView=(TextView)(pView.findViewById(R.id.description));
         lView.setText(pStatus.getDescription());
 

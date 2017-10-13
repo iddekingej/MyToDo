@@ -1,4 +1,4 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.Adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,11 +9,14 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
+import org.elaya.mytodo.R;
+import org.elaya.mytodo.Models.TodoItem;
+
 /**
  * Used for listing all to do's belonging to a project
  */
 
-class TodoListAdapter extends CursorAdapter {
+public class TodoListAdapter extends CursorAdapter {
 
     private final int idIndex;
     private final int idProjectIndex;

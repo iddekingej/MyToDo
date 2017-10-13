@@ -14,6 +14,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.elaya.mytodo.Models.ProjectItem;
+import org.elaya.mytodo.Models.TodoItem;
+import org.elaya.mytodo.Adapters.TodoListAdapter;
+
 public class TodoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private static final int ACT_NEW_TODO=100;
     private static final int ACT_SHOW_TODO=101;
@@ -187,7 +191,7 @@ public class TodoActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void refreshListFilter()
     {
-        ProjectItem projectItem=ds.getProjectById(id);
+        projectItem=ds.getProjectById(id);
         todoFilterElement.setSelection((int)projectItem.getFilterType());
         refreshList();
     }
@@ -214,6 +218,6 @@ public class TodoActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
+        //When nothing is selected , nothing should be done..
     }
 }
