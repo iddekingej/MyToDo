@@ -7,10 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -19,17 +17,15 @@ import android.widget.Spinner;
 
 public class TodoFilterActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
-    ListView statusListElement;
-    StatusCheckListAdapter adapter;
-    RadioButton  buildInRadioElement;
-    RadioButton  customRadioElement;
-    LinearLayout buildInFilterSectionElement;
-    LinearLayout customFilterSectionElement;
-    Spinner      buildInFilterElement;
-    DataSource ds;
-
-    ProjectItem projectItem;
-    long projectId;
+    private ListView statusListElement;
+    private RadioButton  buildInRadioElement;
+    private RadioButton  customRadioElement;
+    private LinearLayout buildInFilterSectionElement;
+    private LinearLayout customFilterSectionElement;
+    private Spinner      buildInFilterElement;
+    private DataSource ds;
+    private ProjectItem projectItem;
+    private long projectId;
 
 
     @Override
@@ -47,7 +43,7 @@ public class TodoFilterActivity extends AppCompatActivity implements CompoundBut
         projectItem=ds.getProjectById(projectId);
 
         statusListElement=(ListView) findViewById(R.id.statusList);
-        adapter=new StatusCheckListAdapter(this,ds.getStatusCursor(),ds.getStatusSet(projectId));
+        StatusCheckListAdapter adapter=new StatusCheckListAdapter(this,ds.getStatusCursor(),ds.getStatusSet(projectId));
         statusListElement.setAdapter(adapter);
 
         buildInRadioElement = (RadioButton) findViewById(R.id.buildinRadio);
@@ -98,7 +94,7 @@ public class TodoFilterActivity extends AppCompatActivity implements CompoundBut
         }
     }
 
-    public void saveFilter()
+    private void saveFilter()
     {
         View lListItem;
         CheckBox lStatusCheck;

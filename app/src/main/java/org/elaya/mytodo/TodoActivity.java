@@ -162,7 +162,7 @@ public class TodoActivity extends AppCompatActivity implements AdapterView.OnIte
                             break;
 
                         case ACT_FILTER:
-                            refreshList();
+                            refreshListFilter();
                             break;
 
                         case ACT_SHOW_TODO:
@@ -182,7 +182,7 @@ public class TodoActivity extends AppCompatActivity implements AdapterView.OnIte
     {
         Intent lIntent=new Intent(this,TodoFilterActivity.class);
         lIntent.putExtra("projectId",id);
-        startActivityForResult(lIntent,ACT_SHOW_TODO);
+        startActivityForResult(lIntent,ACT_FILTER);
     }
 
     private void refreshListFilter()

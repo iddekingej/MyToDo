@@ -82,6 +82,7 @@
     <string name="choose_buildin">Build in filters:</string>
     <string name="label_filter">Filter:</string>
     <string name="label_customFilter">Custom filers</string>
+    <string name="img_filter">Open filter settings</string>
     <!-- filter types -->
     <string name="ft_all">All</string>
     <string name="ft_custom">Custom</string>

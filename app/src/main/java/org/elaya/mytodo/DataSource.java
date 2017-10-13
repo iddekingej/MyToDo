@@ -307,6 +307,7 @@ final class DataSource {
             lStatusSet.add(lStatusCursor.getLong(0));
             lStatusCursor.moveToNext();
         }
+        lStatusCursor.close();
         return lStatusSet;
     }
 

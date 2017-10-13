@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class StatusCheckListAdapter extends StatusBaseAdapter {
 
-    private Set<Long> enabledStatusSet;
+    private final Set<Long> enabledStatusSet;
 
     public StatusCheckListAdapter(Context pContext,@NonNull Cursor pCursor, Set<Long> pEnabledStatusSet)
     {

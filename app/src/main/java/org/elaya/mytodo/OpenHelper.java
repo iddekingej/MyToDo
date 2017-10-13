@@ -73,7 +73,7 @@ class OpenHelper extends SQLiteOpenHelper {
         createToDoFilter(pDatabase);
     }
 
-    public void createToDoFilter(@NonNull SQLiteDatabase pDatabase)
+    private void createToDoFilter(@NonNull SQLiteDatabase pDatabase)
     {
         pDatabase.execSQL("alter table projects add filter_type integer");
         pDatabase.execSQL("create table project_statusfilters(" +

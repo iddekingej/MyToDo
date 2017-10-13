@@ -48,7 +48,7 @@ public class ShowTodo extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.show_todo, pMenu);
         return super.onCreateOptionsMenu(pMenu);
     }
-    public void editTodo()
+    private void editTodo()
     {
         Intent lIntent = new Intent(this,EditToDoActivity.class);
         if(null != getIntent().getExtras()) {
