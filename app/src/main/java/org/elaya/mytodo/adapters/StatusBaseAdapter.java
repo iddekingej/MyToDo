@@ -1,4 +1,4 @@
-package org.elaya.mytodo.Adapters;
+package org.elaya.mytodo.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -8,13 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 
-import org.elaya.mytodo.Models.StatusItem;
+import org.elaya.mytodo.status.StatusItem;
 
 /**
  * Base class of @see CursorAdapter for the Status table
  */
 
-public abstract class StatusBaseAdapter extends CursorAdapter {
+abstract class StatusBaseAdapter extends CursorAdapter {
     private final int idIndex;
     private final int positionIndex;
     private final int actionTypeIndex;
@@ -42,7 +42,6 @@ public abstract class StatusBaseAdapter extends CursorAdapter {
         fillView(pView,lStatusItem);
     }
 
-
     /**
      * Create view for each item displayed in list.
      *
@@ -57,7 +56,7 @@ public abstract class StatusBaseAdapter extends CursorAdapter {
         return lInflater.inflate(getViewResource(),pViewGroup,false);
     }
 
-    abstract protected int getViewResource();
+    protected abstract int getViewResource();
 
     protected abstract void fillView(View pView,StatusItem pStatus);
 }

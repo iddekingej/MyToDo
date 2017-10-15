@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="org.elaya.mytodo.TodoFilterActivity">
+    tools:context="org.elaya.mytodo.todo.TodoFilterActivity">
 
     <include  layout="@layout/app_bar"/>
 
@@ -12,14 +12,14 @@
         android:id="@+id/buildinRadio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/choose_buildin" />
+        android:text="@string/choose_build_in" />
 
     <LinearLayout
         android:id="@+id/buildInFilterSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="15dp">
+        android:paddingStart="15dp">
 
         <TextView
             android:id="@+id/textView17"
@@ -35,7 +35,7 @@
     </LinearLayout>
 
     <RadioButton
-        android:id="@+id/customeRadio"
+        android:id="@+id/customRadio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/label_customFilter" />
@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="15dp">
+        android:paddingStart="15dp">
 
         <TextView
             android:id="@+id/textView16"

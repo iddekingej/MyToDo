@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="org.elaya.mytodo.ProjectActivity">
+    tools:context="org.elaya.mytodo.project.ProjectActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
 
-        tools:context="org.elaya.mytodo.ProjectActivity"
+        tools:context="org.elaya.mytodo.project.ProjectActivity"
         tools:showIn="@layout/activity_project"
         >
         <TextView

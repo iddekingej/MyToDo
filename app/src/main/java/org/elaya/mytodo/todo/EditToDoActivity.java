@@ -1,23 +1,26 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.todo;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import org.elaya.mytodo.Models.StatusItem;
-import org.elaya.mytodo.Adapters.StatusSpinnerAdapter;
+import org.elaya.mytodo.tools.BaseActivity;
+import org.elaya.mytodo.tools.DatePickerFragment;
+import org.elaya.mytodo.status.StatusItem;
+import org.elaya.mytodo.adapters.StatusSpinnerAdapter;
+import org.elaya.mytodo.R;
+import org.elaya.mytodo.tools.DateHandler;
+import org.elaya.mytodo.tools.Helpers;
 
 import java.util.Date;
 
-public class EditToDoActivity extends AppCompatActivity {
+public class EditToDoActivity extends BaseActivity {
 
     private boolean isNew=false;
     private long id;
@@ -31,13 +34,8 @@ public class EditToDoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_todo);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         Intent lIntent=getIntent();
-        DataSource ds= DataSource.getSource();
-
         isNew = !lIntent.hasExtra("_id");
         id=lIntent.getLongExtra("_id",-1);
         idProject=lIntent.getLongExtra("id_project",-1);
@@ -73,16 +71,27 @@ public class EditToDoActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_edit_todo, menu);
+    public boolean onCreateOptionsMenu(@NonNull Menu pMenu) {
+
+        super.onCreateOptionsMenu(pMenu);
         if(isNew) {
-            MenuItem lDeleteMenu = menu.findItem(R.id.delete);
+            MenuItem lDeleteMenu = pMenu.findItem(R.id.delete);
             invalidateOptionsMenu();
             lDeleteMenu.setVisible(false);
         }
         return true;
     }
+
+    @Override
+    protected int getContentResource() {
+        return R.layout.activity_edit_todo;
+    }
+
+    @Override
+    protected int getMenuResource() {
+        return R.menu.menu_edit_todo;
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
         switch (pItem.getItemId()) {

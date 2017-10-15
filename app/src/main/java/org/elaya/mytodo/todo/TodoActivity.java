@@ -1,12 +1,9 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.todo;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,38 +11,33 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.elaya.mytodo.Models.ProjectItem;
-import org.elaya.mytodo.Models.TodoItem;
-import org.elaya.mytodo.Adapters.TodoListAdapter;
+import org.elaya.mytodo.tools.BaseActivity;
+import org.elaya.mytodo.project.ProjectItem;
+import org.elaya.mytodo.R;
+import org.elaya.mytodo.tools.FilterTypes;
 
-public class TodoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class TodoActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
+
     private static final int ACT_NEW_TODO=100;
     private static final int ACT_SHOW_TODO=101;
     private static final int ACT_FILTER=102;
     public static  final int RES_DELETE_TODO=RESULT_FIRST_USER+1000;
 
     private long id;
-    private DataSource ds;
     private TodoListAdapter adapter;
     private Spinner todoFilterElement;
     private ProjectItem projectItem;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_todo);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        ds=DataSource.getSource();
         Intent lIntent=getIntent();
         id=lIntent.getLongExtra("_id",0);
         projectItem=ds.getProjectById(id);
 
-
         TextView projectName=(TextView)findViewById(R.id.projectName);
         ListView todoList=(ListView)findViewById(R.id.todoList);
-
-
 
         todoFilterElement = (Spinner) findViewById(R.id.todoFilter);
         FilterTypes.setSpinner(this,todoFilterElement);
@@ -66,10 +58,13 @@ public class TodoActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_todo, menu);
-        return true;
+    protected int getContentResource() {
+        return R.layout.activity_todo;
+    }
+
+    @Override
+    protected int getMenuResource() {
+        return R.menu.menu_todo;
     }
 
     @Override
@@ -107,7 +102,7 @@ public class TodoActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void openShowToDo(@NonNull View pItem){
         TodoItem lItem=(TodoItem)pItem.getTag();
-        Intent lIntent= new Intent(this,ShowTodo.class);
+        Intent lIntent= new Intent(this,ShowTodoActivity.class);
         lIntent.putExtra("_id",lItem.getId());
         lIntent.putExtra("id_project",id);
         lIntent.putExtra("id_status",lItem.getIdStatus());

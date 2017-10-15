@@ -1,16 +1,17 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.project;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-public class EditProjectActivity extends AppCompatActivity {
+import org.elaya.mytodo.tools.BaseActivity;
+import org.elaya.mytodo.R;
+import org.elaya.mytodo.tools.Helpers;
+
+public class EditProjectActivity extends BaseActivity {
 
     private TextView projectName;
     private long     id;
@@ -24,9 +25,6 @@ public class EditProjectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_project);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         projectName=(TextView) findViewById(R.id.projectName);
         Intent lIntent=getIntent();
@@ -34,18 +32,14 @@ public class EditProjectActivity extends AppCompatActivity {
         projectName.setText(lIntent.getStringExtra("projectName"));
     }
 
-
-    /**
-     * Set the toolbar option menu
-     *
-     * @param pMenu Toolbar menu
-     * @return If handled
-     */
     @Override
-    public boolean onCreateOptionsMenu(Menu pMenu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_project_edit, pMenu);
-        return super.onCreateOptionsMenu(pMenu);
+    protected int getContentResource() {
+        return R.layout.activity_edit_project;
+    }
+
+    @Override
+    protected int getMenuResource() {
+        return R.menu.menu_project_edit;
     }
 
     /**

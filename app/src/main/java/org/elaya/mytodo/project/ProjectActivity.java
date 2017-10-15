@@ -1,36 +1,36 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.project;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import org.elaya.mytodo.Models.ProjectItem;
-import org.elaya.mytodo.Adapters.ProjectListAdapter;
+import org.elaya.mytodo.tools.BaseActivity;
+import org.elaya.mytodo.R;
+import org.elaya.mytodo.settings.SettingsEditor;
+import org.elaya.mytodo.status.StatusActivity;
+import org.elaya.mytodo.todo.TodoActivity;
+import org.elaya.mytodo.tools.Helpers;
+import org.elaya.mytodo.settings.Settings;
 
-public class ProjectActivity extends AppCompatActivity {
+public class ProjectActivity extends BaseActivity {
+
     private static final int ACT_NEW_PROJECT=100;
     private static final int ACT_EDIT_PROJECT=101;
     private static final int ACT_EDIT_TODO=102;
     private static final int ACT_EDIT_STATUS=103;
-    private DataSource ds;
+
     private ProjectListAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project);
-        ds=DataSource.makeSource(getApplicationContext());
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         ListView lProjectList=(ListView)findViewById(R.id.projectList);
         lProjectList.setOnItemClickListener(new ListView.OnItemClickListener(){
@@ -51,9 +51,13 @@ public class ProjectActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    protected int getContentResource() {
+        return R.layout.activity_project;
+    }
+
+    @Override
+    protected int getMenuResource() {
+        return R.menu.menu_main;
     }
 
     @Override
@@ -173,11 +177,11 @@ public class ProjectActivity extends AppCompatActivity {
      * Saves data in database after user entered net project.
      * @param pData Data returned from the project form
      */
-    private void newProject(@NonNull Bundle pData)
+    private void newProject(@NonNull Intent pData)
     {
-        long lIdProject=ds.addProject(pData.getString("projectName"));
+        long lIdProject=ds.addProject(pData.getStringExtra("projectName"));
         refreshList();
-        if(pData.getBoolean("addTodo")){
+        if(pData.getBooleanExtra("addTodo",false)){
             openProjectById(lIdProject);
         }
     }
@@ -186,8 +190,8 @@ public class ProjectActivity extends AppCompatActivity {
      * Saves data in databases after user edited the project
      * @param pData Data returned from the project form
      */
-    private void editProject(@NonNull Bundle pData){
-        ds.editProject(pData.getLong("_id",-1),pData.getString("projectName"));
+    private void editProject(@NonNull Intent pData){
+        ds.editProject(pData.getLongExtra("_id",-1),pData.getStringExtra("projectName"));
     }
 
     /**
@@ -203,12 +207,14 @@ public class ProjectActivity extends AppCompatActivity {
             switch(pRequestCode)
             {
                 case ACT_NEW_PROJECT:
-                    newProject(pData.getExtras());
+                    if(pData.getExtras() != null) {
+                        newProject(pData);
+                    }
 
                     break;
 
                 case ACT_EDIT_PROJECT:
-                    editProject(pData.getExtras());
+                    editProject(pData);
                     refreshList();
                     break;
 

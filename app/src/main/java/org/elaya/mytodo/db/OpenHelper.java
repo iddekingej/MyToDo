@@ -1,4 +1,4 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,6 +6,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+
+import org.elaya.mytodo.R;
+import org.elaya.mytodo.tools.ActionTypes;
 
 /**
 *Creates or updates the database
@@ -30,7 +33,7 @@ class OpenHelper extends SQLiteOpenHelper {
 
     private void statusDefaults(@NonNull SQLiteDatabase pDb)
     {
-        insertStatus(pDb,0 ,ActionTypes.NOT_STARTED,R.string.at_not_active);
+        insertStatus(pDb,0 , ActionTypes.NOT_STARTED, R.string.at_not_active);
         insertStatus(pDb,1 ,ActionTypes.NOT_ACTIVE ,R.string.at_not_started);
         insertStatus(pDb,2, ActionTypes.STARTED, R.string.at_started);
         insertStatus(pDb,3, ActionTypes.FINISHED, R.string.at_finished);

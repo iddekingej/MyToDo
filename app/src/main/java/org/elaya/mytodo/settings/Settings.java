@@ -1,4 +1,4 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,13 +8,13 @@ import android.support.annotation.NonNull;
  * Class for reading and writing persistent app settings
  */
 
-class Settings {
+public class Settings {
 
 
     private static SharedPreferences settingsFile;
     private static String dateFormat=null;
 
-    static void make(@NonNull Context pContext)
+    public static void make(@NonNull Context pContext)
     {
         settingsFile = pContext.getSharedPreferences("main", Context.MODE_PRIVATE);
     }

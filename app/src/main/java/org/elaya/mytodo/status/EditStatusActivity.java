@@ -1,20 +1,22 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.status;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class EditStatusActivity extends AppCompatActivity {
+import org.elaya.mytodo.tools.BaseActivity;
+import org.elaya.mytodo.R;
+import org.elaya.mytodo.tools.ActionTypes;
+import org.elaya.mytodo.tools.Helpers;
+
+public class EditStatusActivity extends BaseActivity {
 
     private long id;
     private EditText descriptionElement;
@@ -25,12 +27,6 @@ public class EditStatusActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_status);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DataSource ds = DataSource.getSource();
-
 
         positionElement=(EditText)findViewById(R.id.position);
         Intent lIntent=getIntent();
@@ -47,7 +43,7 @@ public class EditStatusActivity extends AppCompatActivity {
         descriptionElement=(EditText)findViewById(R.id.description);
         descriptionElement.setText(lIntent.getStringExtra("description"));
 
-        ArrayAdapter actionTypeAdapter=new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,ActionTypes.getActionTypes(this));
+        ArrayAdapter actionTypeAdapter=new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, ActionTypes.getActionTypes(this));
 
         actionType=(Spinner)findViewById(R.id.actionType);
         actionType.setAdapter(actionTypeAdapter);
@@ -67,17 +63,15 @@ public class EditStatusActivity extends AppCompatActivity {
         statusIsUsed=ds.statusIsUsed(id);
     }
 
-    /**
-     * Set the toolbar option menu
-     *
-     * @param pMenu Toolbar menu
-     * @return If handled
-     */
+
     @Override
-    public boolean onCreateOptionsMenu(Menu pMenu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_edit_status, pMenu);
-        return super.onCreateOptionsMenu(pMenu);
+    protected int getContentResource() {
+        return R.layout.activity_edit_status;
+    }
+
+    @Override
+    protected int getMenuResource() {
+        return R.menu.menu_edit_status;
     }
 
     private void onSavePressed()

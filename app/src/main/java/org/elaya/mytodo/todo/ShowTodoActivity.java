@@ -1,28 +1,22 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.todo;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class ShowTodo extends AppCompatActivity {
+import org.elaya.mytodo.tools.BaseActivity;
+import org.elaya.mytodo.R;
+import org.elaya.mytodo.tools.DateHandler;
+
+public class ShowTodoActivity extends BaseActivity {
 
     private  static final int REQ_EDIT =100;
-
-    private DataSource ds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_todo);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        ds=DataSource.getSource();
 
         TextView lTitleElement=(TextView)findViewById(R.id.title);
         TextView lStatusElement=(TextView)findViewById(R.id.status);
@@ -43,11 +37,15 @@ public class ShowTodo extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu pMenu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.show_todo, pMenu);
-        return super.onCreateOptionsMenu(pMenu);
+    protected int getContentResource() {
+        return R.layout.activity_show_todo;
     }
+
+    @Override
+    protected int getMenuResource() {
+        return R.menu.show_todo;
+    }
+
     private void editTodo()
     {
         Intent lIntent = new Intent(this,EditToDoActivity.class);

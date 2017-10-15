@@ -1,4 +1,4 @@
-package org.elaya.mytodo.Adapters;
+package org.elaya.mytodo.todo;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -10,7 +10,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 import org.elaya.mytodo.R;
-import org.elaya.mytodo.Models.TodoItem;
+import org.elaya.mytodo.todo.TodoItem;
 
 /**
  * Used for listing all to do's belonging to a project
@@ -30,15 +30,15 @@ public class TodoListAdapter extends CursorAdapter {
 
     public TodoListAdapter(Context pContext,@NonNull Cursor pCursor){
         super(pContext,pCursor,0);
-        idIndex=pCursor.getColumnIndex("_id");
-        idProjectIndex=pCursor.getColumnIndex("id_project");
-        idStatusIndex=pCursor.getColumnIndex("id_status");
-        titleIndex=pCursor.getColumnIndex("title");
-        commentIndex=pCursor.getColumnIndex("comment");
+        idIndex=pCursor.getColumnIndex(TodoItem.F_ID);
+        idProjectIndex=pCursor.getColumnIndex(TodoItem.F_ID_PROJECT);
+        idStatusIndex=pCursor.getColumnIndex(TodoItem.F_ID_STATUS);
+        titleIndex=pCursor.getColumnIndex(TodoItem.F_TITLE);
+        commentIndex=pCursor.getColumnIndex(TodoItem.F_COMMENT);
         statusdescIndex=pCursor.getColumnIndex("statusdesc");
         isFinishedIndex=pCursor.getColumnIndex("isfinished");
-        startDateIndex=pCursor.getColumnIndex("start_date");
-        endDateIndex=pCursor.getColumnIndex("end_date");
+        startDateIndex=pCursor.getColumnIndex(TodoItem.F_START_DATE);
+        endDateIndex=pCursor.getColumnIndex(TodoItem.F_END_DATE);
     }
 
 

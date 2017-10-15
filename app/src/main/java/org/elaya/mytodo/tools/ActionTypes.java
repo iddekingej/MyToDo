@@ -1,8 +1,10 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.tools;
 
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
+
+import org.elaya.mytodo.R;
 
 /**
  * Action types used in the status table

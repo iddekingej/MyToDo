@@ -1,10 +1,20 @@
-package org.elaya.mytodo.Models;
+package org.elaya.mytodo.todo;
 
 /**
  * Class representing a to do item belonging to a project
  */
 
 public class TodoItem {
+
+    public static final String TABLE_NAME="todoitems";
+    public static final String F_ID="_id";
+    public static final String F_ID_STATUS="id_status";
+    public static final String F_ID_PROJECT="id_project";
+    public static final String F_TITLE="title";
+    public static final String F_COMMENT="comment";
+    public static final String F_START_DATE="start_date";
+    public static final String F_END_DATE="end_date";
+
     private final long id;
     private final long idProject;
     private final long idStatus;

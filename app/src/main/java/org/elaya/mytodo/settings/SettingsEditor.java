@@ -1,27 +1,26 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.settings;
 
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RadioGroup;
 
-public class SettingsEditor extends AppCompatActivity {
+import org.elaya.mytodo.tools.BaseActivity;
+import org.elaya.mytodo.R;
+import org.elaya.mytodo.tools.Helpers;
+
+public class SettingsEditor extends BaseActivity {
 
     private RadioGroup dateFormatElement;
     private RadioGroup separatorElement;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
         dateFormatElement = (RadioGroup)findViewById(R.id.dateFormat);
         separatorElement  = (RadioGroup)findViewById(R.id.dateSep);
         int lFormat=R.id.date_dmy;
-        String lFormatSettings=Settings.getDateFormatType();
+        String lFormatSettings= Settings.getDateFormatType();
         if("MDY".equals(lFormatSettings)){
             lFormat=R.id.date_mdy;
         } else if("YMD".equals(lFormatSettings)){
@@ -41,17 +40,14 @@ public class SettingsEditor extends AppCompatActivity {
         separatorElement.check(lSeparator);
     }
 
-    /**
-     * Set the toolbar option menu
-     *
-     * @param pMenu Toolbar menu
-     * @return If handled
-     */
     @Override
-    public boolean onCreateOptionsMenu(Menu pMenu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_settings, pMenu);
-        return super.onCreateOptionsMenu(pMenu);
+    protected int getContentResource() {
+        return R.layout.activity_settings;
+    }
+
+    @Override
+    protected int getMenuResource() {
+        return R.menu.menu_settings;
     }
 
     private void saveSettings()

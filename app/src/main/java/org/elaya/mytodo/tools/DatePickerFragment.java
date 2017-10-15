@@ -1,4 +1,4 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.tools;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.widget.DatePicker;
 import android.widget.EditText;
+
 import java.util.Date;
 
 /**
@@ -18,7 +19,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
 
 
-    static DatePickerFragment newInstance(@NonNull EditText pDateElement)
+    public static DatePickerFragment newInstance(@NonNull EditText pDateElement)
     {
         DatePickerFragment lFragment=new DatePickerFragment();
         lFragment.setDateElement(pDateElement);

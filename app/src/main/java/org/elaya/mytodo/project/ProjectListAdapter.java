@@ -1,4 +1,4 @@
-package org.elaya.mytodo.Adapters;
+package org.elaya.mytodo.project;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
-import org.elaya.mytodo.Models.ProjectItem;
 import org.elaya.mytodo.R;
 
 /**
@@ -27,11 +26,11 @@ public class ProjectListAdapter extends CursorAdapter {
     public ProjectListAdapter(Context pContext,@NonNull Cursor pCursor){
         super(pContext,pCursor,0);
         idIndex=pCursor.getColumnIndex("_id");
-        projectNameIndex=pCursor.getColumnIndex("projectname");
+        projectNameIndex=pCursor.getColumnIndex(ProjectItem.F_PROJECTNAME);
         numFinishedIndex=pCursor.getColumnIndex("num_finished");
         numActiveIndex=pCursor.getColumnIndex("num_active");
         numNotActiveIndex=pCursor.getColumnIndex("num_not_active");
-        filterTypeIndex=pCursor.getColumnIndex("filter_type");
+        filterTypeIndex=pCursor.getColumnIndex(ProjectItem.F_FILTER_TYPE);
     }
 
     public void bindView(@NonNull View pView, Context pContext, @NonNull Cursor pCursor)

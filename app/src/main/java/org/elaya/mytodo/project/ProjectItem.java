@@ -1,11 +1,14 @@
-package org.elaya.mytodo.Models;
+package org.elaya.mytodo.project;
 
 /**
  * Object representing a project
  */
 
 public class ProjectItem {
-
+    public static final String F_ID ="_id";
+    public static final String F_TABLE_NAME ="projects";
+    public static final String F_PROJECTNAME ="projectname";
+    public static final String F_FILTER_TYPE ="filter_type";
 
     private final String projectName;
     private final long id;

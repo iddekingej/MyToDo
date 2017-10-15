@@ -1,4 +1,4 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.tools;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -7,11 +7,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 
+import org.elaya.mytodo.R;
+
 /**
  * Some utility functions
  */
 
-class Helpers {
+public class Helpers {
     private Helpers()
     {
 

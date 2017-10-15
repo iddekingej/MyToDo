@@ -1,4 +1,4 @@
-package org.elaya.mytodo.Adapters;
+package org.elaya.mytodo.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.elaya.mytodo.R;
-import org.elaya.mytodo.Models.StatusItem;
+import org.elaya.mytodo.status.StatusItem;
 
 /**
  * Adapter used for filling the Status Dropdown list.

@@ -1,4 +1,4 @@
-package org.elaya.mytodo.Models;
+package org.elaya.mytodo.status;
 
 /**
  * Class representing a Status item

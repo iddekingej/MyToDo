@@ -1,4 +1,4 @@
-package org.elaya.mytodo.Adapters;
+package org.elaya.mytodo.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,12 +7,12 @@ import android.view.View;
 import android.widget.CheckBox;
 
 import org.elaya.mytodo.R;
-import org.elaya.mytodo.Models.StatusItem;
+import org.elaya.mytodo.status.StatusItem;
 
 import java.util.Set;
 
 /**
- * Created by jeroen on 10/11/17.
+ * This adapter is for a list of status and with checkboxes
  */
 
 public class StatusCheckListAdapter extends StatusBaseAdapter {

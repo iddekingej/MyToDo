@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme.NoActionBar"
         >
         <activity
-            android:name=".ProjectActivity"
+            android:name=".project.ProjectActivity"
             android:label="@string/title_main"
             >
             <intent-filter>
@@ -23,40 +23,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EditProjectActivity"
+            android:name=".project.EditProjectActivity"
             android:label="@string/title_activity_edit_project"
              />
         <activity
-            android:name=".TodoActivity"
+            android:name=".todo.TodoActivity"
             android:label="@string/title_activity_todo"
             />
         <activity
-            android:name=".EditToDoActivity"
+            android:name=".todo.EditToDoActivity"
             android:label="@string/title_activity_edit_todo"
 
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".StatusActivity"
+            android:name=".status.StatusActivity"
             android:label="@string/title_activity_status"
             />
         <activity
-            android:name=".EditStatusActivity"
+            android:name=".status.EditStatusActivity"
             android:label="@string/title_activity_edit_status"
             />
         <activity
-            android:name=".HelpActivity"
+            android:name=".tools.HelpActivity"
             android:label="@string/title_activity_help"
             />
         <activity
-            android:name=".SettingsEditor"
+            android:name=".settings.SettingsEditor"
             android:label="@string/title_settings"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ShowTodo"
+            android:name=".todo.ShowTodoActivity"
             android:label="@string/title_show_todo"
              />
         <activity
-            android:name=".TodoFilterActivity"
+            android:name=".todo.TodoFilterActivity"
             android:label="@string/title_activity_todo_filter"
 
             />

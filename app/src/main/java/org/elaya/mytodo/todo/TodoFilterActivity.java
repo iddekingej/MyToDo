@@ -1,10 +1,8 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.todo;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -14,12 +12,15 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-import org.elaya.mytodo.Models.ProjectItem;
-import org.elaya.mytodo.Models.StatusItem;
-import org.elaya.mytodo.Adapters.StatusCheckListAdapter;
+import org.elaya.mytodo.tools.BaseActivity;
+import org.elaya.mytodo.project.ProjectItem;
+import org.elaya.mytodo.status.StatusItem;
+import org.elaya.mytodo.adapters.StatusCheckListAdapter;
+import org.elaya.mytodo.R;
+import org.elaya.mytodo.tools.FilterTypes;
 
 
-public class TodoFilterActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
+public class TodoFilterActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener {
 
     private ListView statusListElement;
     private RadioButton  buildInRadioElement;
@@ -27,7 +28,6 @@ public class TodoFilterActivity extends AppCompatActivity implements CompoundBut
     private LinearLayout buildInFilterSectionElement;
     private LinearLayout customFilterSectionElement;
     private Spinner      buildInFilterElement;
-    private DataSource ds;
     private ProjectItem projectItem;
     private long projectId;
 
@@ -36,13 +36,6 @@ public class TodoFilterActivity extends AppCompatActivity implements CompoundBut
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_todo_filter);
-
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        ds=DataSource.getSource();
         projectId=getIntent().getLongExtra("projectId",-1);
         projectItem=ds.getProjectById(projectId);
 
@@ -53,7 +46,7 @@ public class TodoFilterActivity extends AppCompatActivity implements CompoundBut
         buildInRadioElement = (RadioButton) findViewById(R.id.buildinRadio);
         buildInRadioElement.setOnCheckedChangeListener(this);
 
-        customRadioElement  = (RadioButton) findViewById(R.id.customeRadio);
+        customRadioElement  = (RadioButton) findViewById(R.id.customRadio);
         customRadioElement.setOnCheckedChangeListener(this);
 
         buildInFilterElement=(Spinner) findViewById(R.id.buildInFilter);
@@ -73,11 +66,15 @@ public class TodoFilterActivity extends AppCompatActivity implements CompoundBut
         }
     }
 
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.todo_filter, menu);
-        return true;
+    protected int getContentResource() {
+        return R.layout.activity_todo_filter;
+    }
+
+    @Override
+    protected int getMenuResource() {
+        return R.menu.todo_filter;
     }
 
     @Override

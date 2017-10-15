@@ -1,34 +1,30 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.status;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import org.elaya.mytodo.Models.StatusItem;
-import org.elaya.mytodo.Adapters.StatusListAdapter;
+import org.elaya.mytodo.tools.BaseActivity;
+import org.elaya.mytodo.R;
+import org.elaya.mytodo.adapters.StatusListAdapter;
+import org.elaya.mytodo.tools.Helpers;
 
-public class StatusActivity extends AppCompatActivity {
-
-    private StatusListAdapter adapter;
-    private DataSource ds;
+public class StatusActivity extends BaseActivity {
 
     private static final int RES_NEW_STATUS=100;
     private static final int RES_EDIT_STATUS=101;
     public static final int RESULT_DELETE_STATUS=RESULT_FIRST_USER+1;
+
+    private StatusListAdapter adapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_status);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ds=DataSource.getSource();
         ListView statusList=(ListView) findViewById(R.id.statusList);
         adapter=new StatusListAdapter(this,ds.getStatusCursor());
         statusList.setAdapter(adapter);
@@ -40,12 +36,14 @@ public class StatusActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected int getContentResource() {
+        return R.layout.activity_status;
+    }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_status, menu);
-        return true;
+    protected int getMenuResource() {
+        return R.menu.menu_status;
     }
 
     @Override

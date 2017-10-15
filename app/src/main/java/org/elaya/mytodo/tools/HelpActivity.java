@@ -1,10 +1,12 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.tools;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
+
+import org.elaya.mytodo.R;
 
 /**
  * This activity displays a help page.

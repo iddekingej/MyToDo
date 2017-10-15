@@ -1,12 +1,14 @@
-package org.elaya.mytodo;
+package org.elaya.mytodo.db;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
-
-import org.elaya.mytodo.Models.ProjectItem;
+import org.elaya.mytodo.project.ProjectItem;
+import org.elaya.mytodo.todo.TodoItem;
+import org.elaya.mytodo.tools.ActionTypes;
+import org.elaya.mytodo.tools.FilterTypes;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +17,7 @@ import java.util.Set;
  * Interface to SqlLite database
  */
 
-final class DataSource {
+public final class DataSource {
     private static  DataSource source;
     private SQLiteDatabase db;
 
@@ -55,7 +57,7 @@ final class DataSource {
      * @param pContext  Application activity
      * @return          Created data source
      */
-    static DataSource makeSource(Context pContext)
+    public static DataSource makeSource(Context pContext)
     {
         if(source == null){
             source=new DataSource(pContext);
@@ -80,7 +82,7 @@ final class DataSource {
         db.close();
     }
 
-    ProjectItem getProjectById(long pId)
+    public ProjectItem getProjectById(long pId)
     {
         Cursor lProjectCursor=db.rawQuery("select projectname,filter_type from projects where _id=?",new String[]{Long.toString(pId)});
         lProjectCursor.moveToFirst();
@@ -98,7 +100,7 @@ final class DataSource {
      *
      * @return Initialized cursor that retrieves all projects
      */
-    Cursor getProjectCursor()
+    public Cursor getProjectCursor()
     {
         Cursor lProjectCursor=db.rawQuery("" +
                 "select p._id" +
@@ -116,7 +118,7 @@ final class DataSource {
         return lProjectCursor;
     }
 
-    boolean projectHasTodo(@NonNull  ProjectItem pProject)
+    public boolean projectHasTodo(@NonNull  ProjectItem pProject)
     {
         Cursor lHasToDoCursor=db.rawQuery("select 1 as dm where exists(select 1 from todoitems where id_project=?)",new String[]{String.valueOf(pProject.getId())});
         lHasToDoCursor.moveToFirst();
@@ -125,7 +127,7 @@ final class DataSource {
         return lHas;
     }
 
-    String getStatusTextById(long pId)
+    public String getStatusTextById(long pId)
     {
             Cursor lStatusCursor=db.rawQuery("select description from status where _id=?",new String[]{String.valueOf(pId)});
             lStatusCursor.moveToFirst();
@@ -145,7 +147,7 @@ final class DataSource {
      * @param pIdProject Project ID. The to do's of this project are retrieved
      * @return           Cursor that retrieves all to do belonging to a project
      */
-    Cursor getTodoCursor(long pIdProject)
+    public Cursor getTodoCursor(long pIdProject)
     {
         Cursor lTodoCursor=db.rawQuery("" +
                 "select t._id " +
@@ -177,10 +179,11 @@ final class DataSource {
      *
      * @param pProjectName  Naam/description of project
      */
-    long addProject(String pProjectName){
+    public long addProject(String pProjectName){
         ContentValues lValues=new ContentValues();
-        lValues.put("projectname",pProjectName);
-        return db.insert("projects",null,lValues);
+        lValues.put( ProjectItem.F_PROJECTNAME,pProjectName);
+        lValues.put(ProjectItem.F_FILTER_TYPE, FilterTypes.FT_NONE);
+        return db.insert(ProjectItem.F_TABLE_NAME,null,lValues);
     }
 
     /**
@@ -189,12 +192,12 @@ final class DataSource {
      * @param pId           Id of project
      * @param pProjectName  New project name
      */
-    void editProject(long pId,String pProjectName)
+    public void editProject(long pId,String pProjectName)
     {
         ContentValues lValues = new ContentValues();
-        lValues.put("projectname",pProjectName);
-        lValues.put("filter_type",FilterTypes.FT_NONE);
-        updateById("projects",lValues,pId);
+        lValues.put(ProjectItem.F_PROJECTNAME,pProjectName);
+
+        updateById(ProjectItem.F_TABLE_NAME,lValues,pId);
     }
 
     /**
@@ -206,36 +209,36 @@ final class DataSource {
      * @param pComment     To do Comment
      */
 
-    void addTodo(long pIdProject,long pIdStatus,String pTitle,String pComment,Long pStartDate,Long pEndDate)
+    public void addTodo(long pIdProject,long pIdStatus,String pTitle,String pComment,Long pStartDate,Long pEndDate)
     {
         ContentValues lValues=new ContentValues();
-        lValues.put("id_project",pIdProject);
-        lValues.put("id_status",pIdStatus);
-        lValues.put("title",pTitle);
-        lValues.put("comment",pComment);
+        lValues.put(TodoItem.F_ID_PROJECT,pIdProject);
+        lValues.put(TodoItem.F_ID_STATUS,pIdStatus);
+        lValues.put(TodoItem.F_TITLE,pTitle);
+        lValues.put(TodoItem.F_COMMENT,pComment);
         if(pStartDate != null){
-            lValues.put("start_date",pStartDate);
+            lValues.put(TodoItem.F_START_DATE,pStartDate);
         }
         if(pEndDate != null){
-            lValues.put("end_date",pEndDate);
+            lValues.put(TodoItem.F_END_DATE,pEndDate);
         }
-        db.insert("todoitems",null,lValues);
+        db.insert(TodoItem.TABLE_NAME,null,lValues);
     }
 
-    void updateToDo(long pId,long pIdProject,long pIdStatus,String pTitle,String pComment,Long pStartDate,Long pEndDate)
+    public void updateToDo(long pId,long pIdProject,long pIdStatus,String pTitle,String pComment,Long pStartDate,Long pEndDate)
     {
         ContentValues lValues = new ContentValues();
-        lValues.put("id_project",pIdProject);
-        lValues.put("id_status",pIdStatus);
-        lValues.put("title",pTitle);
-        lValues.put("comment",pComment);
+        lValues.put(TodoItem.F_ID_PROJECT,pIdProject);
+        lValues.put(TodoItem.F_ID_STATUS,pIdStatus);
+        lValues.put(TodoItem.F_TITLE,pTitle);
+        lValues.put(TodoItem.F_COMMENT,pComment);
         if(pStartDate != null){
-            lValues.put("start_date",pStartDate);
+            lValues.put(TodoItem.F_START_DATE,pStartDate);
         }
         if(pEndDate != null){
-            lValues.put("end_date",pEndDate);
+            lValues.put(TodoItem.F_END_DATE,pEndDate);
         }
-        updateById("todoitems",lValues,pId);
+        updateById(TodoItem.TABLE_NAME,lValues,pId);
     }
 
     public void deleteToDo(long pId)
@@ -300,7 +303,6 @@ final class DataSource {
 
     public Set<Long> getStatusSet(long pIdProject)
     {
-        long lId;
         Set<Long> lStatusSet=new HashSet<>();
         Cursor lStatusCursor=db.rawQuery("select id_status from project_statusfilters where id_project=?",new String[]{String.valueOf(pIdProject)});
         lStatusCursor.moveToFirst();
@@ -329,7 +331,7 @@ final class DataSource {
     public void setProjectFilterType(long pIdProject,long pProjectStatus)
     {
         ContentValues lValues=new ContentValues();
-        lValues.put("filter_type",pProjectStatus);
-        updateById("projects",lValues,pIdProject);
+        lValues.put(ProjectItem.F_FILTER_TYPE,pProjectStatus);
+        updateById(ProjectItem.F_TABLE_NAME,lValues,pIdProject);
     }
 }

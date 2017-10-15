@@ -79,7 +79,7 @@
     <!-- filter settings -->
     <string name="choose_status">Status:</string>
     <string name="choose_date_status">Status regarding start/end date:</string>
-    <string name="choose_buildin">Build in filters:</string>
+    <string name="choose_build_in">Build in filters:</string>
     <string name="label_filter">Filter:</string>
     <string name="label_customFilter">Custom filers</string>
     <string name="img_filter">Open filter settings</string>
@@ -87,7 +87,7 @@
     <string name="ft_all">All</string>
     <string name="ft_custom">Custom</string>
     <string name="ft_active_todo">Active todo\'s</string>
-    <string name="ft_finished">Finished todos\'s</string>
+    <string name="ft_finished">Finished todo\'s</string>
     <string name="ft_to_late">To late</string>
     <string name="ft_should_start">Should start</string>
 </resources>
