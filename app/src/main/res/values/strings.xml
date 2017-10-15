@@ -83,6 +83,9 @@
     <string name="label_filter">Filter:</string>
     <string name="label_customFilter">Custom filers</string>
     <string name="img_filter">Open filter settings</string>
+    <string name="filter_notInclude">Not include</string>
+    <string name="filter_afterEndDate">Include when later than \"end date\"</string>
+    <string name="filter_afterStartDate">Include after \"start date\"</string>
     <!-- filter types -->
     <string name="ft_all">All</string>
     <string name="ft_custom">Custom</string>
