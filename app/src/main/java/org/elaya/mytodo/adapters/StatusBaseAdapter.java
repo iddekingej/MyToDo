@@ -21,7 +21,7 @@ abstract class StatusBaseAdapter extends CursorAdapter {
     private final int descriptionIndex;
     private final int activeIndex;
 
-    public StatusBaseAdapter(Context pContext, @NonNull Cursor pCursor) {
+    StatusBaseAdapter(Context pContext, @NonNull Cursor pCursor) {
         super(pContext,pCursor,0);
         idIndex = pCursor.getColumnIndex("_id");
         positionIndex=pCursor.getColumnIndex("position");

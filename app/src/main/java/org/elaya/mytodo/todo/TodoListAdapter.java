@@ -16,7 +16,7 @@ import org.elaya.mytodo.todo.TodoItem;
  * Used for listing all to do's belonging to a project
  */
 
-public class TodoListAdapter extends CursorAdapter {
+class TodoListAdapter extends CursorAdapter {
 
     private final int idIndex;
     private final int idProjectIndex;

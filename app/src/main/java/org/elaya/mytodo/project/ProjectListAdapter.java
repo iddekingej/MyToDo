@@ -15,7 +15,7 @@ import org.elaya.mytodo.R;
  * Adapter for project list
  */
 
-public class ProjectListAdapter extends CursorAdapter {
+class ProjectListAdapter extends CursorAdapter {
     private final int idIndex;
     private final int projectNameIndex;
     private final int numFinishedIndex;

@@ -158,16 +158,24 @@ public final class DataSource {
                 ",      t.start_date "+
                 ",      t.end_date "+
                 ",      s.description statusdesc " +
-                ",      case when s.action_type==? then 1 else 0 end isfinished "+
+                ",      case when (s.action_type = ?) then 1 else 0 end isfinished "+
                 "from todoitems t " +
                 "left join status s on (t.id_status = s._id) " +
-                "where id_project=? " +
+                "join projects p on (t.id_project = p._id)"+
+                "where t.id_project=? " +
+                "and (p.filter_type<>? or t.id_status in (" +
+                        "select ps.id_status " +
+                        "from project_statusfilters ps " +
+                        "where ps.id_project=t.id_project))"+
                 "order by " +
                 "   case " +
                 "   when action_type=2 then 1 " +
                 "   when action_type in (0,1,4) then 2 " +
                 "   else 3 end" +
-                ", t._id desc",new String[]{Long.toString(ActionTypes.FINISHED),Long.toString(pIdProject)});
+                ", t._id desc",new String[]{
+                    Long.toString(ActionTypes.FINISHED),
+                    Long.toString(pIdProject),
+                    Long.toString(FilterTypes.FT_CUSTOM)});
         lTodoCursor.moveToFirst();
         return lTodoCursor;
     }
@@ -334,4 +342,6 @@ public final class DataSource {
         lValues.put(ProjectItem.F_FILTER_TYPE,pProjectStatus);
         updateById(ProjectItem.F_TABLE_NAME,lValues,pIdProject);
     }
+
+
 }
