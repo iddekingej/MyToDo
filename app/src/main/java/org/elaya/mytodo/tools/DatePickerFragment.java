@@ -8,6 +8,9 @@ import android.support.annotation.NonNull;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import org.joda.time.DateTime;
+import org.joda.time.IllegalFieldValueException;
+
 import java.util.Date;
 
 /**
@@ -35,19 +38,18 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     public Dialog onCreateDialog(@NonNull Bundle pSaveInstanceState)
     {
 
-        Date lDate= DateHandler.getDateFromText(dateElement.getText().toString());
-        if(lDate==null){
-            lDate=new Date();
+        DateTime lDate;
+        try {
+            lDate = DateHandler.getDateFromText(dateElement.getText().toString());
+        }catch(IllegalFieldValueException lE) {
+                lDate = DateTime.now();
         }
-        return new DatePickerDialog(getActivity(),this,lDate.getYear()+1900,lDate.getMonth(),lDate.getDate());
+        return new DatePickerDialog(getActivity(),this,lDate.getYear(),lDate.getMonthOfYear(),lDate.getDayOfMonth());
     }
 
     @Override
     public void onDateSet(DatePicker datePicker, int pYear, int pMonth, int pDay) {
-        Date lDate=new Date();
-        lDate.setDate(pDay);
-        lDate.setMonth(pMonth);
-        lDate.setYear(pYear-1900);
+        DateTime lDate=new DateTime(pYear,pMonth,pDay,0,0);
         dateElement.setText(DateHandler.getTextFromDate(lDate));
     }
 }

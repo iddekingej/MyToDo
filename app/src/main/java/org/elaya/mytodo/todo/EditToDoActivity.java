@@ -17,6 +17,8 @@ import org.elaya.mytodo.adapters.StatusSpinnerAdapter;
 import org.elaya.mytodo.R;
 import org.elaya.mytodo.tools.DateHandler;
 import org.elaya.mytodo.tools.Helpers;
+import org.joda.time.DateTime;
+import org.joda.time.IllegalFieldValueException;
 
 import java.util.Date;
 
@@ -149,9 +151,24 @@ public class EditToDoActivity extends BaseActivity {
 
     private void onSaveClicked()
     {
-        Date lStartDate=DateHandler.getDateFromText(startDateElement.getText().toString());
-        Date lEndDate=DateHandler.getDateFromText(endDateElement.getText().toString());
-        if(lEndDate != null && lStartDate!= null && lEndDate.before(lStartDate)){
+        DateTime lStartDate;
+        DateTime lEndDate;
+
+        try {
+            lStartDate = DateHandler.getDateFromText(startDateElement.getText().toString());
+        }catch(IllegalFieldValueException lE){
+            Helpers.warning(this,R.string.warning_start_date_invalid);
+            return;
+        }
+
+        try {
+            lEndDate = DateHandler.getDateFromText(endDateElement.getText().toString());
+        } catch(IllegalFieldValueException lE){
+            Helpers.warning(this,R.string.warning_end_date_invalid);
+            return;
+        }
+
+        if(lEndDate != null && lStartDate!= null && lEndDate.isBefore(lStartDate)){
             Helpers.warning(this,R.string.err_end_before_start_date);
             return;
         }
@@ -163,10 +180,10 @@ public class EditToDoActivity extends BaseActivity {
         lIntent.putExtra("title",title.getText().toString());
         lIntent.putExtra("comment",comment.getText().toString());
         if(lStartDate != null){
-            lIntent.putExtra("startDate",lStartDate.getTime());
+            lIntent.putExtra("startDate",lStartDate.getMillis());
         }
         if(lEndDate != null){
-            lIntent.putExtra("endDate",lEndDate.getTime());
+            lIntent.putExtra("endDate",lEndDate.getMillis());
         }
         setResult(RESULT_OK,lIntent);
         finish();

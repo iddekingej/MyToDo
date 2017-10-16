@@ -76,6 +76,9 @@
     <string name="show_edit_todo">Edit todo</string>
     <string name="title_show_todo">Todo details</string>
     <string name="title_activity_todo_filter">TodoFilterActivity</string>
+    <!--- Edit to do -->
+    <string name="warning_start_date_invalid">Invalid start date</string>
+    <string name="warning_end_date_invalid">Invalid end date</string>
     <!-- filter settings -->
     <string name="choose_status">Status:</string>
     <string name="choose_date_status">Status regarding start/end date:</string>
