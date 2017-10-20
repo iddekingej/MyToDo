@@ -10,14 +10,18 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import org.elaya.mytodo.project.DateFilter;
 import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.project.ProjectItem;
 import org.elaya.mytodo.status.StatusItem;
 import org.elaya.mytodo.adapters.StatusCheckListAdapter;
 import org.elaya.mytodo.R;
 import org.elaya.mytodo.tools.FilterTypes;
+
+import java.util.Date;
 
 
 public class TodoFilterActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener {
@@ -28,7 +32,8 @@ public class TodoFilterActivity extends BaseActivity implements CompoundButton.O
     private LinearLayout buildInFilterSectionElement;
     private LinearLayout customFilterSectionElement;
     private Spinner      buildInFilterElement;
-    private ProjectItem projectItem;
+    private ProjectItem  projectItem;
+    private RadioGroup   dateCondElement;
     private long projectId;
 
 
@@ -57,12 +62,21 @@ public class TodoFilterActivity extends BaseActivity implements CompoundButton.O
         buildInFilterSectionElement = (LinearLayout) findViewById(R.id.buildInFilterSection);
         customFilterSectionElement=(LinearLayout) findViewById(R.id.customFilterSection);
 
+        dateCondElement=(RadioGroup) findViewById(R.id.dateCond);
+
         if(projectItem.getFilterType() != FilterTypes.FT_CUSTOM) {
             buildInRadioElement.setChecked(true);
             customFilterSectionElement.setVisibility(View.GONE);
         } else {
             customRadioElement.setChecked(true);
             buildInFilterSectionElement.setVisibility(View.GONE);
+        }
+
+        long lDateFilter=projectItem.getDateFilter();
+        if(lDateFilter==DateFilter.DF_AFTER_START){
+            dateCondElement.check(R.id.dateCondAfterStartDate);
+        } else if(lDateFilter == DateFilter.DF_AFTER_END){
+            dateCondElement.check(R.id.dateCondAfterEndDate);
         }
     }
 
@@ -102,6 +116,18 @@ public class TodoFilterActivity extends BaseActivity implements CompoundButton.O
         if(customRadioElement.isChecked()) {
             ds.removeStatusFilter(projectId);
             ds.setProjectFilterType(projectItem.getId(), FilterTypes.FT_CUSTOM);
+
+            int lDateCond=dateCondElement.getCheckedRadioButtonId();
+
+            int lDateFilter= DateFilter.DF_NONE;
+            if(lDateCond == R.id.dateCondAfterStartDate){
+                lDateFilter = DateFilter.DF_AFTER_START;
+            }  else if(lDateCond == R.id.dateCondAfterEndDate){
+                lDateFilter = DateFilter.DF_AFTER_END;
+            }
+
+            ds.setProjectDateFilter(projectItem.getId(),lDateFilter);
+
             for (int lCnt = 0; lCnt < statusListElement.getCount(); lCnt++) {
                 lListItem = statusListElement.getChildAt(lCnt);
                 lStatusCheck = (CheckBox) (lListItem.findViewById(R.id.statusCheck));

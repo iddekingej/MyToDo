@@ -17,7 +17,7 @@
             android:name=".project.ProjectActivity"
             android:label="@string/title_main"
             >
-            <intent-filter>
+            <intent-filter android:label="MyToDo">
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

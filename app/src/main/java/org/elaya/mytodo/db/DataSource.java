@@ -5,10 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
+
+import org.elaya.mytodo.project.DateFilter;
 import org.elaya.mytodo.project.ProjectItem;
 import org.elaya.mytodo.todo.TodoItem;
 import org.elaya.mytodo.tools.ActionTypes;
 import org.elaya.mytodo.tools.FilterTypes;
+import org.joda.time.DateTime;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -84,11 +87,11 @@ public final class DataSource {
 
     public ProjectItem getProjectById(long pId)
     {
-        Cursor lProjectCursor=db.rawQuery("select projectname,filter_type from projects where _id=?",new String[]{Long.toString(pId)});
+        Cursor lProjectCursor=db.rawQuery("select projectname,filter_type,date_filter from projects where _id=?",new String[]{Long.toString(pId)});
         lProjectCursor.moveToFirst();
         ProjectItem lProjectItem=null;
         if(!lProjectCursor.isAfterLast()){
-            lProjectItem=new ProjectItem(pId,lProjectCursor.getString(0),lProjectCursor.getLong(1));
+            lProjectItem=new ProjectItem(pId,lProjectCursor.getString(0),lProjectCursor.getLong(1),lProjectCursor.getLong(2));
 
         }
         lProjectCursor.close();
@@ -106,6 +109,7 @@ public final class DataSource {
                 "select p._id" +
                 ",      p.projectname " +
                 ",      p.filter_type "+
+                ",      p.date_filter "+
                 ",      sum(case when action_type in (0,1,4) then 1 else 0 end) num_not_active "+
                 ",      sum(case when action_type =2  then 1 else 0 end) num_active "+
                 ",      sum(case when action_type =3  then 1 else 0 end) num_finished "+
@@ -149,6 +153,8 @@ public final class DataSource {
      */
     public Cursor getTodoCursor(long pIdProject)
     {
+        long lUnix=new DateTime().getMillis();
+
         Cursor lTodoCursor=db.rawQuery("" +
                 "select t._id " +
                 ",      t.id_project" +
@@ -163,19 +169,27 @@ public final class DataSource {
                 "left join status s on (t.id_status = s._id) " +
                 "join projects p on (t.id_project = p._id)"+
                 "where t.id_project=? " +
-                "and (p.filter_type<>? or t.id_status in (" +
+                "and ((p.filter_type<>? or t.id_status in (" +
                         "select ps.id_status " +
                         "from project_statusfilters ps " +
-                        "where ps.id_project=t.id_project))"+
+                        "where ps.id_project=t.id_project))" +
+                "or (p.date_filter=? and ?>=start_date)" +
+                "or (p.date_filter=? and ?>=end_date) "+
+                ")"+
                 "order by " +
                 "   case " +
                 "   when action_type=2 then 1 " +
                 "   when action_type in (0,1,4) then 2 " +
                 "   else 3 end" +
                 ", t._id desc",new String[]{
-                    Long.toString(ActionTypes.FINISHED),
-                    Long.toString(pIdProject),
-                    Long.toString(FilterTypes.FT_CUSTOM)});
+                    String.valueOf(ActionTypes.FINISHED),
+                    String.valueOf(pIdProject),
+                    String.valueOf(FilterTypes.FT_CUSTOM),
+                    String.valueOf(DateFilter.DF_AFTER_START),
+                    String.valueOf(lUnix),
+                    String.valueOf(DateFilter.DF_AFTER_END),
+                    String.valueOf(lUnix)
+            });
         lTodoCursor.moveToFirst();
         return lTodoCursor;
     }
@@ -336,12 +350,19 @@ public final class DataSource {
         db.insert("project_statusfilters",null,lValues);
     }
 
-    public void setProjectFilterType(long pIdProject,long pProjectStatus)
-    {
-        ContentValues lValues=new ContentValues();
-        lValues.put(ProjectItem.F_FILTER_TYPE,pProjectStatus);
-        updateById(ProjectItem.F_TABLE_NAME,lValues,pIdProject);
+    public void setProjectFilterType(long pIdProject,long pFilterType) {
+        ContentValues lValues = new ContentValues();
+        lValues.put(ProjectItem.F_FILTER_TYPE, pFilterType);
+        updateById(ProjectItem.F_TABLE_NAME, lValues, pIdProject);
     }
+
+    public void setProjectDateFilter(long pIdProject,long pDateFilter){
+        ContentValues lValues = new ContentValues();
+        lValues.put(ProjectItem.F_DATE_FILTER, pDateFilter);
+        updateById(ProjectItem.F_TABLE_NAME, lValues, pIdProject);
+
+    }
+
 
 
 }

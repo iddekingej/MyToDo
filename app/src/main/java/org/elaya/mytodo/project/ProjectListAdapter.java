@@ -22,6 +22,7 @@ class ProjectListAdapter extends CursorAdapter {
     private final int numActiveIndex;
     private final int numNotActiveIndex;
     private final int filterTypeIndex;
+    private final int dateFilterIndex;
 
     public ProjectListAdapter(Context pContext,@NonNull Cursor pCursor){
         super(pContext,pCursor,0);
@@ -31,6 +32,7 @@ class ProjectListAdapter extends CursorAdapter {
         numActiveIndex=pCursor.getColumnIndex("num_active");
         numNotActiveIndex=pCursor.getColumnIndex("num_not_active");
         filterTypeIndex=pCursor.getColumnIndex(ProjectItem.F_FILTER_TYPE);
+        dateFilterIndex=pCursor.getColumnIndex(ProjectItem.F_DATE_FILTER);
     }
 
     public void bindView(@NonNull View pView, Context pContext, @NonNull Cursor pCursor)
@@ -38,6 +40,7 @@ class ProjectListAdapter extends CursorAdapter {
         long lId=pCursor.getLong(idIndex);
         String lProjectName=pCursor.getString(projectNameIndex);
         long   lFilterType=pCursor.getLong(filterTypeIndex);
+        long   lDataFilter=pCursor.getLong(dateFilterIndex);
         TextView lProjectWidget=(TextView)(pView.findViewById(R.id.projectName));
         lProjectWidget.setText(lProjectName);
 
@@ -50,7 +53,7 @@ class ProjectListAdapter extends CursorAdapter {
         TextView lNumNotActiveElement=(TextView)(pView.findViewById(R.id.numNotActive));
         lNumNotActiveElement.setText(pCursor.getString(numNotActiveIndex));
 
-        pView.setTag(new ProjectItem(lId,lProjectName,lFilterType));
+        pView.setTag(new ProjectItem(lId,lProjectName,lFilterType,lDataFilter));
     }
 
     public View newView(Context pContext,Cursor pCursor,ViewGroup pViewGroup)

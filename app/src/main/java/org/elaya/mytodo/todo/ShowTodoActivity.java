@@ -14,6 +14,7 @@ public class ShowTodoActivity extends BaseActivity {
 
     private  static final int REQ_EDIT =100;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,11 +89,14 @@ public class ShowTodoActivity extends BaseActivity {
                 updateTodo(pIntent);
                 setResult(RESULT_OK);
                 finish();
+        } else if(TodoActivity.RES_DELETE_TODO == pResultCode) {
+            Intent lIntent = new Intent();
+            lIntent.putExtras(pIntent.getExtras());
+            setResult(TodoActivity.RES_DELETE_TODO, lIntent);
+            finish();
         }
 
     }
-
-
 
 
     @Override

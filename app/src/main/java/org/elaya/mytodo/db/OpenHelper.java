@@ -17,7 +17,7 @@ import org.elaya.mytodo.tools.ActionTypes;
 class OpenHelper extends SQLiteOpenHelper {
     private final Context context;
     public OpenHelper(Context pContext){
-        super(pContext,"main",null,2);
+        super(pContext,"main",null,4);
         context=pContext;
     }
 
@@ -74,6 +74,7 @@ class OpenHelper extends SQLiteOpenHelper {
         createStatus(pDatabase);
         createTodoItems(pDatabase);
         createToDoFilter(pDatabase);
+        addDateFilter(pDatabase);
     }
 
     private void createToDoFilter(@NonNull SQLiteDatabase pDatabase)
@@ -91,9 +92,16 @@ class OpenHelper extends SQLiteOpenHelper {
 
     }
 
+    private void addDateFilter(@NonNull SQLiteDatabase pDatabase){
+        pDatabase.execSQL("alter table projects add date_filter integer");
+    }
+
     public void onUpgrade(@NonNull SQLiteDatabase pDatabase,int pOldVersion,int pNewVersion){
-        if(pOldVersion==1 && pNewVersion>=1){
+        if(pOldVersion<2){
             createToDoFilter(pDatabase);
+        }
+        if(pOldVersion<4){
+            addDateFilter(pDatabase);
         }
 
     }

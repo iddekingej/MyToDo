@@ -42,7 +42,10 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         try {
             lDate = DateHandler.getDateFromText(dateElement.getText().toString());
         }catch(IllegalFieldValueException lE) {
-                lDate = DateTime.now();
+                lDate = null;
+        }
+        if(lDate==null){
+            lDate=DateTime.now();
         }
         return new DatePickerDialog(getActivity(),this,lDate.getYear(),lDate.getMonthOfYear(),lDate.getDayOfMonth());
     }
