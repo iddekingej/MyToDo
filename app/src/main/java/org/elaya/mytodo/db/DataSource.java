@@ -238,12 +238,8 @@ public final class DataSource {
         lValues.put(TodoItem.F_ID_STATUS,pIdStatus);
         lValues.put(TodoItem.F_TITLE,pTitle);
         lValues.put(TodoItem.F_COMMENT,pComment);
-        if(pStartDate != null){
-            lValues.put(TodoItem.F_START_DATE,pStartDate);
-        }
-        if(pEndDate != null){
-            lValues.put(TodoItem.F_END_DATE,pEndDate);
-        }
+        lValues.put(TodoItem.F_START_DATE,pStartDate);
+        lValues.put(TodoItem.F_END_DATE,pEndDate);
         db.insert(TodoItem.TABLE_NAME,null,lValues);
     }
 
@@ -254,12 +250,8 @@ public final class DataSource {
         lValues.put(TodoItem.F_ID_STATUS,pIdStatus);
         lValues.put(TodoItem.F_TITLE,pTitle);
         lValues.put(TodoItem.F_COMMENT,pComment);
-        if(pStartDate != null){
-            lValues.put(TodoItem.F_START_DATE,pStartDate);
-        }
-        if(pEndDate != null){
-            lValues.put(TodoItem.F_END_DATE,pEndDate);
-        }
+        lValues.put(TodoItem.F_START_DATE,pStartDate);
+        lValues.put(TodoItem.F_END_DATE,pEndDate);
         updateById(TodoItem.TABLE_NAME,lValues,pId);
     }
 
