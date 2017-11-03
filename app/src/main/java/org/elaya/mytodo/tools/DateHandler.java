@@ -8,13 +8,18 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.util.Date;
-
 /**
- * Created by jeroen on 10/15/17.
+ * Utility class for handling dates.
  */
 
 public class DateHandler {
+    /**
+     * All methods are static so hide constructor.
+     */
+    private DateHandler()
+    {
+
+    }
 
     public static DateTime getDateFromText(@NonNull String pTextDate)
     {

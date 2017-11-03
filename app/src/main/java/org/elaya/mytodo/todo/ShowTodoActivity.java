@@ -91,7 +91,9 @@ public class ShowTodoActivity extends BaseActivity {
                 finish();
         } else if(TodoActivity.RES_DELETE_TODO == pResultCode) {
             Intent lIntent = new Intent();
-            lIntent.putExtras(pIntent.getExtras());
+            if(pIntent.getExtras() != null) {
+                lIntent.putExtras(pIntent.getExtras());
+            }
             setResult(TodoActivity.RES_DELETE_TODO, lIntent);
             finish();
         }

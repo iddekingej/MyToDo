@@ -42,7 +42,11 @@
 
     <style name='num_started' parent="android:Widget.TextView">
         <item name='android:textColor'>#009900</item>
+    </style>
 
+    <style name="table_header" parent="android:Widget.TextView">
+        <item name='android:textColor'>#777</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name='num_finished' parent="android:Widget.TextView">

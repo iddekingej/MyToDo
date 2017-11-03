@@ -37,6 +37,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="4"
         android:gravity="end"
-        android:text="" />
+        android:text="@string/head_title_wait" />
 
 </LinearLayout>

@@ -29,6 +29,51 @@
         tools:context="org.elaya.mytodo.project.ProjectActivity"
         tools:showIn="@layout/activity_project"
         >
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp">
+
+            <TextView
+                android:id="@+id/projectName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/table_header"
+                android:text="@string/Project_name" />
+
+            <TextView
+                android:id="@+id/numFinished"
+                style="@style/table_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:gravity="end"
+
+                android:text="@string/head_title_finished" />
+
+            <TextView
+                android:id="@+id/numActive"
+                style="@style/table_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:gravity="end"
+                android:text="@string/head_title_active" />
+
+            <TextView
+                android:id="@+id/numNotActive"
+                style="@style/table_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:gravity="end"
+                android:text="@string/head_title_wait" />
+
+
+        </LinearLayout>
         <TextView
             android:id="@+id/noProject"
             android:layout_width="match_parent"

@@ -49,8 +49,8 @@ public class StatusItem {
     }
 
     /**
-     * Get unique ID (pk) of status
-     * @return
+     * @return     Get unique ID (pk) of status
+
      */
     public long getId()
     {
@@ -59,19 +59,21 @@ public class StatusItem {
 
     /**
      * Get the current position of the status inside the status select type
-     * @return
+     * @return Current position
      */
     public long getPosition(){return position;}
 
     /**
      * Get the action type
-     * @return
+     *
+     * @return Action type
      */
     public long getActionType(){ return actionType;}
 
     /**
      * Get the description of the status
-     * @return
+     *
+     * @return description of the status
      */
     public String getDescription()
     {
@@ -80,7 +82,8 @@ public class StatusItem {
 
     /**
      * Returns true if status is active
-     * @return
+     *
+     * @return true if status is active
      */
     public boolean getActive(){ return active;}
 }

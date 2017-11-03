@@ -9,7 +9,7 @@
     <include  layout="@layout/app_bar"/>
 
     <RadioButton
-        android:id="@+id/buildinRadio"
+        android:id="@+id/buildInRadio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/choose_build_in" />

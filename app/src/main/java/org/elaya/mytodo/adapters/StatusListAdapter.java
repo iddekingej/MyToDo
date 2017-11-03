@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.elaya.mytodo.tools.ActionTypes;
@@ -48,8 +49,8 @@ public class StatusListAdapter extends StatusBaseAdapter {
         lPositionLabel.setText(String.valueOf(pStatus.getPosition()));
         TextView lActionType=(TextView)(pView.findViewById(R.id.actionType));
         lActionType.setText(ActionTypes.getActionTypesById(pView.getContext(),pStatus.getActionType()));
-        TextView lActiveElement=(TextView)pView.findViewById(R.id.active);
-        lActiveElement.setText(pStatus.getActive()?"O":"X");
+        ImageView lActiveElement=(ImageView)pView.findViewById(R.id.active);
+        lActiveElement.setImageResource(pStatus.getActive()?R.drawable.on:R.drawable.off);
 
     }
 

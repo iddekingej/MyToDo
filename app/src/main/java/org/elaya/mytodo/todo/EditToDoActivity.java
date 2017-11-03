@@ -20,7 +20,6 @@ import org.elaya.mytodo.tools.Helpers;
 import org.joda.time.DateTime;
 import org.joda.time.IllegalFieldValueException;
 
-import java.util.Date;
 
 public class EditToDoActivity extends BaseActivity {
 

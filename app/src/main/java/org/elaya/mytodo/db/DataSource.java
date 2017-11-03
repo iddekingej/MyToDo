@@ -199,7 +199,7 @@ public final class DataSource {
     /**
      * Add project to database
      *
-     * @param pProjectName  Naam/description of project
+     * @param pProjectName  Name/description of project
      */
     public long addProject(String pProjectName){
         ContentValues lValues=new ContentValues();

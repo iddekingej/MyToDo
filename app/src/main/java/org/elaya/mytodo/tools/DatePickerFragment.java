@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.widget.DatePicker;
 import android.widget.EditText;
-
 import org.joda.time.DateTime;
 import org.joda.time.IllegalFieldValueException;
 
-import java.util.Date;
 
 /**
  * Date picker popup

@@ -21,7 +21,6 @@ import org.elaya.mytodo.adapters.StatusCheckListAdapter;
 import org.elaya.mytodo.R;
 import org.elaya.mytodo.tools.FilterTypes;
 
-import java.util.Date;
 
 
 public class TodoFilterActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener {
@@ -48,7 +47,7 @@ public class TodoFilterActivity extends BaseActivity implements CompoundButton.O
         StatusCheckListAdapter adapter=new StatusCheckListAdapter(this,ds.getStatusCursor(),ds.getStatusSet(projectId));
         statusListElement.setAdapter(adapter);
 
-        buildInRadioElement = (RadioButton) findViewById(R.id.buildinRadio);
+        buildInRadioElement = (RadioButton) findViewById(R.id.buildInRadio);
         buildInRadioElement.setOnCheckedChangeListener(this);
 
         customRadioElement  = (RadioButton) findViewById(R.id.customRadio);
