@@ -24,8 +24,7 @@ public class DateHandler {
     public static DateTime getDateFromText(@NonNull String pTextDate)
     {
         if(!pTextDate.isEmpty()){
-            return DateTime.parse(pTextDate,DateTimeFormat.forPattern(Settings.getDateFormat()));
-
+                return DateTime.parse(pTextDate, DateTimeFormat.forPattern(Settings.getDateFormat()));
         }
         return null;
     }

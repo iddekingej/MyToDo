@@ -18,7 +18,7 @@ import org.elaya.mytodo.R;
 import org.elaya.mytodo.tools.DateHandler;
 import org.elaya.mytodo.tools.Helpers;
 import org.joda.time.DateTime;
-import org.joda.time.IllegalFieldValueException;
+
 
 
 public class EditToDoActivity extends BaseActivity {
@@ -155,14 +155,14 @@ public class EditToDoActivity extends BaseActivity {
 
         try {
             lStartDate = DateHandler.getDateFromText(startDateElement.getText().toString());
-        }catch(IllegalFieldValueException lE){
+        }catch(IllegalArgumentException lE){
             Helpers.warning(this,R.string.warning_start_date_invalid);
             return;
         }
 
         try {
             lEndDate = DateHandler.getDateFromText(endDateElement.getText().toString());
-        } catch(IllegalFieldValueException lE){
+        } catch(IllegalArgumentException lE){
             Helpers.warning(this,R.string.warning_end_date_invalid);
             return;
         }

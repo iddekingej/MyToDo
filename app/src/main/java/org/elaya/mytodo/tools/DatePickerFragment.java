@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import org.joda.time.DateTime;
-import org.joda.time.IllegalFieldValueException;
+
 
 
 /**
@@ -39,7 +39,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         DateTime lDate;
         try {
             lDate = DateHandler.getDateFromText(dateElement.getText().toString());
-        }catch(IllegalFieldValueException lE) {
+        }catch(IllegalArgumentException lE) {
                 lDate = null;
         }
         if(lDate==null){
