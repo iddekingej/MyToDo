@@ -171,6 +171,10 @@ public class EditToDoActivity extends BaseActivity {
             Helpers.warning(this,R.string.err_end_before_start_date);
             return;
         }
+        if(title.getText().length()==0){
+            Helpers.warning(this,R.string.err_title_empty);
+            return;
+        }
         Intent lIntent = new Intent();
         lIntent.putExtra("_id",id);
         lIntent.putExtra("id_project",idProject);
