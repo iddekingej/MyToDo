@@ -42,23 +42,23 @@ public class EditToDoActivity extends BaseActivity {
         idProject=lIntent.getLongExtra("id_project",-1);
         long idStatus=lIntent.getLongExtra("id_status",-1);
 
-        title=(EditText)findViewById(R.id.title);
+        title= findViewById(R.id.title);
         title.setText(lIntent.getStringExtra("title"));
 
-        comment=(EditText)findViewById(R.id.comment);
+        comment= findViewById(R.id.comment);
         comment.setText(lIntent.getStringExtra("comment"));
 
-        startDateElement=(EditText)findViewById(R.id.startDate);
+        startDateElement= findViewById(R.id.startDate);
         if(lIntent.hasExtra("startDate")){
             startDateElement.setText(DateHandler.getDateFromLong(lIntent.getLongExtra("startDate",-1)));
         }
 
-        endDateElement=(EditText)findViewById(R.id.endDate);
+        endDateElement= findViewById(R.id.endDate);
         if(lIntent.hasExtra("endDate")){
             endDateElement.setText(DateHandler.getDateFromLong(lIntent.getLongExtra("endDate",-1)));
         }
 
-        statusElement=(Spinner)findViewById(R.id.status);
+        statusElement= findViewById(R.id.status);
         StatusSpinnerAdapter spinnerAdapter=new StatusSpinnerAdapter(this,ds.getActiveStatusCursor(idStatus));
         statusElement.setAdapter(spinnerAdapter);
         int lNum=spinnerAdapter.getCount();

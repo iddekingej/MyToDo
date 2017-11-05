@@ -25,7 +25,7 @@ public class StatusActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ListView statusList=(ListView) findViewById(R.id.statusList);
+        ListView statusList= findViewById(R.id.statusList);
         adapter=new StatusListAdapter(this,ds.getStatusCursor());
         statusList.setAdapter(adapter);
         statusList.setOnItemClickListener(new ListView.OnItemClickListener(){

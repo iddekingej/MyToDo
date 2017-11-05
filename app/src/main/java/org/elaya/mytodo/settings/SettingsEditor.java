@@ -17,8 +17,8 @@ public class SettingsEditor extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        dateFormatElement = (RadioGroup)findViewById(R.id.dateFormat);
-        separatorElement  = (RadioGroup)findViewById(R.id.dateSep);
+        dateFormatElement = findViewById(R.id.dateFormat);
+        separatorElement  = findViewById(R.id.dateSep);
         int lFormat=R.id.date_dmy;
         String lFormatSettings= Settings.getDateFormatType();
         if("MDY".equals(lFormatSettings)){

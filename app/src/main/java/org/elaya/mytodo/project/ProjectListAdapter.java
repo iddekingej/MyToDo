@@ -41,16 +41,16 @@ class ProjectListAdapter extends CursorAdapter {
         String lProjectName=pCursor.getString(projectNameIndex);
         long   lFilterType=pCursor.getLong(filterTypeIndex);
         long   lDataFilter=pCursor.getLong(dateFilterIndex);
-        TextView lProjectWidget=(TextView)(pView.findViewById(R.id.projectName));
+        TextView lProjectWidget= pView.findViewById(R.id.projectName);
         lProjectWidget.setText(lProjectName);
 
-        TextView lNumFinishedElement=(TextView)(pView.findViewById(R.id.numFinished));
+        TextView lNumFinishedElement= pView.findViewById(R.id.numFinished);
         lNumFinishedElement.setText(pCursor.getString(numFinishedIndex));
 
-        TextView lNumActiveElement=(TextView)(pView.findViewById(R.id.numActive));
+        TextView lNumActiveElement= pView.findViewById(R.id.numActive);
         lNumActiveElement.setText(pCursor.getString(numActiveIndex));
 
-        TextView lNumNotActiveElement=(TextView)(pView.findViewById(R.id.numNotActive));
+        TextView lNumNotActiveElement= pView.findViewById(R.id.numNotActive);
         lNumNotActiveElement.setText(pCursor.getString(numNotActiveIndex));
 
         pView.setTag(new ProjectItem(lId,lProjectName,lFilterType,lDataFilter));

@@ -32,7 +32,7 @@ public class ProjectActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
 
-        ListView lProjectList=(ListView)findViewById(R.id.projectList);
+        ListView lProjectList= findViewById(R.id.projectList);
         lProjectList.setOnItemClickListener(new ListView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> pParent,@NonNull View pView,int pPosition,long pId){
                 openProject(pView);

@@ -36,10 +36,10 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         id=lIntent.getLongExtra("_id",0);
         projectItem=ds.getProjectById(id);
 
-        TextView projectName=(TextView)findViewById(R.id.projectName);
-        ListView todoList=(ListView)findViewById(R.id.todoList);
+        TextView projectName= findViewById(R.id.projectName);
+        ListView todoList= findViewById(R.id.todoList);
 
-        todoFilterElement = (Spinner) findViewById(R.id.todoFilter);
+        todoFilterElement = findViewById(R.id.todoFilter);
         FilterTypes.setSpinner(this,todoFilterElement);
         todoFilterElement.setOnItemSelectedListener(this);
 

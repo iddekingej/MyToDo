@@ -56,7 +56,7 @@ class TodoListAdapter extends CursorAdapter {
         String lTitle=pCursor.getString(titleIndex);
         String lComment=pCursor.getString(commentIndex);
         String lStatus=pCursor.getString(statusdescIndex);
-        TextView lTitleWidget=(TextView)pView.findViewById(R.id.title);
+        TextView lTitleWidget= pView.findViewById(R.id.title);
         lTitleWidget.setText(lTitle);
         if(pCursor.getLong(isFinishedIndex)==1){
             lTitleWidget.setBackgroundResource(R.drawable.strike);
@@ -71,7 +71,7 @@ class TodoListAdapter extends CursorAdapter {
         if(!pCursor.isNull(endDateIndex)){
             lEndDate=pCursor.getLong(endDateIndex);
         }
-        TextView lStatusWidget=(TextView)pView.findViewById(R.id.status);
+        TextView lStatusWidget= pView.findViewById(R.id.status);
         lStatusWidget.setText(lStatus);
         pView.setTag(new TodoItem(lId,lIdProject,lIdStatus,lTitle,lComment,lStartDate,lEndDate));
 

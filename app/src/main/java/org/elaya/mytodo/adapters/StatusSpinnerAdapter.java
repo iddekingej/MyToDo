@@ -26,7 +26,7 @@ public class StatusSpinnerAdapter extends StatusBaseAdapter {
 
     @Override
     protected void fillView(@NonNull View pView, @NonNull StatusItem pStatus) {
-        TextView lView=(TextView)(pView.findViewById(R.id.description));
+        TextView lView= pView.findViewById(R.id.description);
         lView.setText(pStatus.getDescription());
 
     }

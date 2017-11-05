@@ -22,10 +22,12 @@
     <string name="label_todo_title">Title:</string>
     <string name="label_todo_status">Status:</string>
     <string name="label_todo_comment">Comment:</string>
-    <string name="label_start_date">Start date:</string>
-    <string name="label_end_date">End date</string>
-    <string name="err_end_before_start_date">End date of todo can be empty or must be later than the start date</string>
+    <string name="label_start_date">Should start on:</string>
+    <string name="label_end_date">Should finish on:</string>
+    <string name="err_end_before_start_date">Finish date can be empty or must be later than the start date</string>
     <string name="err_title_empty">Title is empty</string>
+    <string name="warning_start_date_invalid">Invalid start date</string>
+    <string name="warning_end_date_invalid">Invalid finish date</string>
     <!-- Project -->
     <string name="title_main">Projects</string>
     <string name="no_project">No projects found. Please add one or more project first and than add todo items.</string>
@@ -81,9 +83,7 @@
     <string name="show_edit_todo">Edit todo</string>
     <string name="title_show_todo">Todo details</string>
     <string name="title_activity_todo_filter">TodoFilterActivity</string>
-    <!--- Edit to do -->
-    <string name="warning_start_date_invalid">Invalid start date</string>
-    <string name="warning_end_date_invalid">Invalid end date</string>
+
     <!-- filter settings -->
     <string name="choose_status">Status:</string>
     <string name="choose_date_status">Status regarding start/end date:</string>

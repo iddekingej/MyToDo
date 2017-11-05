@@ -19,11 +19,11 @@ public class ShowTodoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        TextView lTitleElement=(TextView)findViewById(R.id.title);
-        TextView lStatusElement=(TextView)findViewById(R.id.status);
-        TextView lStartDateElement=(TextView)findViewById(R.id.startDate);
-        TextView lEndDateElement=(TextView)findViewById(R.id.endDate);
-        TextView lCommentElement=(TextView)findViewById(R.id.comment);
+        TextView lTitleElement= findViewById(R.id.title);
+        TextView lStatusElement= findViewById(R.id.status);
+        TextView lStartDateElement= findViewById(R.id.startDate);
+        TextView lEndDateElement= findViewById(R.id.endDate);
+        TextView lCommentElement= findViewById(R.id.comment);
 
         Intent lIntent=getIntent();
         lTitleElement.setText(lIntent.getStringExtra("title"));

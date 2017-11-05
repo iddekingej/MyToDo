@@ -38,7 +38,7 @@ public class StatusCheckListAdapter extends StatusBaseAdapter {
 
     @Override
     protected void fillView(@NonNull  View pView,@NonNull StatusItem pStatus) {
-        CheckBox lCheck=(CheckBox) pView.findViewById(R.id.statusCheck);
+        CheckBox lCheck= pView.findViewById(R.id.statusCheck);
         lCheck.setText(pStatus.getDescription());
         if(enabledStatusSet.contains(pStatus.getId())){
             lCheck.setChecked(true);

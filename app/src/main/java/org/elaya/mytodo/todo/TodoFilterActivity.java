@@ -43,25 +43,25 @@ public class TodoFilterActivity extends BaseActivity implements CompoundButton.O
         projectId=getIntent().getLongExtra("projectId",-1);
         projectItem=ds.getProjectById(projectId);
 
-        statusListElement=(ListView) findViewById(R.id.statusList);
+        statusListElement= findViewById(R.id.statusList);
         StatusCheckListAdapter adapter=new StatusCheckListAdapter(this,ds.getStatusCursor(),ds.getStatusSet(projectId));
         statusListElement.setAdapter(adapter);
 
-        buildInRadioElement = (RadioButton) findViewById(R.id.buildInRadio);
+        buildInRadioElement = findViewById(R.id.buildInRadio);
         buildInRadioElement.setOnCheckedChangeListener(this);
 
-        customRadioElement  = (RadioButton) findViewById(R.id.customRadio);
+        customRadioElement  = findViewById(R.id.customRadio);
         customRadioElement.setOnCheckedChangeListener(this);
 
-        buildInFilterElement=(Spinner) findViewById(R.id.buildInFilter);
+        buildInFilterElement= findViewById(R.id.buildInFilter);
         FilterTypes.setSpinner(this,buildInFilterElement);
 
         buildInFilterElement.setSelection((int)projectItem.getFilterType());
 
-        buildInFilterSectionElement = (LinearLayout) findViewById(R.id.buildInFilterSection);
-        customFilterSectionElement=(LinearLayout) findViewById(R.id.customFilterSection);
+        buildInFilterSectionElement = findViewById(R.id.buildInFilterSection);
+        customFilterSectionElement= findViewById(R.id.customFilterSection);
 
-        dateCondElement=(RadioGroup) findViewById(R.id.dateCond);
+        dateCondElement= findViewById(R.id.dateCond);
 
         if(projectItem.getFilterType() != FilterTypes.FT_CUSTOM) {
             buildInRadioElement.setChecked(true);
@@ -129,7 +129,7 @@ public class TodoFilterActivity extends BaseActivity implements CompoundButton.O
 
             for (int lCnt = 0; lCnt < statusListElement.getCount(); lCnt++) {
                 lListItem = statusListElement.getChildAt(lCnt);
-                lStatusCheck = (CheckBox) (lListItem.findViewById(R.id.statusCheck));
+                lStatusCheck = lListItem.findViewById(R.id.statusCheck);
                 if (lStatusCheck.isChecked()) {
                     StatusItem lStatus = (StatusItem) lListItem.getTag();
                     ds.addStatusFilter(projectId, lStatus.getId());

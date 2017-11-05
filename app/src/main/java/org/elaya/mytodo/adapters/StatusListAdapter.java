@@ -43,13 +43,13 @@ public class StatusListAdapter extends StatusBaseAdapter {
      * @param pStatus   StatusItem used for filling the data
      */
     public void fillView(@NonNull View pView,@NonNull StatusItem pStatus) {
-        TextView lView=(TextView)(pView.findViewById(R.id.description));
-        TextView lPositionLabel=(TextView)(pView.findViewById(R.id.position));
+        TextView lView= pView.findViewById(R.id.description);
+        TextView lPositionLabel= pView.findViewById(R.id.position);
         lView.setText(pStatus.getDescription());
         lPositionLabel.setText(String.valueOf(pStatus.getPosition()));
-        TextView lActionType=(TextView)(pView.findViewById(R.id.actionType));
+        TextView lActionType= pView.findViewById(R.id.actionType);
         lActionType.setText(ActionTypes.getActionTypesById(pView.getContext(),pStatus.getActionType()));
-        ImageView lActiveElement=(ImageView)pView.findViewById(R.id.active);
+        ImageView lActiveElement= pView.findViewById(R.id.active);
         lActiveElement.setImageResource(pStatus.getActive()?R.drawable.on:R.drawable.off);
 
     }

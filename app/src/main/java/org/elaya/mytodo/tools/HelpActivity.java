@@ -26,7 +26,7 @@ public class HelpActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
-        WebView lHelp=(WebView)findViewById(R.id.helpHtml);
+        WebView lHelp= findViewById(R.id.helpHtml);
         Intent lIntent=getIntent();
         lHelp.loadUrl("file:///android_asset/"+lIntent.getStringExtra("page")+".html");
     }

@@ -26,7 +26,7 @@ public class EditProjectActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        projectName=(TextView) findViewById(R.id.projectName);
+        projectName= findViewById(R.id.projectName);
         Intent lIntent=getIntent();
         id=lIntent.getLongExtra("_id",-1);
         projectName.setText(lIntent.getStringExtra("projectName"));

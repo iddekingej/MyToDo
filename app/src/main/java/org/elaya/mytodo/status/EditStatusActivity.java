@@ -28,7 +28,7 @@ public class EditStatusActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        positionElement=(EditText)findViewById(R.id.position);
+        positionElement= findViewById(R.id.position);
         Intent lIntent=getIntent();
 
 
@@ -40,12 +40,12 @@ public class EditStatusActivity extends BaseActivity {
             positionElement.setText("");
         }
 
-        descriptionElement=(EditText)findViewById(R.id.description);
+        descriptionElement= findViewById(R.id.description);
         descriptionElement.setText(lIntent.getStringExtra("description"));
 
         ArrayAdapter actionTypeAdapter=new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, ActionTypes.getActionTypes(this));
 
-        actionType=(Spinner)findViewById(R.id.actionType);
+        actionType= findViewById(R.id.actionType);
         actionType.setAdapter(actionTypeAdapter);
 
         long lActionType=lIntent.getLongExtra("actionType",0);
@@ -56,7 +56,7 @@ public class EditStatusActivity extends BaseActivity {
         actionType.setSelection((int)lActionType);
 
         boolean lActive=lIntent.getBooleanExtra("active",true);
-        activeElement=(CheckBox)findViewById(R.id.active) ;
+        activeElement= findViewById(R.id.active);
         activeElement.setChecked(lActive);
 
 
