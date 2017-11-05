@@ -16,7 +16,7 @@ public final class FilterTypes {
     private static final int[] filterResources={R.string.ft_all,R.string.ft_custom,R.string.ft_active_todo,R.string.ft_to_late,R.string.ft_should_start,R.string.ft_finished};
 
     /**
-     * This class ise onlu used static, so hide constructor.
+     * This class ise only used static, so hide constructor.
      */
     private FilterTypes()
     {
