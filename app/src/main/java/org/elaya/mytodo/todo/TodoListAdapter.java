@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import org.elaya.mytodo.R;
 import org.elaya.mytodo.todo.TodoItem;
+import org.elaya.mytodo.tools.DateHandler;
 
 /**
  * Used for listing all to do's belonging to a project
@@ -48,6 +49,17 @@ class TodoListAdapter extends CursorAdapter {
         LayoutInflater lInflater=LayoutInflater.from(pContext);
         return lInflater.inflate(R.layout.todo_item, pViewGroup, false);
     }
+
+    private void setDateElement(Cursor pCursor,View pView,int pElement,Long pValue)
+    {
+        TextView lElement=pView.findViewById(pElement);
+        if(pValue==null){
+            lElement.setText("");
+        } else {
+            lElement.setText(DateHandler.getDateFromLong(pValue));
+        }
+    }
+
     @Override
     public void bindView(@NonNull  View pView, Context pContext,@NonNull  Cursor pCursor) {
         long lId=pCursor.getLong(idIndex);
@@ -73,6 +85,8 @@ class TodoListAdapter extends CursorAdapter {
         }
         TextView lStatusWidget= pView.findViewById(R.id.status);
         lStatusWidget.setText(lStatus);
+        setDateElement(pCursor,pView,R.id.startDate,lStartDate);
+        setDateElement(pCursor,pView,R.id.endDate,lEndDate);
         pView.setTag(new TodoItem(lId,lIdProject,lIdStatus,lTitle,lComment,lStartDate,lEndDate));
 
     }

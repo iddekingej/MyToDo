@@ -24,7 +24,7 @@ public final class FilterTypes {
     }
 
     private static String[] getFilterTypes(Context pContext){
-        String filters[]=new String[filterResources.length];
+        String[] filters=new String[filterResources.length];
         for(int lCnt=0;lCnt<filterResources.length;lCnt++){
             filters[lCnt]=pContext.getResources().getString(filterResources[lCnt]);
         }
