@@ -173,14 +173,16 @@ public final class DataSource {
                         "select ps.id_status " +
                         "from project_statusfilters ps " +
                         "where ps.id_project=t.id_project))" +
-                "or (p.date_filter=? and ?>=start_date)" +
-                "or (p.date_filter=? and ?>=end_date) "+
+                "or (p.date_filter=? and ?>=start_date and not action_type in (3,4))" +
+                "or (p.date_filter=? and ?>=end_date and not action_type in (3,4)) "+
                 ")"+
                 "order by " +
                 "   case " +
-                "   when action_type=2 then 1 " +
-                "   when action_type in (0,1,4) then 2 " +
-                "   else 3 end" +
+                "   when end_date <?  and not action_type in (3,4) then 1" +
+                "   when start_date < ?  and not action_type in (3,4) then 2"+
+                "   when action_type=2 then 3 " +
+                "   when action_type in (0,1,4) then 4 " +
+                "   else 5 end" +
                 ", t._id desc",new String[]{
                     String.valueOf(ActionTypes.FINISHED),
                     String.valueOf(pIdProject),
@@ -188,6 +190,8 @@ public final class DataSource {
                     String.valueOf(DateFilter.DF_AFTER_START),
                     String.valueOf(lUnix),
                     String.valueOf(DateFilter.DF_AFTER_END),
+                    String.valueOf(lUnix),
+                    String.valueOf(lUnix),
                     String.valueOf(lUnix)
             });
         lTodoCursor.moveToFirst();

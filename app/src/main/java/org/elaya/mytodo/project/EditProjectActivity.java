@@ -7,11 +7,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.R;
+import org.elaya.mytodo.tools.BaseEditActivity;
 import org.elaya.mytodo.tools.Helpers;
 
-public class EditProjectActivity extends BaseActivity {
+public class EditProjectActivity extends BaseEditActivity {
 
     private TextView projectName;
     private long     id;
@@ -39,7 +39,7 @@ public class EditProjectActivity extends BaseActivity {
 
     @Override
     protected int getMenuResource() {
-        return R.menu.menu_project_edit;
+        return R.menu.menu_edit_project;
     }
 
     /**
@@ -59,7 +59,7 @@ public class EditProjectActivity extends BaseActivity {
      *
      * @param pAddTodo When true After save (in ProjectActivity) the To Do activity is started
      */
-    private void onPressSave(boolean pAddTodo)
+    private void saveProject(boolean pAddTodo)
     {
         Intent lIntent = new Intent();
         String lText=projectName.getText().toString();
@@ -70,9 +70,14 @@ public class EditProjectActivity extends BaseActivity {
         finish();
     }
 
+    protected void onSaveClicked()
+    {
+        saveProject(false);
+    }
+
     public void saveGotoTodo(View pView)
     {
-        onPressSave(true);
+        saveProject(true);
     }
 
     /**
@@ -86,13 +91,6 @@ public class EditProjectActivity extends BaseActivity {
      */
     public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
         switch (pItem.getItemId()) {
-            case R.id.back:
-                onPressCancel();
-                break;
-
-            case R.id.save:
-                onPressSave(false);
-                break;
 
             case R.id.help:
                 Helpers.openHelp(this, "edit_project");

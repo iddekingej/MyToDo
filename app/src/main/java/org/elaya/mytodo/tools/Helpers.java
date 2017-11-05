@@ -44,6 +44,17 @@ public class Helpers {
         lDialog.show();
     }
 
+    public static void confirm(@NonNull Activity pActivity, @StringRes int pTitle,@StringRes int pYes,@StringRes int pNo, DialogInterface.OnClickListener pConfirmed)
+    {
+        AlertDialog.Builder lBuilder = new AlertDialog.Builder(pActivity);
+        lBuilder.setTitle(R.string.title_confirmation);
+        lBuilder.setMessage(pTitle);
+        lBuilder.setPositiveButton(pYes,pConfirmed);
+        lBuilder.setNegativeButton(pNo,null);
+        AlertDialog lDialog = lBuilder.create();
+        lDialog.show();
+    }
+
     public static void confirmDelete(@NonNull Activity pActivity, @StringRes int pTitle, DialogInterface.OnClickListener pConfirmed)
     {
         AlertDialog.Builder lBuilder = new AlertDialog.Builder(pActivity);

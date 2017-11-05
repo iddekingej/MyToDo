@@ -108,7 +108,7 @@ public class ProjectActivity extends BaseActivity {
         final ProjectItem lProject=(ProjectItem)pView.getTag();
         if(lProject != null) {
             PopupMenu lPopup=new PopupMenu(this,pView);
-            lPopup.getMenuInflater().inflate(R.menu.edit_project_menu,lPopup.getMenu());
+            lPopup.getMenuInflater().inflate(R.menu.menu_project,lPopup.getMenu());
             lPopup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
 
                 public boolean onMenuItemClick(@NonNull MenuItem pItem){

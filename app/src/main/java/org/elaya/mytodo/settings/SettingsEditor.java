@@ -7,9 +7,10 @@ import android.widget.RadioGroup;
 
 import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.R;
+import org.elaya.mytodo.tools.BaseEditActivity;
 import org.elaya.mytodo.tools.Helpers;
 
-public class SettingsEditor extends BaseActivity {
+public class SettingsEditor extends BaseEditActivity {
 
     private RadioGroup dateFormatElement;
     private RadioGroup separatorElement;
@@ -50,7 +51,7 @@ public class SettingsEditor extends BaseActivity {
         return R.menu.menu_settings;
     }
 
-    private void saveSettings()
+    protected void onSaveClicked()
     {
         int lId=dateFormatElement.getCheckedRadioButtonId();
         String lFormatType="DMY";
@@ -82,14 +83,6 @@ public class SettingsEditor extends BaseActivity {
      */
     public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
         switch (pItem.getItemId()) {
-            case R.id.back:
-                finish();
-                break;
-
-            case R.id.save:
-                saveSettings();
-                break;
-
             case R.id.help:
                 Helpers.openHelp(this, "settings");
                 break;

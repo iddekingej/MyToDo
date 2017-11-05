@@ -10,7 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import org.elaya.mytodo.tools.BaseActivity;
+
+import org.elaya.mytodo.tools.BaseEditActivity;
 import org.elaya.mytodo.tools.DatePickerFragment;
 import org.elaya.mytodo.status.StatusItem;
 import org.elaya.mytodo.adapters.StatusSpinnerAdapter;
@@ -21,7 +22,7 @@ import org.joda.time.DateTime;
 
 
 
-public class EditToDoActivity extends BaseActivity {
+public class EditToDoActivity extends BaseEditActivity {
 
     private boolean isNew=false;
     private long id;
@@ -96,17 +97,11 @@ public class EditToDoActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
         switch (pItem.getItemId()) {
-            case R.id.back:
-                onCancelClicked();
-                break;
             case R.id.delete:
                 onDeleteTodoClicked();
                 break;
-            case R.id.save:
-                onSaveClicked();
-                break;
             default:
-                return onOptionsItemSelected(pItem);
+                return super.onOptionsItemSelected(pItem);
         }
         return true;
     }
@@ -129,11 +124,6 @@ public class EditToDoActivity extends BaseActivity {
         setResult(TodoActivity.RES_DELETE_TODO,lIntent);
         finish();
     }
-    private void onCancelClicked()
-    {
-        setResult(RESULT_CANCELED);
-        finish();
-    }
 
     public void  startDatePicker(View pView)
     {
@@ -148,7 +138,7 @@ public class EditToDoActivity extends BaseActivity {
     }
 
 
-    private void onSaveClicked()
+    protected void onSaveClicked()
     {
         DateTime lStartDate;
         DateTime lEndDate;

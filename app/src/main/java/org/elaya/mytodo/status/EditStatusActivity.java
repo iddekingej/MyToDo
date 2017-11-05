@@ -14,9 +14,10 @@ import android.widget.Spinner;
 import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.R;
 import org.elaya.mytodo.tools.ActionTypes;
+import org.elaya.mytodo.tools.BaseEditActivity;
 import org.elaya.mytodo.tools.Helpers;
 
-public class EditStatusActivity extends BaseActivity {
+public class EditStatusActivity extends BaseEditActivity {
 
     private long id;
     private EditText descriptionElement;
@@ -74,7 +75,7 @@ public class EditStatusActivity extends BaseActivity {
         return R.menu.menu_edit_status;
     }
 
-    private void onSavePressed()
+    protected void onSaveClicked()
     {
         String lDescription=descriptionElement.getText().toString();
         Editable lPositionText=positionElement.getText();
@@ -136,14 +137,6 @@ public class EditStatusActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
         switch (pItem.getItemId()) {
-
-            case R.id.back:
-                finish();
-                break;
-
-            case R.id.save:
-                onSavePressed();
-                break;
 
             case R.id.help:
                 Helpers.openHelp(this,"edit_status");
