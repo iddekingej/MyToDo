@@ -10,8 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.R;
 import org.elaya.mytodo.tools.ActionTypes;
 import org.elaya.mytodo.tools.BaseEditActivity;

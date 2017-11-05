@@ -4,8 +4,6 @@ import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.RadioGroup;
-
-import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.R;
 import org.elaya.mytodo.tools.BaseEditActivity;
 import org.elaya.mytodo.tools.Helpers;

@@ -43,17 +43,6 @@ public class EditProjectActivity extends BaseEditActivity {
     }
 
     /**
-     * When the back button in the toolbar is pressed, the activity is finished
-     *
-     */
-
-    private void onPressCancel()
-    {
-        setResult(RESULT_CANCELED);
-        finish();
-    }
-
-    /**
      * When the save button is pressed all form data is send back to the calling  Activity
      * In ProjectActivity the data is saved
      *

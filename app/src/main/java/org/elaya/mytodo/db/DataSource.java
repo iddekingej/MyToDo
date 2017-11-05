@@ -68,12 +68,7 @@ public final class DataSource {
         return source;
     }
 
-    static DataSource getSource()
-    {
-        return source;
-    }
-
-    private void open(Context pContext)
+     private void open(Context pContext)
     {
         OpenHelper lHelper=new OpenHelper(pContext);
         db = lHelper.getWritableDatabase();

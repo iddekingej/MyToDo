@@ -16,8 +16,8 @@
     <!-- Generic -->
     <string name="title_confirmation">Confirmation</string>
     <string name="title_cancel_edit">Cancel edit?</string>
-    <string name="title_cancel_confirm">Cancel edit and don\'t aply changed</string>
-    <string name="title_dont_cancel">Don\'t cancel edit</string>
+    <string name="title_cancel_confirm">Cancel edit and don\'t apply changed</string>
+    <string name="title_do_not_cancel">Don\'t cancel edit</string>
     <!-- To do -->
     <string name="title_activity_todo">Todo items</string>
     <string name="title_activity_edit_todo">Edit a todo</string>
