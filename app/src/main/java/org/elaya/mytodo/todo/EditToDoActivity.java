@@ -51,12 +51,12 @@ public class EditToDoActivity extends BaseEditActivity {
 
         startDateElement= findViewById(R.id.startDate);
         if(lIntent.hasExtra("startDate")){
-            startDateElement.setText(DateHandler.getDateFromLong(lIntent.getLongExtra("startDate",-1)));
+            startDateElement.setText(DateHandler.getDateTextFromLong(lIntent.getLongExtra("startDate",-1)));
         }
 
         endDateElement= findViewById(R.id.endDate);
         if(lIntent.hasExtra("endDate")){
-            endDateElement.setText(DateHandler.getDateFromLong(lIntent.getLongExtra("endDate",-1)));
+            endDateElement.setText(DateHandler.getDateTextFromLong(lIntent.getLongExtra("endDate",-1)));
         }
 
         statusElement= findViewById(R.id.status);

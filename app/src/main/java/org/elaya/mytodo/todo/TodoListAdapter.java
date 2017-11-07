@@ -10,8 +10,8 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 import org.elaya.mytodo.R;
-import org.elaya.mytodo.todo.TodoItem;
 import org.elaya.mytodo.tools.DateHandler;
+import org.joda.time.DateTime;
 
 /**
  * Used for listing all to do's belonging to a project
@@ -50,14 +50,15 @@ class TodoListAdapter extends CursorAdapter {
         return lInflater.inflate(R.layout.todo_item, pViewGroup, false);
     }
 
-    private void setDateElement(Cursor pCursor,View pView,int pElement,Long pValue)
+    private TextView setDateElement(Cursor pCursor,View pView,int pElement,Long pValue)
     {
         TextView lElement=pView.findViewById(pElement);
         if(pValue==null){
             lElement.setText("");
         } else {
-            lElement.setText(DateHandler.getDateFromLong(pValue));
+            lElement.setText(DateHandler.getDateTextFromLong(pValue));
         }
+        return lElement;
     }
 
     @Override
@@ -75,19 +76,34 @@ class TodoListAdapter extends CursorAdapter {
         } else {
             lTitleWidget.setBackgroundResource(0);
         }
-        Long lStartDate=null;
+        Long lStartDateEpoch=null;
+        DateTime lStartDate=null;
         if(!pCursor.isNull(startDateIndex)){
-            lStartDate=pCursor.getLong(startDateIndex);
+            lStartDateEpoch=pCursor.getLong(startDateIndex);
+            lStartDate=DateHandler.getDateFromLong(lStartDateEpoch);
         }
-        Long lEndDate=null;
+        Long lEndDateEpoch=null;
+        DateTime lEndDate=null;
         if(!pCursor.isNull(endDateIndex)){
-            lEndDate=pCursor.getLong(endDateIndex);
+            lEndDateEpoch=pCursor.getLong(endDateIndex);
+            lEndDate=DateHandler.getDateFromLong(lEndDateEpoch);
         }
         TextView lStatusWidget= pView.findViewById(R.id.status);
         lStatusWidget.setText(lStatus);
-        setDateElement(pCursor,pView,R.id.startDate,lStartDate);
-        setDateElement(pCursor,pView,R.id.endDate,lEndDate);
-        pView.setTag(new TodoItem(lId,lIdProject,lIdStatus,lTitle,lComment,lStartDate,lEndDate));
+
+
+        TextView lStartView=setDateElement(pCursor,pView,R.id.startDate,lStartDateEpoch);
+        TextView lEndView=setDateElement(pCursor,pView,R.id.endDate,lEndDateEpoch);
+
+        lStartView.setTextColor(lTitleWidget.getTextColors());
+        lEndView.setTextColor(lTitleWidget.getTextColors());
+        if(lEndDate != null && !lEndDate.isAfterNow()){
+            lEndView.setTextColor(pContext.getResources().getColor(R.color.after_end));
+
+        } else if(lStartDate != null && !lStartDate.isAfterNow()){
+            lStartView.setTextColor(pContext.getResources().getColor(R.color.after_start));
+        }
+        pView.setTag(new TodoItem(lId,lIdProject,lIdStatus,lTitle,lComment,lStartDateEpoch,lEndDateEpoch));
 
     }
 }

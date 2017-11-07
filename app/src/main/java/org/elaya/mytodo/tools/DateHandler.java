@@ -29,7 +29,12 @@ public class DateHandler {
         return null;
     }
 
-    public static String getDateFromLong(long pLongDate)
+    public static DateTime getDateFromLong(long pLongDate)
+    {
+        return new DateTime(pLongDate);
+    }
+
+    public static String getDateTextFromLong(long pLongDate)
     {
         DateTimeFormatter lFormatter= DateTimeFormat.forPattern(Settings.getDateFormat());
         return lFormatter.print(pLongDate);

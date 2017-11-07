@@ -29,10 +29,10 @@ public class ShowTodoActivity extends BaseActivity {
         lTitleElement.setText(lIntent.getStringExtra("title"));
         lStatusElement.setText(ds.getStatusTextById(lIntent.getLongExtra("id_status",-1)));
         if(lIntent.hasExtra("startDate")) {
-            lStartDateElement.setText(DateHandler.getDateFromLong(lIntent.getLongExtra("startDate",-1)));
+            lStartDateElement.setText(DateHandler.getDateTextFromLong(lIntent.getLongExtra("startDate",-1)));
         }
         if(lIntent.hasExtra("endDate")){
-            lEndDateElement.setText(DateHandler.getDateFromLong(lIntent.getLongExtra("endDate",-1)));
+            lEndDateElement.setText(DateHandler.getDateTextFromLong(lIntent.getLongExtra("endDate",-1)));
         }
         lCommentElement.setText(lIntent.getStringExtra("comment"));
     }
