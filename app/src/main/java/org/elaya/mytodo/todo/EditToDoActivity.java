@@ -7,10 +7,13 @@ import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 
+import org.elaya.mytodo.db.DataSource;
+import org.elaya.mytodo.project.ProjectItem;
 import org.elaya.mytodo.tools.BaseEditActivity;
 import org.elaya.mytodo.tools.DatePickerFragment;
 import org.elaya.mytodo.status.StatusItem;
@@ -32,6 +35,8 @@ public class EditToDoActivity extends BaseEditActivity {
     private EditText endDateElement;
     private EditText comment;
     private Spinner  statusElement;
+    private Spinner  projectElement;
+    private ArrayAdapter<ProjectItem> projectAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,13 @@ public class EditToDoActivity extends BaseEditActivity {
         statusElement= findViewById(R.id.status);
         StatusSpinnerAdapter spinnerAdapter=new StatusSpinnerAdapter(this,ds.getActiveStatusCursor(idStatus));
         statusElement.setAdapter(spinnerAdapter);
+
+        projectElement=findViewById(R.id.project);
+        projectAdapter=new ArrayAdapter<ProjectItem>(this, android.R.layout.simple_spinner_dropdown_item);
+        int lCurrentPos=ds.fillProjectAdapter(projectAdapter,idProject);
+        projectElement.setAdapter(projectAdapter);
+        projectElement.setSelection(lCurrentPos);
+
         int lNum=spinnerAdapter.getCount();
         for(int lCnt=0;lCnt<lNum;lCnt++) {
             long lId = spinnerAdapter.getItemId(lCnt);
@@ -70,6 +82,7 @@ public class EditToDoActivity extends BaseEditActivity {
                 break;
             }
         }
+
     }
 
     @Override
@@ -165,9 +178,11 @@ public class EditToDoActivity extends BaseEditActivity {
             Helpers.warning(this,R.string.err_title_empty);
             return;
         }
+        ProjectItem lProjectItem=(ProjectItem)projectElement.getSelectedItem();
+
         Intent lIntent = new Intent();
         lIntent.putExtra("_id",id);
-        lIntent.putExtra("id_project",idProject);
+        lIntent.putExtra("id_project",lProjectItem.getId());
         StatusItem lItem=(StatusItem)statusElement.getSelectedView().getTag();
         lIntent.putExtra("id_status",lItem.getId());
         lIntent.putExtra("title",title.getText().toString());

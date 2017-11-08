@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
+import android.widget.ArrayAdapter;
 
 import org.elaya.mytodo.project.DateFilter;
 import org.elaya.mytodo.project.ProjectItem;
@@ -14,6 +15,7 @@ import org.elaya.mytodo.tools.FilterTypes;
 import org.joda.time.DateTime;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
 
 /**
@@ -91,6 +93,25 @@ public final class DataSource {
         }
         lProjectCursor.close();
         return lProjectItem;
+    }
+
+
+    public int fillProjectAdapter(ArrayAdapter<ProjectItem> pProjectAdapter,long pId)
+    {
+        Cursor lProjectCursor=db.rawQuery("select _id,projectname,filter_type,date_filter from projects order by projectName",null);
+        lProjectCursor.moveToFirst();
+        int lCnt=0;
+        int lReturn=0;
+        while(!lProjectCursor.isAfterLast()){
+            ProjectItem lProjectItem=new ProjectItem(lProjectCursor.getLong(0),lProjectCursor.getString(1),lProjectCursor.getLong(2),lProjectCursor.getLong(3));
+            pProjectAdapter.add(lProjectItem);
+            lProjectCursor.moveToNext();
+            if(lProjectItem.getId()==pId){
+                lReturn=lCnt;
+            }
+            lCnt++;
+        }
+        return lReturn;
     }
 
     /**

@@ -61,6 +61,9 @@ public class ProjectActivity extends BaseActivity {
     }
 
     @Override
+    protected String getHelpName(){ return "projects";}
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
         switch (pItem.getItemId()) {
 
@@ -74,10 +77,6 @@ public class ProjectActivity extends BaseActivity {
 
             case R.id.action_settings:
                 openSettings();
-                break;
-
-            case R.id.help:
-                Helpers.openHelp(this,"projects");
                 break;
 
             default:

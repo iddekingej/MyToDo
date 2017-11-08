@@ -47,4 +47,6 @@ public class ProjectItem {
     public void setDateFilter(long pDateFilter){ dateFilter=pDateFilter;}
 
     public long getDateFilter(){ return dateFilter;}
+
+    public String toString(){ return projectName;}
 }
