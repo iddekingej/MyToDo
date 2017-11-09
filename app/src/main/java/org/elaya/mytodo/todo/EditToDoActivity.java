@@ -27,14 +27,12 @@ public class EditToDoActivity extends BaseEditActivity {
 
     private boolean isNew=false;
     private long id;
-    private long idProject;
     private EditText title;
     private EditText startDateElement;
     private EditText endDateElement;
     private EditText comment;
     private Spinner  statusElement;
     private Spinner  projectElement;
-    private ArrayAdapter<ProjectItem> projectAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +41,8 @@ public class EditToDoActivity extends BaseEditActivity {
         Intent lIntent=getIntent();
         isNew = !lIntent.hasExtra("_id");
         id=lIntent.getLongExtra("_id",-1);
-        idProject=lIntent.getLongExtra("id_project",-1);
-        long idStatus=lIntent.getLongExtra("id_status",-1);
+        long lIdProject=lIntent.getLongExtra("id_project",-1);
+        long lIdStatus=lIntent.getLongExtra("id_status",-1);
 
         title= findViewById(R.id.title);
         title.setText(lIntent.getStringExtra("title"));
@@ -63,19 +61,19 @@ public class EditToDoActivity extends BaseEditActivity {
         }
 
         statusElement= findViewById(R.id.status);
-        StatusSpinnerAdapter spinnerAdapter=new StatusSpinnerAdapter(this,ds.getActiveStatusCursor(idStatus));
+        StatusSpinnerAdapter spinnerAdapter=new StatusSpinnerAdapter(this,ds.getActiveStatusCursor(lIdStatus));
         statusElement.setAdapter(spinnerAdapter);
 
         projectElement=findViewById(R.id.project);
-        projectAdapter=new ArrayAdapter<ProjectItem>(this, android.R.layout.simple_spinner_dropdown_item);
-        int lCurrentPos=ds.fillProjectAdapter(projectAdapter,idProject);
-        projectElement.setAdapter(projectAdapter);
+        ArrayAdapter<ProjectItem> lProjectAdapter=new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item);
+        int lCurrentPos=ds.fillProjectAdapter(lProjectAdapter,lIdProject);
+        projectElement.setAdapter(lProjectAdapter);
         projectElement.setSelection(lCurrentPos);
 
         int lNum=spinnerAdapter.getCount();
         for(int lCnt=0;lCnt<lNum;lCnt++) {
             long lId = spinnerAdapter.getItemId(lCnt);
-            if(lId==idStatus){
+            if(lId==lIdStatus){
                 statusElement.setSelection(lCnt);
                 break;
             }

@@ -15,7 +15,6 @@ import org.elaya.mytodo.tools.FilterTypes;
 import org.joda.time.DateTime;
 
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Set;
 
 /**
@@ -111,6 +110,7 @@ public final class DataSource {
             }
             lCnt++;
         }
+        lProjectCursor.close();
         return lReturn;
     }
 
