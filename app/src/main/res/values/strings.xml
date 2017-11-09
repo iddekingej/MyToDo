@@ -91,13 +91,13 @@
     <string name="title_activity_todo_filter">TodoFilterActivity</string>
 
     <!-- filter settings -->
-    <string name="choose_status">Status:</string>
-    <string name="choose_date_status">Status regarding start/end date:</string>
+    <string name="choose_status">Or filter on status:</string>
+    <string name="choose_date_status">Filter on dates?</string>
     <string name="choose_build_in">Build in filters:</string>
     <string name="label_filter">Filter:</string>
     <string name="label_customFilter">Custom filers</string>
     <string name="img_filter">Open filter settings</string>
-    <string name="filter_notInclude">Not include</string>
+    <string name="filter_notInclude">Don\'t check</string>
     <string name="filter_afterEndDate">Include when later than \"end date\"</string>
     <string name="filter_afterStartDate">Include after \"start date\"</string>
     <!-- filter types -->

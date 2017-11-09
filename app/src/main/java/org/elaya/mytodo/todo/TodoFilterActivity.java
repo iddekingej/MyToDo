@@ -76,6 +76,8 @@ public class TodoFilterActivity extends BaseActivity implements CompoundButton.O
             dateCondElement.check(R.id.dateCondAfterStartDate);
         } else if(lDateFilter == DateFilter.DF_AFTER_END){
             dateCondElement.check(R.id.dateCondAfterEndDate);
+        } else {
+            dateCondElement.check(R.id.dateCondNotInclude);
         }
     }
 
