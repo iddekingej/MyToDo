@@ -11,8 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-
-import org.elaya.mytodo.db.DataSource;
 import org.elaya.mytodo.project.ProjectItem;
 import org.elaya.mytodo.tools.BaseEditActivity;
 import org.elaya.mytodo.tools.DatePickerFragment;
@@ -106,6 +104,9 @@ public class EditToDoActivity extends BaseEditActivity {
     protected int getMenuResource() {
         return R.menu.menu_edit_todo;
     }
+
+    @Override
+    protected String getHelpName(){ return "edit_todo";}
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
