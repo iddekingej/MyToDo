@@ -34,6 +34,7 @@
     <string name="err_title_empty">Title is empty</string>
     <string name="warning_start_date_invalid">Invalid start date</string>
     <string name="warning_end_date_invalid">Invalid finish date</string>
+    <string name="menu_add_todo">Add todo</string>
     <!-- Project -->
     <string name="title_main">Projects</string>
     <string name="no_project">No projects found. Please add one or more project first and than add todo items.</string>
@@ -107,6 +108,6 @@
     <string name="ft_finished">Finished todo\'s</string>
     <string name="ft_to_late">To late</string>
     <string name="ft_should_start">Should start</string>
-    <string name="ft_not_filtered">Do display not filtered(Not displayed %1$d)</string>
-    <string name="ft_filtered">Do display filtered(Not displayed %1$d)</string>
+    <string name="ft_not_filtered">Switch to not filtered(Not displayed %1$d)</string>
+    <string name="ft_filtered">Switch to filtered(Not displayed %1$d)</string>
 </resources>
