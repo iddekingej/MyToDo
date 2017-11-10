@@ -16,20 +16,12 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 
-public class DbProjectTest {
+public class DbProjectTest  extends DbTest{
 
     static final String projectName="TestProject";
     static final String projectNameOth="TestProjectXXXX";
 
-    DataSource ds;
-    Context context;
     long IdProject;
-    @Before
-    public void setupDS()
-    {
-        context= InstrumentationRegistry.getTargetContext();
-        ds=DataSource.makeSource(context);
-    }
 
     @Test
     public void testAddProject()
@@ -56,6 +48,15 @@ public class DbProjectTest {
         ProjectItem lProject=ds.getProjectById(lId);
         assertEquals(lProject.getProjectName(),projectNameOth);
         assertEquals(lProject.toString(),projectNameOth);
+    }
+
+    @Test
+    public void testDeleteProject()
+    {
+        long lId=ds.addProject(projectName);
+        ds.deleteProject(lId);
+        ProjectItem lProject=ds.getProjectById(lId);
+        assertNull(lProject);
     }
 
 }
