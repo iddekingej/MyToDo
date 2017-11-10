@@ -7,14 +7,12 @@ import android.support.test.runner.AndroidJUnit4;
 import org.elaya.mytodo.db.DataSource;
 import org.elaya.mytodo.project.ProjectItem;
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import static org.junit.Assert.*;
 
 /**
- * Created by jeroen on 11/10/17.
+ * Testing project methods regarding db interaction
  */
 @RunWith(AndroidJUnit4.class)
 
