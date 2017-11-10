@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,6 +28,8 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
     private TodoListAdapter adapter;
     private Spinner todoFilterElement;
     private ProjectItem projectItem;
+    private boolean notFilter;
+    private Button notFilterElement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +49,7 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         todoFilterElement.setSelection((int)projectItem.getFilterType());
         projectName.setText(projectItem.getProjectName());
 
-        adapter=new TodoListAdapter(this,ds.getTodoCursor(id));
+        adapter=new TodoListAdapter(this,ds.getTodoCursor(id,false));
         todoList.setAdapter(adapter);
         todoList.setOnItemClickListener(new ListView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> pParent, @NonNull View pView, int pPosition, long pId){
@@ -55,6 +58,16 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         });
         todoList.setEmptyView(findViewById(R.id.noItemsMessage));
 
+        notFilterElement=findViewById(R.id.notFilter);
+        notFilter=false;
+        setNumNotInFilter();
+    }
+
+    private void setNumNotInFilter()
+    {
+        long lNum=ds.getNumberOfTodo(id);
+        String lTitle=getString(notFilter?R.string.ft_filtered:R.string.ft_not_filtered,lNum-adapter.getCount());
+        notFilterElement.setText(lTitle);
     }
 
     @Override
@@ -184,6 +197,12 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         startActivityForResult(lIntent,ACT_FILTER);
     }
 
+    public void negResult(View pView)
+    {
+        notFilter=!notFilter;
+        refreshList();
+    }
+
     private void refreshListFilter()
     {
         projectItem=ds.getProjectById(id);
@@ -194,8 +213,9 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
     private void refreshList()
     {
         adapter.getCursor().close();
-        adapter.swapCursor(ds.getTodoCursor(id));
+        adapter.swapCursor(ds.getTodoCursor(id,notFilter));
         adapter.notifyDataSetChanged();
+        setNumNotInFilter();
     }
 
     @Override

@@ -38,15 +38,25 @@
             android:id="@+id/imageButton5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/img_filter"
             android:onClick="openFilter"
-            android:src="@drawable/filter"
-            android:contentDescription="@string/img_filter"/>
+            android:src="@drawable/filter" />
 
         <Spinner
             android:id="@+id/todoFilter"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="top|left|center_vertical" />
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/notFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="negResult"
+        android:text="Button" />
 
     <TextView
         android:id="@+id/noItemsMessage"
@@ -59,7 +69,7 @@
     <ListView
         android:id="@+id/todoList"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1" />
 
 </LinearLayout>

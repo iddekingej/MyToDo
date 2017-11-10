@@ -107,4 +107,6 @@
     <string name="ft_finished">Finished todo\'s</string>
     <string name="ft_to_late">To late</string>
     <string name="ft_should_start">Should start</string>
+    <string name="ft_not_filtered">Do display not filtered(Not displayed %1$d)</string>
+    <string name="ft_filtered">Do display filtered(Not displayed %1$d)</string>
 </resources>

@@ -161,16 +161,34 @@ public final class DataSource {
             return lDescription;
     }
 
+    public long getNumberOfTodo(long pIdProject)
+    {
+        Cursor lNumCursor=db.rawQuery("select count(1) num from todoitems where id_project=?",new String[]{String.valueOf(pIdProject)});
+        lNumCursor.moveToFirst();
+        long lNum=lNumCursor.getLong(0);
+        lNumCursor.close();
+        return lNum;
+    }
+
     /**
      * List all to do items belonging to a project
      *
      * @param pIdProject Project ID. The to do's of this project are retrieved
      * @return           Cursor that retrieves all to do belonging to a project
      */
-    public Cursor getTodoCursor(long pIdProject)
+    public Cursor getTodoCursor(long pIdProject,boolean pNot)
     {
         long lUnix=new DateTime().getMillis();
-
+        String lCondition="((p.filter_type<>? or t.id_status in (" +
+        "select ps.id_status " +
+                "from project_statusfilters ps " +
+                "where ps.id_project=t.id_project))" +
+                "or (p.date_filter=? and ?>=start_date and not action_type in (3,4))" +
+                "or (p.date_filter=? and ?>=end_date and not action_type in (3,4)) "+
+                ")";
+        if(pNot){
+            lCondition="not "+lCondition;
+        }
         Cursor lTodoCursor=db.rawQuery("" +
                 "select t._id " +
                 ",      t.id_project" +
@@ -185,13 +203,7 @@ public final class DataSource {
                 "left join status s on (t.id_status = s._id) " +
                 "join projects p on (t.id_project = p._id)"+
                 "where t.id_project=? " +
-                "and ((p.filter_type<>? or t.id_status in (" +
-                        "select ps.id_status " +
-                        "from project_statusfilters ps " +
-                        "where ps.id_project=t.id_project))" +
-                "or (p.date_filter=? and ?>=start_date and not action_type in (3,4))" +
-                "or (p.date_filter=? and ?>=end_date and not action_type in (3,4)) "+
-                ")"+
+                "and "+lCondition+
                 "order by " +
                 "   case " +
                 "   when end_date <?  and not action_type in (3,4) then 1" +
