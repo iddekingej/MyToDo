@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingEnd="8dp"
+        android:id="@+id/projectHeader"
         android:paddingStart="8dp">
 
             <TextView

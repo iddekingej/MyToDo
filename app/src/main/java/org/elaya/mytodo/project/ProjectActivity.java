@@ -8,6 +8,7 @@ import android.support.v7.widget.PopupMenu;
 import android.view.View;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import org.elaya.mytodo.tools.BaseActivity;
@@ -26,11 +27,13 @@ public class ProjectActivity extends BaseActivity {
     private static final int ACT_EDIT_STATUS=103;
 
     private ProjectListAdapter adapter;
+    private LinearLayout projectHeaderElement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        projectHeaderElement=findViewById(R.id.projectHeader);
 
         ListView lProjectList= findViewById(R.id.projectList);
         lProjectList.setOnItemClickListener(new ListView.OnItemClickListener(){
@@ -48,6 +51,7 @@ public class ProjectActivity extends BaseActivity {
         lProjectList.setAdapter(adapter);
         lProjectList.setEmptyView(findViewById(R.id.noProject));
         Settings.make(this);
+        showHeader();
     }
 
     @Override
@@ -62,6 +66,11 @@ public class ProjectActivity extends BaseActivity {
 
     @Override
     protected String getHelpName(){ return "projects";}
+
+    private void showHeader()
+    {
+        projectHeaderElement.setVisibility((adapter.getCount()>0)?View.VISIBLE:View.GONE);
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
@@ -170,6 +179,7 @@ public class ProjectActivity extends BaseActivity {
         adapter.getCursor().close();
         adapter.swapCursor(ds.getProjectCursor());
         adapter.notifyDataSetChanged();
+        showHeader();
     }
 
     /**
