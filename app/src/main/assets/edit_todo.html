@@ -3,6 +3,65 @@
     <link rel="stylesheet" href="main.css"/>
 </head>
 <body>
+<img src="save.xml"/>
 <div class="title">Edit or add a todo</div>
+<div class='sectionTitle'>Overview</div>
+<div class='sectionTitle'>Actions</div>
+<table>
+    <tr>
+            <td>
+                <img src="save.png"/>
+            </td>
+            <td>
+                Add todo item to project or save changes while editing a todo
+            </td>
+    </tr>
+    <tr>
+            <td>
+                <img src="cancel.png">
+            </td>
+            <td>
+                Don't save changed while editing a todo or don't add a new todo when editing a new one.
+            </td>
+    </tr>
+</table>
+<div class="sectionTitle">Entering data</div>
+When editing a new todo or editing a existing one, the following information can be entered.
+<br/>
+<span class="formItem">Project name:</span>
+<div class="formItemHelp">
+Project to which the todo item is added. By default the current project is selected.
+   When editing the todo item, it's also possible to move it to an other project by changing
+    the selected project
+</div>
+<span class="formItem">
+    Title
+</span>
+<div class="formItemHelp">
+    Distinguishably title of the todo item. This title is displayed in the todo overview list.
+    The title is mandatory.
+</div>
+<span class="formItem">
+    Status
+</span>
+<div class="formItemHelp">
+    Indicates status of the todo item such as : Not active, bussy with todo , finished or
+    for example removed<br/>
+    Information how the list of available statuses can be configured: <a href="status.html">Configuring status selection</a>
+</div>
+<span class="formItem">
+    &#39;Should start on &#39; and &#39;Should finish on &#39;
+</span>
+<div class="formItemHelp">
+    The dates when you should start or finish this todo.
+    In the todo overview list the "start date" turn green on or after the start date<br>
+    After the finish date, the "finish date" turns green<br>
+</div>
+<span class="formItem">
+    Comment
+</span>
+<div class="formItemHelp">
+    Any information about the todo item.
+</div>
 </body>
 </html>
