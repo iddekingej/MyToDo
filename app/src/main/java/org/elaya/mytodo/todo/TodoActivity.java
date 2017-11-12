@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
     private ProjectItem projectItem;
     private boolean notFilter;
     private Button notFilterElement;
+    private LinearLayout headerElement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         Intent lIntent=getIntent();
         id=lIntent.getLongExtra("_id",0);
         projectItem=ds.getProjectById(id);
+
+        headerElement=findViewById(R.id.header);
 
         TextView projectName= findViewById(R.id.projectName);
         ListView todoList= findViewById(R.id.todoList);
@@ -61,6 +65,7 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         notFilterElement=findViewById(R.id.notFilter);
         notFilter=false;
         setNumNotInFilter();
+        showHeader();
     }
 
     private void setNumNotInFilter()
@@ -78,6 +83,12 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
     @Override
     protected int getMenuResource() {
         return R.menu.menu_todo;
+    }
+
+
+    private void showHeader()
+    {
+        headerElement.setVisibility(adapter.getCount()==0?View.GONE:View.VISIBLE);
     }
 
     @Override
@@ -212,10 +223,12 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
 
     private void refreshList()
     {
+
         adapter.getCursor().close();
         adapter.swapCursor(ds.getTodoCursor(id,notFilter));
         adapter.notifyDataSetChanged();
         setNumNotInFilter();
+        showHeader();
     }
 
     @Override

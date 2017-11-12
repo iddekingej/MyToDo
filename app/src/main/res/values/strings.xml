@@ -24,6 +24,10 @@
 
     <string name="delete_todo_question">Delete todo item?</string>
     <string name="delete_todo">Delete todo item</string>
+    <string name="header_todo_title">Title</string>
+    <string name="header_todo_status">Status</string>
+    <string name="header_todo_start">Start</string>
+    <string name="header_todo_end">End</string>
 
     <string name="label_todo_title">Title:</string>
     <string name="label_todo_status">Status:</string>

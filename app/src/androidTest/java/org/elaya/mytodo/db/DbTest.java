@@ -1,23 +1,21 @@
 package org.elaya.mytodo.db;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.support.test.InstrumentationRegistry;
 
 import org.junit.Before;
 
 /**
- * Created by jeroen on 11/10/17.
+ * Base class for a DataSource tests
  */
 
 public abstract class DbTest {
-    protected Context context;
-    protected DataSource ds;
+    DataSource ds;
 
     @Before
     public void setupDS()
     {
-        context= InstrumentationRegistry.getTargetContext();
-        ds=DataSource.makeSource(context);
+        Context lContext= InstrumentationRegistry.getTargetContext();
+        ds=DataSource.makeSource(lContext);
     }
 }

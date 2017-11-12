@@ -1,12 +1,8 @@
 package org.elaya.mytodo.db;
 
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 
-import org.elaya.mytodo.db.DataSource;
+import android.support.test.runner.AndroidJUnit4;
 import org.elaya.mytodo.project.ProjectItem;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
@@ -18,8 +14,8 @@ import static org.junit.Assert.*;
 
 public class DbProjectTest  extends DbTest{
 
-    static final String projectName="TestProject";
-    static final String projectNameOth="TestProjectXXXX";
+    static final private String projectName="TestProject";
+    static final private String projectNameOth="TestProjectXXXX";
 
     long IdProject;
 

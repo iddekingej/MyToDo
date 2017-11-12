@@ -50,7 +50,7 @@ class TodoListAdapter extends CursorAdapter {
         return lInflater.inflate(R.layout.todo_item, pViewGroup, false);
     }
 
-    private TextView setDateElement(Cursor pCursor,View pView,int pElement,Long pValue)
+    private TextView setDateElement(View pView,int pElement,Long pValue)
     {
         TextView lElement=pView.findViewById(pElement);
         if(pValue==null){
@@ -92,8 +92,8 @@ class TodoListAdapter extends CursorAdapter {
         lStatusWidget.setText(lStatus);
 
 
-        TextView lStartView=setDateElement(pCursor,pView,R.id.startDate,lStartDateEpoch);
-        TextView lEndView=setDateElement(pCursor,pView,R.id.endDate,lEndDateEpoch);
+        TextView lStartView=setDateElement(pView,R.id.startDate,lStartDateEpoch);
+        TextView lEndView=setDateElement(pView,R.id.endDate,lEndDateEpoch);
 
         lStartView.setTextColor(lTitleWidget.getTextColors());
         lEndView.setTextColor(lTitleWidget.getTextColors());
