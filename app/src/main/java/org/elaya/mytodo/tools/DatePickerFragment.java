@@ -45,12 +45,12 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         if(lDate==null){
             lDate=DateTime.now();
         }
-        return new DatePickerDialog(getActivity(),this,lDate.getYear(),lDate.getMonthOfYear(),lDate.getDayOfMonth());
+        return new DatePickerDialog(getActivity(),this,lDate.getYear(),lDate.getMonthOfYear()-1,lDate.getDayOfMonth());
     }
 
     @Override
     public void onDateSet(DatePicker datePicker, int pYear, int pMonth, int pDay) {
-        DateTime lDate=new DateTime(pYear,pMonth,pDay,0,0);
+        DateTime lDate=new DateTime(pYear,pMonth+1,pDay,0,0);
         dateElement.setText(DateHandler.getTextFromDate(lDate));
     }
 }
