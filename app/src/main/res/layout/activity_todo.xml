@@ -43,6 +43,32 @@
             style="@style/noPaddingButton"
             android:src="@drawable/filter" />
 
+        <RadioGroup
+            android:id="@+id/filterUse"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:onClick="negResult"
+            android:orientation="vertical"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp">
+
+            <RadioButton
+                android:id="@+id/inFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="negResult"
+                android:text="@string/sel_in_filter" />
+
+            <RadioButton
+                android:id="@+id/notInFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="negResult"
+                android:text="@string/sel_not_in_filter" />
+        </RadioGroup>
+
         <Spinner
             android:id="@+id/todoFilter"
             android:layout_width="match_parent"
@@ -52,13 +78,11 @@
 
     </LinearLayout>
 
-    <Button
+    <TextView
         android:id="@+id/notFilter"
+        style="@style/numTodoFilter"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="negResult"
-        style="@style/noPaddingButton"
-        android:text="" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/noItemsMessage"
@@ -67,6 +91,7 @@
         android:paddingTop="5dp"
         android:text="@string/no_todo_items"
         android:visibility="gone" />
+
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/header"

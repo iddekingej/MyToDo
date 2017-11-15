@@ -105,6 +105,8 @@
     <string name="filter_notInclude">Don\'t check</string>
     <string name="filter_afterEndDate">Include when later than \"end date\"</string>
     <string name="filter_afterStartDate">Include after \"start date\"</string>
+    <string name="sel_in_filter">In filter</string>
+    <string name="sel_not_in_filter">Not in filter</string>
     <!-- filter types -->
     <string name="ft_all">All</string>
     <string name="ft_custom">Custom</string>
@@ -112,6 +114,6 @@
     <string name="ft_finished">Finished todo\'s</string>
     <string name="ft_to_late">To late</string>
     <string name="ft_should_start">Should start</string>
-    <string name="ft_not_filtered">Switch to not filtered(Not displayed %1$d)</string>
-    <string name="ft_filtered">Switch to filtered(Not displayed %1$d)</string>
+    <string name="ft_num_found">Found %1$d todo\'s, %2$d filtered out</string>
+
 </resources>

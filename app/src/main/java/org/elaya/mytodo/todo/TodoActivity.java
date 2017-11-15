@@ -2,6 +2,7 @@ package org.elaya.mytodo.todo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
@@ -10,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -30,9 +33,10 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
     private Spinner todoFilterElement;
     private ProjectItem projectItem;
     private boolean notFilter;
-    private Button notFilterElement;
+    private TextView notFilterElement;
     private LinearLayout headerElement;
-
+    private RadioButton inFilterElement;
+    private RadioButton notInFilterelement;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +68,11 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
 
         notFilterElement=findViewById(R.id.notFilter);
         notFilter=false;
+
+        inFilterElement = findViewById(R.id.inFilter);
+        inFilterElement.setChecked(true);
+        notInFilterelement = findViewById(R.id.notInFilter);
+
         setNumNotInFilter();
         showHeader();
     }
@@ -71,7 +80,7 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
     private void setNumNotInFilter()
     {
         long lNum=ds.getNumberOfTodo(id);
-        String lTitle=getString(notFilter?R.string.ft_filtered:R.string.ft_not_filtered,lNum-adapter.getCount());
+        String lTitle=getString(R.string.ft_num_found,adapter.getCount(),lNum-adapter.getCount());
         notFilterElement.setText(lTitle);
     }
 
@@ -210,7 +219,7 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
 
     public void negResult(View pView)
     {
-        notFilter=!notFilter;
+        notFilter=!inFilterElement.isChecked();
         refreshList();
     }
 
