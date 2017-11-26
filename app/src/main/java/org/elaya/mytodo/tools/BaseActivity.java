@@ -2,6 +2,7 @@ package org.elaya.mytodo.tools;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -34,6 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract int getContentResource();
     protected abstract int getMenuResource();
+    @Nullable
     protected String getHelpName()
     {
         return null;
@@ -46,6 +48,8 @@ public abstract class BaseActivity extends AppCompatActivity {
                 Helpers.openHelp(this, lHelp);
             }
             return true;
+        } else if(pItem.getItemId() == R.id.back){
+            finish();
         }
         return super.onOptionsItemSelected(pItem);
 

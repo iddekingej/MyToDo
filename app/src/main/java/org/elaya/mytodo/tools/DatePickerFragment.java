@@ -20,6 +20,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
 
 
+    @NonNull
     public static DatePickerFragment newInstance(@NonNull EditText pDateElement)
     {
         DatePickerFragment lFragment=new DatePickerFragment();
@@ -33,6 +34,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     }
 
 
+    @NonNull
     public Dialog onCreateDialog(@NonNull Bundle pSaveInstanceState)
     {
 

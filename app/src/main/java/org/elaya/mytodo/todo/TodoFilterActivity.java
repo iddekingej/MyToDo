@@ -3,6 +3,7 @@ package org.elaya.mytodo.todo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -31,6 +32,7 @@ public class TodoFilterActivity extends BaseActivity implements CompoundButton.O
     private LinearLayout buildInFilterSectionElement;
     private LinearLayout customFilterSectionElement;
     private Spinner      buildInFilterElement;
+    @Nullable
     private ProjectItem  projectItem;
     private RadioGroup   dateCondElement;
     private long projectId;
@@ -93,7 +95,7 @@ public class TodoFilterActivity extends BaseActivity implements CompoundButton.O
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton pCompoundButton, boolean pIsChecked) {
+    public void onCheckedChanged(@NonNull CompoundButton pCompoundButton, boolean pIsChecked) {
         if(pIsChecked) {
             if (buildInRadioElement.getId() == pCompoundButton.getId()) {
                 customRadioElement.setChecked(false);

@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import org.elaya.mytodo.filter.FilterActivity;
 import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.R;
 import org.elaya.mytodo.settings.SettingsEditor;
@@ -64,6 +65,7 @@ public class ProjectActivity extends BaseActivity {
         return R.menu.menu_main;
     }
 
+    @NonNull
     @Override
     protected String getHelpName(){ return "projects";}
 
@@ -88,11 +90,22 @@ public class ProjectActivity extends BaseActivity {
                 openSettings();
                 break;
 
+            case R.id.todo_filters:
+                showFilters();
+                break;
+
             default:
                 return super.onOptionsItemSelected(pItem);
         }
 
         return true;
+    }
+
+
+    private void showFilters()
+    {
+        Intent lIntent=new Intent(this, FilterActivity.class);
+        startActivity(lIntent);
     }
 
     /**

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.Editable;
-import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -62,6 +61,11 @@ public class EditStatusActivity extends BaseEditActivity {
         statusIsUsed=ds.statusIsUsed(id);
     }
 
+    @NonNull
+    @Override
+    protected String getHelpName() {
+        return "edit_status";
+    }
 
     @Override
     protected int getContentResource() {
@@ -98,11 +102,13 @@ public class EditStatusActivity extends BaseEditActivity {
         finish();
     }
 
+
+
     /**
      * When the delete button is pressed, the form returns with RESULT_DELETE_STATUS
      * and the ID of the status. In the  @see StatusActivity class
      */
-    private void onDeletePressed()
+    protected void onDeleteClicked()
     {
         if(statusIsUsed){
             Helpers.warning(this,R.string.warning_cant_delete_status_used);
@@ -121,32 +127,4 @@ public class EditStatusActivity extends BaseEditActivity {
         }
     }
 
-    /**
-     * Handles tool menu/icon  events .
-     *
-     * In this method the following menu actions are handled:
-     * R.id.back  - exit form without doing anything
-     * R.id.save  - save entered data.
-     * R.id.help  - display help
-     * R.id.delete - delete the edited status
-     * @param pItem  MenuItem that is clicked
-     * @return       True if handled
-     */
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
-        switch (pItem.getItemId()) {
-
-            case R.id.help:
-                Helpers.openHelp(this,"edit_status");
-                break;
-
-            case R.id.delete:
-                onDeletePressed();
-                break;
-
-            default:
-                return super.onOptionsItemSelected(pItem);
-        }
-        return true;
-    }
-}
+ }

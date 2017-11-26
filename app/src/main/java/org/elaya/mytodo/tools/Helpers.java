@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ListView;
 
 import org.elaya.mytodo.R;
 
@@ -64,6 +68,26 @@ public class Helpers {
         lBuilder.setNegativeButton(R.string.keep,null);
         AlertDialog lDialog = lBuilder.create();
         lDialog.show();
+    }
+
+    public static void setListViewHeightToContent(ListView pView)
+    {
+        Adapter lAdapter=pView.getAdapter();
+        int lHeight=0;
+        View lItem=null;
+        int lWidth= View.MeasureSpec.makeMeasureSpec(pView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+
+        for(int lCnt=0;lCnt<lAdapter.getCount();lCnt++){
+            lItem=lAdapter.getView(lCnt,lItem,pView);
+            if(lCnt==0) {
+                lItem.setLayoutParams(new ViewGroup.LayoutParams(lWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
+            }
+            lItem.measure(lWidth, View.MeasureSpec.UNSPECIFIED);
+            lHeight+=lItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams lParams=pView.getLayoutParams();
+        lParams.height=lHeight;
+        pView.setLayoutParams(lParams);
     }
 
 }

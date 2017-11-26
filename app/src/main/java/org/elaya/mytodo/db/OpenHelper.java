@@ -17,7 +17,7 @@ import org.elaya.mytodo.tools.ActionTypes;
 class OpenHelper extends SQLiteOpenHelper {
     private final Context context;
     public OpenHelper(Context pContext){
-        super(pContext,"main",null,4);
+        super(pContext,"main",null,5);
         context=pContext;
     }
 
@@ -75,6 +75,7 @@ class OpenHelper extends SQLiteOpenHelper {
         createTodoItems(pDatabase);
         createToDoFilter(pDatabase);
         addDateFilter(pDatabase);
+        addDateFilter(pDatabase);
     }
 
     private void createToDoFilter(@NonNull SQLiteDatabase pDatabase)
@@ -92,16 +93,41 @@ class OpenHelper extends SQLiteOpenHelper {
 
     }
 
+    private void createFilter(@NonNull SQLiteDatabase pDatabase)
+    {
+        pDatabase.execSQL(
+                "create table filters(" +
+                        "_id integer primary key autoincrement" +
+                        ",name text" +
+                        ",date_filter integer" +
+                        ")"
+        );
+        pDatabase.execSQL(
+            "create table filter_status(" +
+                    "_id integer primary key autoincrement" +
+                    ",id_filter integer not null" +
+                    ",id_status integer not null" +
+                    ",constraint fk_filter_status_1 foreign key(id_filter) references filters(_id)" +
+                    ",constraint fk_filter_status_2 foreign key(id_status) references status(_id) "+
+                    ")"
+        );
+    }
+
     private void addDateFilter(@NonNull SQLiteDatabase pDatabase){
         pDatabase.execSQL("alter table projects add date_filter integer");
     }
 
-    public void onUpgrade(@NonNull SQLiteDatabase pDatabase,int pOldVersion,int pNewVersion){
-        if(pOldVersion<2){
+
+
+    public void onUpgrade(@NonNull SQLiteDatabase pDatabase,int pOldVersion,int pNewVersion) {
+        if (pOldVersion < 2) {
             createToDoFilter(pDatabase);
         }
-        if(pOldVersion<4){
+        if (pOldVersion < 4) {
             addDateFilter(pDatabase);
+        }
+        if (pOldVersion < 5){
+            createFilter(pDatabase);
         }
 
     }

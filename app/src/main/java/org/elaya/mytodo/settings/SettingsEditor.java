@@ -45,6 +45,11 @@ public class SettingsEditor extends BaseEditActivity {
     }
 
     @Override
+    protected void onDeleteClicked() {
+        //onSettings doesn't require a delete
+    }
+
+    @Override
     protected int getMenuResource() {
         return R.menu.menu_settings;
     }

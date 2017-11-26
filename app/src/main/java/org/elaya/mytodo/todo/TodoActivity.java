@@ -2,17 +2,15 @@ package org.elaya.mytodo.todo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -31,12 +29,12 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
     private long id;
     private TodoListAdapter adapter;
     private Spinner todoFilterElement;
+    @Nullable
     private ProjectItem projectItem;
     private boolean notFilter;
     private TextView notFilterElement;
     private LinearLayout headerElement;
     private RadioButton inFilterElement;
-    private RadioButton notInFilterelement;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,8 +69,6 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
 
         inFilterElement = findViewById(R.id.inFilter);
         inFilterElement.setChecked(true);
-        notInFilterelement = findViewById(R.id.notInFilter);
-
         setNumNotInFilter();
         showHeader();
     }
@@ -241,7 +237,7 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemSelected(@NonNull AdapterView<?> adapterView, View view, int i, long l) {
         if(projectItem != null) {
             long lSelectedType = adapterView.getSelectedItemPosition();
             if (lSelectedType != projectItem.getFilterType()) {

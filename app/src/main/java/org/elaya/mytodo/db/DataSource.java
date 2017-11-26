@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.widget.ArrayAdapter;
 
+import org.elaya.mytodo.filter.FilterItem;
 import org.elaya.mytodo.project.DateFilter;
 import org.elaya.mytodo.project.ProjectItem;
 import org.elaya.mytodo.todo.TodoItem;
@@ -15,6 +17,7 @@ import org.elaya.mytodo.tools.FilterTypes;
 import org.joda.time.DateTime;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -31,6 +34,12 @@ public final class DataSource {
     }
 
 
+    String[]  StringArrayFromLong(long pId)
+    {
+        return new String[]{Long.toString(pId)};
+    }
+
+
     /**
      * Delete record from table by ID
      * @param pTable  Table name
@@ -39,7 +48,7 @@ public final class DataSource {
 
     private void deleteById(String pTable,long pId)
     {
-        db.delete(pTable,"_id=?",new String[]{Long.toString(pId)});
+        db.delete(pTable,"_id=?",StringArrayFromLong(pId));
     }
 
     /**
@@ -81,6 +90,7 @@ public final class DataSource {
         db.close();
     }
 
+    @Nullable
     public ProjectItem getProjectById(long pId)
     {
         Cursor lProjectCursor=db.rawQuery("select projectname,filter_type,date_filter from projects where _id=?",new String[]{Long.toString(pId)});
@@ -95,7 +105,7 @@ public final class DataSource {
     }
 
 
-    public int fillProjectAdapter(ArrayAdapter<ProjectItem> pProjectAdapter,long pId)
+    public int fillProjectAdapter(@NonNull ArrayAdapter<ProjectItem> pProjectAdapter, long pId)
     {
         Cursor lProjectCursor=db.rawQuery("select _id,projectname,filter_type,date_filter from projects order by projectName",null);
         lProjectCursor.moveToFirst();
@@ -347,10 +357,26 @@ public final class DataSource {
         deleteById("projects",pId);
     }
 
+    @NonNull
     public Set<Long> getStatusSet(long pIdProject)
     {
         Set<Long> lStatusSet=new HashSet<>();
         Cursor lStatusCursor=db.rawQuery("select id_status from project_statusfilters where id_project=?",new String[]{String.valueOf(pIdProject)});
+        lStatusCursor.moveToFirst();
+
+        while(!lStatusCursor.isAfterLast()){
+            lStatusSet.add(lStatusCursor.getLong(0));
+            lStatusCursor.moveToNext();
+        }
+        lStatusCursor.close();
+        return lStatusSet;
+    }
+
+    @NonNull
+    public Set<Long> getStatusSetFilter(long pIdFilter)
+    {
+        Set<Long> lStatusSet=new HashSet<>();
+        Cursor lStatusCursor=db.rawQuery("select id_status from filter_status where id_filter=?",new String[]{String.valueOf(pIdFilter)});
         lStatusCursor.moveToFirst();
 
         while(!lStatusCursor.isAfterLast()){
@@ -387,6 +413,71 @@ public final class DataSource {
 
     }
 
+    public Cursor getFilterCursor()
+    {
+        Cursor lCursor=db.rawQuery("select * from filters order by lower(name)",null);
+        lCursor.moveToFirst();
+        return lCursor;
+    }
+
+    private void insertFilterStatus(long pIdFilter,List<Long> pStatus){
+        ContentValues lStatusValues = new ContentValues();
+        lStatusValues.put("id_filter", pIdFilter);
+        for(long lStatus:pStatus){
+            lStatusValues.put("id_status", lStatus);
+            db.insert("filter_status", null, lStatusValues);
+        }
+    }
+
+    public void addFilter(String pName,long pDateFilter,List<Long> pStatus)
+    {
+        db.beginTransaction();
+        try {
+            ContentValues lValues = new ContentValues();
+            lValues.put(FilterItem.F_NAME, pName);
+            lValues.put(FilterItem.F_DATE_FILTER, pDateFilter);
+            long lId = db.insert(FilterItem.F_TABLE_NAME, null, lValues);
+            insertFilterStatus(lId,pStatus);
+            db.setTransactionSuccessful();
+            db.endTransaction();
+        }catch(Throwable e){
+            db.endTransaction();
+            throw e;
+        }
+    }
+
+    public void editFilter(long pIdFilter,String pName,long pDateFilter,List<Long> pStatus)
+    {
+        db.beginTransaction();
+        try {
+            ContentValues lValues=new ContentValues();
+            lValues.put(FilterItem.F_NAME,pName);
+            lValues.put(FilterItem.F_DATE_FILTER,pDateFilter);
+            updateById(FilterItem.F_TABLE_NAME,lValues,pIdFilter);
+
+            db.delete("filter_status","id_filter=?",StringArrayFromLong(pIdFilter));
+            insertFilterStatus(pIdFilter,pStatus);
+            db.setTransactionSuccessful();
+            db.endTransaction();
+        }catch(Throwable e){
+            db.endTransaction();
+            throw e;
+        }
+
+    }
+
+    public void deleteFilter(long pIdFilter)
+    {
+        db.delete("filter_status","id_filter=?",StringArrayFromLong(pIdFilter));
+        deleteById(FilterItem.F_TABLE_NAME,pIdFilter);
+    }
 
 
+    public void AddFilterStatus(long pIdFilter,long pIdStatus)
+    {
+        ContentValues lValues=new ContentValues();
+        lValues.put("id_filter",pIdFilter);
+        lValues.put("id_status",pIdStatus);
+        db.insert("filter_status",null,lValues);
+    }
 }

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
+
 import org.elaya.mytodo.R;
 
 /**
@@ -27,6 +28,8 @@ public abstract class BaseEditActivity extends BaseActivity {
     }
 
     protected abstract void onSaveClicked();
+    protected abstract void onDeleteClicked();
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
@@ -34,6 +37,11 @@ public abstract class BaseEditActivity extends BaseActivity {
             case R.id.cancel:
                 onCancelClicked();
                 break;
+
+            case R.id.delete:
+                onDeleteClicked();
+                break;
+
             case R.id.save:
                 onSaveClicked();
                 break;

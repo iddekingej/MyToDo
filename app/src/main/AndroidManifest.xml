@@ -9,14 +9,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-
-
-        android:theme="@style/AppTheme.NoActionBar"
-        >
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".project.ProjectActivity"
-            android:label="@string/title_main"
-            >
+            android:label="@string/title_main">
             <intent-filter android:label="MyToDo">
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,42 +21,41 @@
         </activity>
         <activity
             android:name=".project.EditProjectActivity"
-            android:label="@string/title_activity_edit_project"
-             />
+            android:label="@string/title_activity_edit_project" />
         <activity
             android:name=".todo.TodoActivity"
-            android:label="@string/title_activity_todo"
-            />
+            android:label="@string/title_activity_todo" />
         <activity
             android:name=".todo.EditToDoActivity"
             android:label="@string/title_activity_edit_todo"
-
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".status.StatusActivity"
-            android:label="@string/title_activity_status"
-            />
+            android:label="@string/title_activity_status" />
         <activity
             android:name=".status.EditStatusActivity"
-            android:label="@string/title_activity_edit_status"
-            />
+            android:label="@string/title_activity_edit_status" />
         <activity
             android:name=".tools.HelpActivity"
-            android:label="@string/title_activity_help"
-            />
+            android:label="@string/title_activity_help" />
         <activity
             android:name=".settings.SettingsEditor"
             android:label="@string/title_settings"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".todo.ShowTodoActivity"
-            android:label="@string/title_show_todo"
-             />
+            android:label="@string/title_show_todo" />
         <activity
             android:name=".todo.TodoFilterActivity"
-            android:label="@string/title_activity_todo_filter"
+            android:label="@string/title_activity_todo_filter" />
+        <activity
+            android:name=".filter.FilterActivity"
+            android:label="@string/title_todo_filters"/>
+        <activity
+            android:name=".filter.EditFilterActivity"
+            android:windowSoftInputMode="adjustResize" />
 
-            />
+
     </application>
 
 </manifest>

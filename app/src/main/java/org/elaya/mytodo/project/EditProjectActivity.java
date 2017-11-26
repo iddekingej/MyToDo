@@ -64,6 +64,11 @@ public class EditProjectActivity extends BaseEditActivity {
         saveProject(false);
     }
 
+    @Override
+    protected void onDeleteClicked() {
+        //Todo: Implement onDeleteClicked
+    }
+
     public void saveGotoTodo(View pView)
     {
         saveProject(true);

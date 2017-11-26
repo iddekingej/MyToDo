@@ -116,4 +116,12 @@
     <string name="ft_should_start">Should start</string>
     <string name="ft_num_found">Found %1$d todo\'s, %2$d filtered out</string>
 
+    <string name="add_filter">Add filter</string>
+    <string name="no_filters_found">No filters found</string>
+    <string name="menu_todo_filters">Todo filters</string>
+    <string name="title_todo_filters">Todo filters</string>
+    <string name="menu_save_filter">Save filer</string>
+    <string name="menu_delete_filter">Delete filter</string>
+    <string name="label_filter_name">Filter name</string>
+    <string name="title_delete_filter">Delete filter</string>
 </resources>

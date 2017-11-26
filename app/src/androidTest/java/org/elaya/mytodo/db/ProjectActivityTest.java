@@ -1,6 +1,7 @@
 package org.elaya.mytodo.db;
 
 
+import android.support.annotation.NonNull;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
@@ -29,6 +30,7 @@ import static org.hamcrest.Matchers.allOf;
 @RunWith(AndroidJUnit4.class)
 public class ProjectActivityTest {
 
+    @NonNull
     @Rule
     public ActivityTestRule<ProjectActivity> mActivityTestRule = new ActivityTestRule<>(ProjectActivity.class);
 

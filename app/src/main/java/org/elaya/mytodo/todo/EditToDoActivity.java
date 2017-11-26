@@ -103,24 +103,12 @@ public class EditToDoActivity extends BaseEditActivity {
         return R.menu.menu_edit_todo;
     }
 
+    @NonNull
     @Override
     protected String getHelpName(){ return "edit_todo";}
 
 
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
-        switch (pItem.getItemId()) {
-            case R.id.delete:
-                onDeleteTodoClicked();
-                break;
-            default:
-                return super.onOptionsItemSelected(pItem);
-        }
-        return true;
-    }
-
-    private void onDeleteTodoClicked()
+    protected void onDeleteClicked()
     {
         Helpers.confirmDelete(this,R.string.delete_todo_question,
                 new DialogInterface.OnClickListener(){
