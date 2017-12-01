@@ -18,7 +18,7 @@ public class FilterConditionSelection implements FilterSelection {
 
     @Override
     @NonNull
-    public String getCondition(String[] pData) {
+    public String getCondition() {
         return condition;
     }
 

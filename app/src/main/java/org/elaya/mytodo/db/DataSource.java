@@ -8,7 +8,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.ArrayAdapter;
 
+import org.elaya.mytodo.filter.FilterFilterSelection;
 import org.elaya.mytodo.filter.FilterItem;
+import org.elaya.mytodo.filter.FilterManager;
+import org.elaya.mytodo.filter.FilterSelection;
 import org.elaya.mytodo.project.DateFilter;
 import org.elaya.mytodo.project.ProjectItem;
 import org.elaya.mytodo.todo.TodoItem;
@@ -16,6 +19,7 @@ import org.elaya.mytodo.tools.ActionTypes;
 import org.elaya.mytodo.tools.FilterTypes;
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -189,16 +193,25 @@ public final class DataSource {
     public Cursor getTodoCursor(long pIdProject,boolean pNot)
     {
         long lUnix=new DateTime().getMillis();
+        FilterSelection  lFilter= FilterManager.getCurrentFilter();
+        String lCondition="";
+        if(lFilter != null){
+            lCondition=lFilter.getCondition();
+            if(!lCondition.isEmpty()) {
+                if (pNot) {
+                    lCondition = "not " + lCondition;
+                }
+                lCondition = "and " + lCondition;
+            }
+        }
+        /*
         String lCondition="((p.filter_type<>? or t.id_status in (" +
         "select ps.id_status " +
                 "from project_statusfilters ps " +
                 "where ps.id_project=t.id_project))" +
                 "or (p.date_filter=? and ?>=start_date and not action_type in (3,4))" +
                 "or (p.date_filter=? and ?>=end_date and not action_type in (3,4)) "+
-                ")";
-        if(pNot){
-            lCondition="not "+lCondition;
-        }
+                ")";*/
         Cursor lTodoCursor=db.rawQuery("" +
                 "select t._id " +
                 ",      t.id_project" +
@@ -213,7 +226,7 @@ public final class DataSource {
                 "left join status s on (t.id_status = s._id) " +
                 "join projects p on (t.id_project = p._id)"+
                 "where t.id_project=? " +
-                "and "+lCondition+
+                lCondition+
                 "order by " +
                 "   case " +
                 "   when end_date <?  and not action_type in (3,4) then 1" +
@@ -224,11 +237,6 @@ public final class DataSource {
                 ", t._id desc",new String[]{
                     String.valueOf(ActionTypes.FINISHED),
                     String.valueOf(pIdProject),
-                    String.valueOf(FilterTypes.FT_CUSTOM),
-                    String.valueOf(DateFilter.DF_AFTER_START),
-                    String.valueOf(lUnix),
-                    String.valueOf(DateFilter.DF_AFTER_END),
-                    String.valueOf(lUnix),
                     String.valueOf(lUnix),
                     String.valueOf(lUnix)
             });
@@ -472,12 +480,17 @@ public final class DataSource {
         deleteById(FilterItem.F_TABLE_NAME,pIdFilter);
     }
 
-
-    public void addFilterStatus(long pIdFilter, long pIdStatus)
+    public void fillFilterSelection(ArrayList<FilterSelection> pSelectionList)
     {
-        ContentValues lValues=new ContentValues();
-        lValues.put("id_filter",pIdFilter);
-        lValues.put("id_status",pIdStatus);
-        db.insert("filter_status",null,lValues);
+        FilterItem lItem;
+        Cursor lCursor=db.rawQuery("select * from filters order by name",null);
+        lCursor.moveToFirst();
+        while(!lCursor.isAfterLast()){
+            lItem=new FilterItem(lCursor);
+            pSelectionList.add(new FilterFilterSelection(lItem));
+            lCursor.moveToNext();
+        }
+        lCursor.close();;
     }
+
 }

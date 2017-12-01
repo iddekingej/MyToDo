@@ -17,8 +17,9 @@ public class FilterFilterSelection implements FilterSelection {
     }
 
     @Override
-    @NonNull public String getCondition(String[] pData) {
-        return "";
+    @NonNull public String getCondition() {
+
+        return "(t.id_status in (select fs.id_status from filter_status fs where fs.id_filter="+Long.toString(filter.getId())+"))";
     }
 
     public String toString()

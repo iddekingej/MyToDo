@@ -7,5 +7,5 @@ import android.support.annotation.NonNull;
  */
 
 public interface FilterSelection {
-    @NonNull String getCondition(String[] pData);
+    @NonNull String getCondition();
 }

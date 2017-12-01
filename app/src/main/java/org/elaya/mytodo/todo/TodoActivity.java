@@ -8,6 +8,8 @@ import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -15,10 +17,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.elaya.mytodo.filter.FilterActivity;
+import org.elaya.mytodo.filter.FilterConditionSelection;
+import org.elaya.mytodo.filter.FilterManager;
+import org.elaya.mytodo.filter.FilterSelection;
 import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.project.ProjectItem;
 import org.elaya.mytodo.R;
 import org.elaya.mytodo.tools.FilterTypes;
+
+import java.util.ArrayList;
 
 public class TodoActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
 
@@ -50,7 +57,12 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         ListView todoList= findViewById(R.id.todoList);
 
         todoFilterElement = findViewById(R.id.todoFilter);
-        FilterTypes.setSpinner(this,todoFilterElement);
+        ArrayList<FilterSelection> lList=new ArrayList<>();
+        lList.add(new FilterConditionSelection("All",""));
+        ds.fillFilterSelection(lList);
+        ArrayAdapter<FilterSelection> lAdapter=new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,lList);
+        this.todoFilterElement.setAdapter(lAdapter);
+
         todoFilterElement.setOnItemSelectedListener(this);
 
         todoFilterElement.setSelection((int)projectItem.getFilterType());
@@ -237,15 +249,21 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         showHeader();
     }
 
+    /**
+     * On the top of the screen there is a spinner for selecting a filter. When a filter is selected
+     * this method is called
+     *
+     * @param pAdapterView  Adapter of the spinner
+     * @param view
+     * @param pPos  Position selected
+     * @param pId
+     */
     @Override
-    public void onItemSelected(@NonNull AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemSelected(@NonNull AdapterView<?> pAdapterView, View view, int pPos, long pId) {
         if(projectItem != null) {
-            long lSelectedType = adapterView.getSelectedItemPosition();
-            if (lSelectedType != projectItem.getFilterType()) {
-                projectItem.setFilterType(lSelectedType);
-                ds.setProjectFilterType(projectItem.getId(), lSelectedType);
-                refreshList();
-            }
+            FilterSelection lSelection=(FilterSelection)pAdapterView.getItemAtPosition(pPos);
+            FilterManager.setCurrentFilter(lSelection);
+            refreshList();
         }
 
     }
