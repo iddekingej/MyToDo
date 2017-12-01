@@ -103,15 +103,10 @@ public class ShowTodoActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
-        switch (pItem.getItemId()) {
-            case R.id.edit:
-                editTodo();
-                break;
-
-            case R.id.back:
-                setResult(RESULT_CANCELED);
-                finish();
-                break;
+        if(pItem.getItemId()==R.id.edit){
+            editTodo();
+        } else {
+            return onOptionsItemSelected(pItem);
         }
         return true;
     }

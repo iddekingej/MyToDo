@@ -46,9 +46,6 @@
             android:name=".todo.ShowTodoActivity"
             android:label="@string/title_show_todo" />
         <activity
-            android:name=".todo.TodoFilterActivity"
-            android:label="@string/title_activity_todo_filter" />
-        <activity
             android:name=".filter.FilterActivity"
             android:label="@string/title_todo_filters"/>
         <activity

@@ -1,5 +1,7 @@
 package org.elaya.mytodo.project;
 
+import android.support.annotation.NonNull;
+
 /**
  * Object representing a project
  */
@@ -15,7 +17,7 @@ public class ProjectItem {
     private final long id;
     private  long filterType;
     private  long dateFilter;
-    public ProjectItem(long pId,String pProjectName,long pFilterType,long pDateFilter)
+    public ProjectItem(long pId, @NonNull String pProjectName, long pFilterType, long pDateFilter)
     {
         projectName=pProjectName;
         filterType=pFilterType;
@@ -24,6 +26,7 @@ public class ProjectItem {
 
     }
 
+    @NonNull
     public String getProjectName()
     {
         return projectName;

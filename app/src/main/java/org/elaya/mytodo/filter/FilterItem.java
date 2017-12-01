@@ -4,15 +4,15 @@ import android.database.Cursor;
 import android.support.annotation.NonNull;
 
 /**
- * Created by jeroen on 11/22/17.
+ * Object representing a to do filter
  */
 
 public class FilterItem {
-    private long   id;
-    private String name;
-    private long   dateFilter;
+    private final long   id;
+    private final String name;
+    private final long   dateFilter;
     public static final String F_TABLE_NAME="filters";
-    public static final String F_ID="_id";
+    private static final String F_ID="_id";
     public static final String F_NAME="name";
     public static final String F_DATE_FILTER="date_filter";
 

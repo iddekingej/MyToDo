@@ -84,14 +84,10 @@ public class EditProjectActivity extends BaseEditActivity {
      * @return      True - event is handled
      */
     public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
-        switch (pItem.getItemId()) {
-
-            case R.id.help:
-                Helpers.openHelp(this, "edit_project");
-                break;
-
-            default:
-                super.onOptionsItemSelected(pItem);
+        if(pItem.getItemId()==R.id.help) {
+            Helpers.openHelp(this, "edit_project");
+        }else {
+            return super.onOptionsItemSelected(pItem);
 
         }
         return true;

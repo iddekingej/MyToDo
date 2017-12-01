@@ -2,11 +2,10 @@ package org.elaya.mytodo.settings;
 
 import android.support.annotation.NonNull;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.RadioGroup;
 import org.elaya.mytodo.R;
 import org.elaya.mytodo.tools.BaseEditActivity;
-import org.elaya.mytodo.tools.Helpers;
+
 
 public class SettingsEditor extends BaseEditActivity {
 
@@ -37,6 +36,11 @@ public class SettingsEditor extends BaseEditActivity {
         }
 
         separatorElement.check(lSeparator);
+    }
+    @Override
+    @NonNull
+    protected String getHelpName(){
+        return "settings";
     }
 
     @Override
@@ -75,25 +79,4 @@ public class SettingsEditor extends BaseEditActivity {
         finish();
     }
 
-    /**
-     * When one of the toolbar icons is pressed:
-     * R.id.back - The back button on the toolbar
-     * R.id.save - Save button
-     * R.id.help - Help button
-     *
-     * @param pItem Menu item clicked
-     * @return      True - event is handled
-     */
-    public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
-        switch (pItem.getItemId()) {
-            case R.id.help:
-                Helpers.openHelp(this, "settings");
-                break;
-
-            default:
-                super.onOptionsItemSelected(pItem);
-
-        }
-        return true;
-    }
 }

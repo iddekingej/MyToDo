@@ -31,9 +31,13 @@ public class DbProjectTest  extends DbTest{
     {
         long lId=ds.addProject(projectName);
         ProjectItem lProject=ds.getProjectById(lId);
-        assertEquals(lProject.getProjectName(),projectName);
-        assertEquals(lProject.getId(),lId);
-        assertEquals(lProject.toString(),projectName);
+        if(lProject==null){
+            fail("Project is null");
+        } else {
+            assertEquals(projectName,lProject.getProjectName());
+            assertEquals(lId,lProject.getId());
+            assertEquals(projectName,lProject.toString());
+        }
     }
 
     @Test
@@ -42,8 +46,12 @@ public class DbProjectTest  extends DbTest{
         long lId=ds.addProject(projectName);
         ds.editProject(lId,projectNameOth);
         ProjectItem lProject=ds.getProjectById(lId);
-        assertEquals(lProject.getProjectName(),projectNameOth);
-        assertEquals(lProject.toString(),projectNameOth);
+        if(lProject==null){
+            fail("Project is null");
+        } else {
+            assertEquals(projectNameOth,lProject.getProjectName());
+            assertEquals(projectNameOth,lProject.toString() );
+        }
     }
 
     @Test

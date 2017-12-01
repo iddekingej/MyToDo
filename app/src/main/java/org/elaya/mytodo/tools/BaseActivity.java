@@ -49,6 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
             return true;
         } else if(pItem.getItemId() == R.id.back){
+            setResult(RESULT_CANCELED);
             finish();
         }
         return super.onOptionsItemSelected(pItem);

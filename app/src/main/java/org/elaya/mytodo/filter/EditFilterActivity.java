@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -21,12 +20,12 @@ import java.util.LinkedList;
 
 public class EditFilterActivity extends BaseEditActivity {
 
-    EditText filterNameElement;
-    RadioGroup dateCondElement;
-    ListView statusListElement;
-    StatusCheckListAdapter statusAdapter;
-    long id;
-    boolean isNew;
+    private EditText filterNameElement;
+    private RadioGroup dateCondElement;
+    private ListView statusListElement;
+    private StatusCheckListAdapter statusAdapter;
+    private long id;
+    private boolean isNew;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +74,7 @@ public class EditFilterActivity extends BaseEditActivity {
             lDateFilter = DateFilter.DF_AFTER_END;
         }
         LinkedList<Long> lStatusList=new LinkedList<>();
-        View lView=null;
+        View lView;
         for(int lItem=0;lItem<statusAdapter.getCount();lItem++){
             lView=statusListElement.getChildAt(lItem);
             CheckBox lStatusElement=lView.findViewById(R.id.statusCheck);

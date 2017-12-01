@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import org.elaya.mytodo.filter.FilterActivity;
+import org.elaya.mytodo.filter.FilterManager;
 import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.R;
 import org.elaya.mytodo.settings.SettingsEditor;
@@ -34,6 +35,7 @@ public class ProjectActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        FilterManager.setCurrentFilter(FilterManager.makeAllSelection(this));
         projectHeaderElement=findViewById(R.id.projectHeader);
 
         ListView lProjectList= findViewById(R.id.projectList);

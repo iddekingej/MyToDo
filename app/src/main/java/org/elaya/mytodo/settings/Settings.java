@@ -28,13 +28,13 @@ public class Settings {
     }
 
 
-    @Nullable
+    @NonNull
     public static String getDateFormatType()
     {
         return settingsFile.getString("dateFormat","dmy");
     }
 
-    @Nullable
+    @NonNull
     public static String getDateFormat()
     {
         String lSep=getSeparator();
@@ -59,7 +59,7 @@ public class Settings {
         lEditor.apply();
     }
 
-    @Nullable
+    @NonNull
     public static String getSeparator()
     {
         return settingsFile.getString("separator","-");

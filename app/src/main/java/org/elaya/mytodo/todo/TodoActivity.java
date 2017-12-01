@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.elaya.mytodo.filter.FilterActivity;
 import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.project.ProjectItem;
 import org.elaya.mytodo.R;
@@ -208,7 +209,7 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
 
     public void openFilter(View pView)
     {
-        Intent lIntent=new Intent(this,TodoFilterActivity.class);
+        Intent lIntent=new Intent(this,FilterActivity.class);
         lIntent.putExtra("projectId",id);
         startActivityForResult(lIntent,ACT_FILTER);
     }

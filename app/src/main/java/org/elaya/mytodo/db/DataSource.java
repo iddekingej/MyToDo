@@ -34,7 +34,7 @@ public final class DataSource {
     }
 
 
-    String[]  StringArrayFromLong(long pId)
+    private String[] stringArrayFromLong(long pId)
     {
         return new String[]{Long.toString(pId)};
     }
@@ -48,7 +48,7 @@ public final class DataSource {
 
     private void deleteById(String pTable,long pId)
     {
-        db.delete(pTable,"_id=?",StringArrayFromLong(pId));
+        db.delete(pTable,"_id=?", stringArrayFromLong(pId));
     }
 
     /**
@@ -440,7 +440,7 @@ public final class DataSource {
             insertFilterStatus(lId,pStatus);
             db.setTransactionSuccessful();
             db.endTransaction();
-        }catch(Throwable e){
+        }catch(Exception e){
             db.endTransaction();
             throw e;
         }
@@ -455,11 +455,11 @@ public final class DataSource {
             lValues.put(FilterItem.F_DATE_FILTER,pDateFilter);
             updateById(FilterItem.F_TABLE_NAME,lValues,pIdFilter);
 
-            db.delete("filter_status","id_filter=?",StringArrayFromLong(pIdFilter));
+            db.delete("filter_status","id_filter=?", stringArrayFromLong(pIdFilter));
             insertFilterStatus(pIdFilter,pStatus);
             db.setTransactionSuccessful();
             db.endTransaction();
-        }catch(Throwable e){
+        }catch(Exception e){
             db.endTransaction();
             throw e;
         }
@@ -468,12 +468,12 @@ public final class DataSource {
 
     public void deleteFilter(long pIdFilter)
     {
-        db.delete("filter_status","id_filter=?",StringArrayFromLong(pIdFilter));
+        db.delete("filter_status","id_filter=?", stringArrayFromLong(pIdFilter));
         deleteById(FilterItem.F_TABLE_NAME,pIdFilter);
     }
 
 
-    public void AddFilterStatus(long pIdFilter,long pIdStatus)
+    public void addFilterStatus(long pIdFilter, long pIdStatus)
     {
         ContentValues lValues=new ContentValues();
         lValues.put("id_filter",pIdFilter);

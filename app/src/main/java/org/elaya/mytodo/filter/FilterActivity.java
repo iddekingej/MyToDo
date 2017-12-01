@@ -9,23 +9,23 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.elaya.mytodo.R;
-import org.elaya.mytodo.project.DateFilter;
 import org.elaya.mytodo.tools.BaseActivity;
 
 public class FilterActivity extends BaseActivity{
 
     private static final int ACT_ADD_FILTER =101;
     private static final int ACT_EDIT_FILTER=102;
-    FilterAdapter adapter;
-    ListView      filterListElement;
+
+    private FilterAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter=new FilterAdapter(this,ds.getFilterCursor());
-        filterListElement=findViewById(R.id.filterList);
-        filterListElement.setAdapter(adapter);
-        filterListElement.setEmptyView(findViewById(R.id.noFilterFound));
-        filterListElement.setOnItemClickListener(new ListView.OnItemClickListener(){
+        ListView lFilterListElement=findViewById(R.id.filterList);
+        lFilterListElement.setAdapter(adapter);
+        lFilterListElement.setEmptyView(findViewById(R.id.noFilterFound));
+        lFilterListElement.setOnItemClickListener(new ListView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> pParent, @NonNull View pView, int pPosition, long pId){
                 editFilter(pView);
             }
@@ -55,7 +55,7 @@ public class FilterActivity extends BaseActivity{
         startActivityForResult(lIntent, ACT_ADD_FILTER);
     }
 
-    public void editFilter(@NonNull View pView)
+    private void editFilter(@NonNull View pView)
     {
         Intent lIntent=new Intent(this,EditFilterActivity.class);
         FilterItem lFilter=(FilterItem)pView.getTag();
