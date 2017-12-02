@@ -1,10 +1,10 @@
-package org.elaya.mytodo.project;
+package org.elaya.mytodo.filter;
 
 /**
  * Date filter types
  */
 
-public class DateFilter {
+class DateFilter {
     private DateFilter()
     {
 

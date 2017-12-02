@@ -16,43 +16,34 @@ import org.elaya.mytodo.tools.ActionTypes;
 
 class OpenHelper extends SQLiteOpenHelper {
     private final Context context;
-    public OpenHelper(Context pContext){
-        super(pContext,"main",null,5);
-        context=pContext;
+
+    public OpenHelper(Context pContext) {
+        super(pContext, "main", null, 1);
+        context = pContext;
     }
 
-    private void insertStatus(@NonNull SQLiteDatabase pDb, long pPosition, long pActionType, @StringRes int pDescription)
-    {
-        ContentValues lValues=new ContentValues();
-        lValues.put("position",pPosition);
-        lValues.put("action_type",pActionType);
-        lValues.put("description",context.getResources().getString(pDescription));
-        lValues.put("active",1);
-        pDb.insert("status",null,lValues);
+    private void insertStatus(@NonNull SQLiteDatabase pDb, long pPosition, long pActionType, @StringRes int pDescription) {
+        ContentValues lValues = new ContentValues();
+        lValues.put("position", pPosition);
+        lValues.put("action_type", pActionType);
+        lValues.put("description", context.getResources().getString(pDescription));
+        lValues.put("active", 1);
+        pDb.insert("status", null, lValues);
     }
 
-    private void statusDefaults(@NonNull SQLiteDatabase pDb)
-    {
-        insertStatus(pDb,0 , ActionTypes.NOT_STARTED, R.string.at_not_active);
-        insertStatus(pDb,1 ,ActionTypes.NOT_ACTIVE ,R.string.at_not_started);
-        insertStatus(pDb,2, ActionTypes.STARTED, R.string.at_started);
-        insertStatus(pDb,3, ActionTypes.FINISHED, R.string.at_finished);
-        insertStatus(pDb,4, ActionTypes.REMOVED, R.string.at_removed);
+    private void statusDefaults(@NonNull SQLiteDatabase pDb) {
+        insertStatus(pDb, 0, ActionTypes.NOT_STARTED, R.string.at_not_active);
+        insertStatus(pDb, 1, ActionTypes.NOT_ACTIVE, R.string.at_not_started);
+        insertStatus(pDb, 2, ActionTypes.STARTED, R.string.at_started);
+        insertStatus(pDb, 3, ActionTypes.FINISHED, R.string.at_finished);
+        insertStatus(pDb, 4, ActionTypes.REMOVED, R.string.at_removed);
 
     }
 
-    private void createStatus(@NonNull  SQLiteDatabase pDatabase){
-        pDatabase.execSQL("" +
-                "create table status(" +
-                "_id integer primary key autoincrement" +
-                ",position integer not null"+
-                ",action_type integer not null"+
-                ",active integer not null"+
-                ",description text" +
-                ",constraint chk_status_1 check(active in (0,1))"+
-                ")");
-        statusDefaults(pDatabase);
+    private void createProject(@NonNull SQLiteDatabase pDatabase){
+        pDatabase.execSQL("create table projects(_id integer primary key autoincrement,projectname text);");
     }
+
     private void createTodoItems(@NonNull SQLiteDatabase pDatabase)
     {
         pDatabase.execSQL("" +
@@ -68,29 +59,18 @@ class OpenHelper extends SQLiteOpenHelper {
                 ",constraint fk_todoitems_2 foreign key(id_project) references projects(_id));");
         pDatabase.execSQL("create index ind_todoitems_1 on todoitems(id_project)");
     }
-    public void onCreate(@NonNull SQLiteDatabase pDatabase) {
 
-        pDatabase.execSQL("create table projects(_id integer primary key autoincrement,projectname text);");
-        createStatus(pDatabase);
-        createTodoItems(pDatabase);
-        createToDoFilter(pDatabase);
-        addDateFilter(pDatabase);
-        addDateFilter(pDatabase);
-    }
-
-    private void createToDoFilter(@NonNull SQLiteDatabase pDatabase)
-    {
-        pDatabase.execSQL("alter table projects add filter_type integer");
-        pDatabase.execSQL("create table project_statusfilters(" +
-                " _id integer primary key autoincrement" +
-                ",id_project integer not null" +
-                ",id_status integer not null" +
-                ",constraint fk_project_statusfilters_1 foreign key(id_project) references projects(_id)" +
-                ",constraint fk_project_statusfilters_2 foreign key(id_status) references status(_id)" +
-                ") ");
-        pDatabase.execSQL("create index ind_project_statusfilters_1 on project_statusfilters(id_project)");
-        pDatabase.execSQL("create index ind_project_statusfilters_2 on project_statusfilters(id_status)");
-
+    private void createStatus(@NonNull  SQLiteDatabase pDatabase){
+        pDatabase.execSQL("" +
+                "create table status(" +
+                "_id integer primary key autoincrement" +
+                ",position integer not null"+
+                ",action_type integer not null"+
+                ",active integer not null"+
+                ",description text" +
+                ",constraint chk_status_1 check(active in (0,1))"+
+                ")");
+        statusDefaults(pDatabase);
     }
 
     private void createFilter(@NonNull SQLiteDatabase pDatabase)
@@ -103,32 +83,25 @@ class OpenHelper extends SQLiteOpenHelper {
                         ")"
         );
         pDatabase.execSQL(
-            "create table filter_status(" +
-                    "_id integer primary key autoincrement" +
-                    ",id_filter integer not null" +
-                    ",id_status integer not null" +
-                    ",constraint fk_filter_status_1 foreign key(id_filter) references filters(_id)" +
-                    ",constraint fk_filter_status_2 foreign key(id_status) references status(_id) "+
-                    ")"
+                "create table filter_status(" +
+                        "_id integer primary key autoincrement" +
+                        ",id_filter integer not null" +
+                        ",id_status integer not null" +
+                        ",constraint fk_filter_status_1 foreign key(id_filter) references filters(_id)" +
+                        ",constraint fk_filter_status_2 foreign key(id_status) references status(_id) "+
+                        ")"
         );
     }
 
-    private void addDateFilter(@NonNull SQLiteDatabase pDatabase){
-        pDatabase.execSQL("alter table projects add date_filter integer");
+
+    public void onCreate(@NonNull SQLiteDatabase pDatabase) {
+        createProject(pDatabase);
+        createStatus(pDatabase);
+        createTodoItems(pDatabase);
+        createFilter(pDatabase);
     }
 
-
-
     public void onUpgrade(@NonNull SQLiteDatabase pDatabase,int pOldVersion,int pNewVersion) {
-        if (pOldVersion < 2) {
-            createToDoFilter(pDatabase);
-        }
-        if (pOldVersion < 4) {
-            addDateFilter(pDatabase);
-        }
-        if (pOldVersion < 5){
-            createFilter(pDatabase);
-        }
 
     }
 }

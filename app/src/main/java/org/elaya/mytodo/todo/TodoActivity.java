@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -23,7 +22,6 @@ import org.elaya.mytodo.filter.FilterSelection;
 import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.project.ProjectItem;
 import org.elaya.mytodo.R;
-import org.elaya.mytodo.tools.FilterTypes;
 
 import java.util.ArrayList;
 
@@ -65,7 +63,6 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
 
         todoFilterElement.setOnItemSelectedListener(this);
 
-        todoFilterElement.setSelection((int)projectItem.getFilterType());
         projectName.setText(projectItem.getProjectName());
 
         adapter=new TodoListAdapter(this,ds.getTodoCursor(id,false));
@@ -235,7 +232,6 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
     private void refreshListFilter()
     {
         projectItem=ds.getProjectById(id);
-        todoFilterElement.setSelection((int)projectItem.getFilterType());
         refreshList();
     }
 

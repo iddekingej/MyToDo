@@ -106,7 +106,7 @@ public class ShowTodoActivity extends BaseActivity {
         if(pItem.getItemId()==R.id.edit){
             editTodo();
         } else {
-            return onOptionsItemSelected(pItem);
+            return super.onOptionsItemSelected(pItem);
         }
         return true;
     }

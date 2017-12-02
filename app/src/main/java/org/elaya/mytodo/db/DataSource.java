@@ -12,7 +12,6 @@ import org.elaya.mytodo.filter.FilterFilterSelection;
 import org.elaya.mytodo.filter.FilterItem;
 import org.elaya.mytodo.filter.FilterManager;
 import org.elaya.mytodo.filter.FilterSelection;
-import org.elaya.mytodo.project.DateFilter;
 import org.elaya.mytodo.project.ProjectItem;
 import org.elaya.mytodo.todo.TodoItem;
 import org.elaya.mytodo.tools.ActionTypes;
@@ -97,11 +96,11 @@ public final class DataSource {
     @Nullable
     public ProjectItem getProjectById(long pId)
     {
-        Cursor lProjectCursor=db.rawQuery("select projectname,filter_type,date_filter from projects where _id=?",new String[]{Long.toString(pId)});
+        Cursor lProjectCursor=db.rawQuery("select projectname from projects where _id=?",new String[]{Long.toString(pId)});
         lProjectCursor.moveToFirst();
         ProjectItem lProjectItem=null;
         if(!lProjectCursor.isAfterLast()){
-            lProjectItem=new ProjectItem(pId,lProjectCursor.getString(0),lProjectCursor.getLong(1),lProjectCursor.getLong(2));
+            lProjectItem=new ProjectItem(pId,lProjectCursor.getString(0));
 
         }
         lProjectCursor.close();
@@ -111,12 +110,12 @@ public final class DataSource {
 
     public int fillProjectAdapter(@NonNull ArrayAdapter<ProjectItem> pProjectAdapter, long pId)
     {
-        Cursor lProjectCursor=db.rawQuery("select _id,projectname,filter_type,date_filter from projects order by projectName",null);
+        Cursor lProjectCursor=db.rawQuery("select _id,projectname from projects order by projectName",null);
         lProjectCursor.moveToFirst();
         int lCnt=0;
         int lReturn=0;
         while(!lProjectCursor.isAfterLast()){
-            ProjectItem lProjectItem=new ProjectItem(lProjectCursor.getLong(0),lProjectCursor.getString(1),lProjectCursor.getLong(2),lProjectCursor.getLong(3));
+            ProjectItem lProjectItem=new ProjectItem(lProjectCursor.getLong(0),lProjectCursor.getString(1));
             pProjectAdapter.add(lProjectItem);
             lProjectCursor.moveToNext();
             if(lProjectItem.getId()==pId){
@@ -138,8 +137,6 @@ public final class DataSource {
         Cursor lProjectCursor=db.rawQuery("" +
                 "select p._id" +
                 ",      p.projectname " +
-                ",      p.filter_type "+
-                ",      p.date_filter "+
                 ",      sum(case when action_type in (0,1,4) then 1 else 0 end) num_not_active "+
                 ",      sum(case when action_type =2  then 1 else 0 end) num_active "+
                 ",      sum(case when action_type =3  then 1 else 0 end) num_finished "+
@@ -254,7 +251,6 @@ public final class DataSource {
     public long addProject(String pProjectName){
         ContentValues lValues=new ContentValues();
         lValues.put( ProjectItem.F_PROJECTNAME,pProjectName);
-        lValues.put(ProjectItem.F_FILTER_TYPE, FilterTypes.FT_NONE);
         return db.insert(ProjectItem.F_TABLE_NAME,null,lValues);
     }
 
@@ -341,8 +337,6 @@ public final class DataSource {
 
     public void deleteStatus(long pId)
     {
-        db.delete("project_statusfilters","id_status=?",new String[]{String.valueOf(pId)});
-
         deleteById("status",pId);
     }
 
@@ -365,20 +359,6 @@ public final class DataSource {
         deleteById("projects",pId);
     }
 
-    @NonNull
-    public Set<Long> getStatusSet(long pIdProject)
-    {
-        Set<Long> lStatusSet=new HashSet<>();
-        Cursor lStatusCursor=db.rawQuery("select id_status from project_statusfilters where id_project=?",new String[]{String.valueOf(pIdProject)});
-        lStatusCursor.moveToFirst();
-
-        while(!lStatusCursor.isAfterLast()){
-            lStatusSet.add(lStatusCursor.getLong(0));
-            lStatusCursor.moveToNext();
-        }
-        lStatusCursor.close();
-        return lStatusSet;
-    }
 
     @NonNull
     public Set<Long> getStatusSetFilter(long pIdFilter)
@@ -395,31 +375,7 @@ public final class DataSource {
         return lStatusSet;
     }
 
-    public void removeStatusFilter(long pIdProject)
-    {
-            db.delete("project_statusfilters","id_project=?",new String[]{String.valueOf(pIdProject)});
-    }
 
-    public void addStatusFilter(long pIdProject,long pIdStatus)
-    {
-        ContentValues lValues = new ContentValues();
-        lValues.put("id_project",pIdProject) ;
-        lValues.put("id_status",pIdStatus);
-        db.insert("project_statusfilters",null,lValues);
-    }
-
-    public void setProjectFilterType(long pIdProject,long pFilterType) {
-        ContentValues lValues = new ContentValues();
-        lValues.put(ProjectItem.F_FILTER_TYPE, pFilterType);
-        updateById(ProjectItem.F_TABLE_NAME, lValues, pIdProject);
-    }
-
-    public void setProjectDateFilter(long pIdProject,long pDateFilter){
-        ContentValues lValues = new ContentValues();
-        lValues.put(ProjectItem.F_DATE_FILTER, pDateFilter);
-        updateById(ProjectItem.F_TABLE_NAME, lValues, pIdProject);
-
-    }
 
     public Cursor getFilterCursor()
     {
@@ -490,7 +446,7 @@ public final class DataSource {
             pSelectionList.add(new FilterFilterSelection(lItem));
             lCursor.moveToNext();
         }
-        lCursor.close();;
+        lCursor.close();
     }
 
 }

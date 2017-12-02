@@ -19,7 +19,13 @@ public class FilterFilterSelection implements FilterSelection {
     @Override
     @NonNull public String getCondition() {
 
-        return "(t.id_status in (select fs.id_status from filter_status fs where fs.id_filter="+Long.toString(filter.getId())+"))";
+        String lCondition="(t.id_status in (select fs.id_status from filter_status fs where fs.id_filter="+Long.toString(filter.getId())+"))";
+        if(filter.getDateFilter()==DateFilter.DF_AFTER_START){
+            lCondition ="("+lCondition+ "or (t.start_date<=strftime('%s','now')))";
+        } else if(filter.getDateFilter()==DateFilter.DF_AFTER_END){
+            lCondition = "(" + lCondition+ "or (t.end_date<=strftime('%s','now')))";
+        }
+        return lCondition;
     }
 
     public String toString()
