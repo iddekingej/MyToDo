@@ -1,5 +1,6 @@
 package org.elaya.mytodo.project;
 
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 
 /**
@@ -14,10 +15,13 @@ public class ProjectItem {
 
     private final String projectName;
     private final long id;
-    public ProjectItem(long pId, @NonNull String pProjectName)
+    public ProjectItem( Cursor pCursor)
     {
-        projectName=pProjectName;
-        id=pId;
+        int lIndex=pCursor.getColumnIndex(F_ID);
+        id=pCursor.getLong(lIndex);
+        lIndex=pCursor.getColumnIndex(F_PROJECTNAME);
+        projectName=pCursor.getString(lIndex);
+
 
     }
 

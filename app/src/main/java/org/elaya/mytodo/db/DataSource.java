@@ -95,11 +95,11 @@ public final class DataSource {
     @Nullable
     public ProjectItem getProjectById(long pId)
     {
-        Cursor lProjectCursor=db.rawQuery("select projectname from projects where _id=?",new String[]{Long.toString(pId)});
+        Cursor lProjectCursor=db.rawQuery("select _id,projectname from projects where _id=?",new String[]{Long.toString(pId)});
         lProjectCursor.moveToFirst();
         ProjectItem lProjectItem=null;
         if(!lProjectCursor.isAfterLast()){
-            lProjectItem=new ProjectItem(pId,lProjectCursor.getString(0));
+            lProjectItem=new ProjectItem(lProjectCursor);
 
         }
         lProjectCursor.close();
@@ -114,7 +114,7 @@ public final class DataSource {
         int lCnt=0;
         int lReturn=0;
         while(!lProjectCursor.isAfterLast()){
-            ProjectItem lProjectItem=new ProjectItem(lProjectCursor.getLong(0),lProjectCursor.getString(1));
+            ProjectItem lProjectItem=new ProjectItem(lProjectCursor);
             pProjectAdapter.add(lProjectItem);
             lProjectCursor.moveToNext();
             if(lProjectItem.getId()==pId){

@@ -16,8 +16,7 @@ import org.elaya.mytodo.R;
  */
 
 class ProjectListAdapter extends CursorAdapter {
-    private final int idIndex;
-    private final int projectNameIndex;
+
     private final int numFinishedIndex;
     private final int numActiveIndex;
     private final int numNotActiveIndex;
@@ -25,8 +24,7 @@ class ProjectListAdapter extends CursorAdapter {
 
     public ProjectListAdapter(Context pContext,@NonNull Cursor pCursor){
         super(pContext,pCursor,0);
-        idIndex=pCursor.getColumnIndex("_id");
-        projectNameIndex=pCursor.getColumnIndex(ProjectItem.F_PROJECTNAME);
+
         numFinishedIndex=pCursor.getColumnIndex("num_finished");
         numActiveIndex=pCursor.getColumnIndex("num_active");
         numNotActiveIndex=pCursor.getColumnIndex("num_not_active");
@@ -34,10 +32,11 @@ class ProjectListAdapter extends CursorAdapter {
 
     public void bindView(@NonNull View pView, Context pContext, @NonNull Cursor pCursor)
     {
-        long lId=pCursor.getLong(idIndex);
-        String lProjectName=pCursor.getString(projectNameIndex);
+
+        ProjectItem lProject=new ProjectItem(pCursor);
+
         TextView lProjectWidget= pView.findViewById(R.id.projectName);
-        lProjectWidget.setText(lProjectName);
+        lProjectWidget.setText(lProject.getProjectName());
 
         TextView lNumFinishedElement= pView.findViewById(R.id.numFinished);
         lNumFinishedElement.setText(pCursor.getString(numFinishedIndex));
@@ -48,7 +47,7 @@ class ProjectListAdapter extends CursorAdapter {
         TextView lNumNotActiveElement= pView.findViewById(R.id.numNotActive);
         lNumNotActiveElement.setText(pCursor.getString(numNotActiveIndex));
 
-        pView.setTag(new ProjectItem(lId,lProjectName));
+        pView.setTag(lProject);
     }
 
     public View newView(Context pContext,Cursor pCursor,ViewGroup pViewGroup)
