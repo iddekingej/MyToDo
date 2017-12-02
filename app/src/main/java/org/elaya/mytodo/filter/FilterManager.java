@@ -7,7 +7,7 @@ import org.elaya.mytodo.R;
 
 
 /**
- * Created by jeroen on 11/26/17.
+ * Manages To do filters
  */
 
 public class FilterManager {

@@ -15,7 +15,6 @@ import org.elaya.mytodo.filter.FilterSelection;
 import org.elaya.mytodo.project.ProjectItem;
 import org.elaya.mytodo.todo.TodoItem;
 import org.elaya.mytodo.tools.ActionTypes;
-import org.elaya.mytodo.tools.FilterTypes;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;

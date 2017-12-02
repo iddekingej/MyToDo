@@ -34,7 +34,6 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
 
     private long id;
     private TodoListAdapter adapter;
-    private Spinner todoFilterElement;
     @Nullable
     private ProjectItem projectItem;
     private boolean notFilter;
@@ -54,12 +53,12 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         TextView projectName= findViewById(R.id.projectName);
         ListView todoList= findViewById(R.id.todoList);
 
-        todoFilterElement = findViewById(R.id.todoFilter);
+        Spinner todoFilterElement = findViewById(R.id.todoFilter);
         ArrayList<FilterSelection> lList=new ArrayList<>();
         lList.add(new FilterConditionSelection("All",""));
         ds.fillFilterSelection(lList);
         ArrayAdapter<FilterSelection> lAdapter=new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,lList);
-        this.todoFilterElement.setAdapter(lAdapter);
+        todoFilterElement.setAdapter(lAdapter);
 
         todoFilterElement.setOnItemSelectedListener(this);
 
@@ -250,9 +249,9 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
      * this method is called
      *
      * @param pAdapterView  Adapter of the spinner
-     * @param view
+     * @param view The view within the adapter view that was clicked
      * @param pPos  Position selected
-     * @param pId
+     * @param pId   The row id that was selected
      */
     @Override
     public void onItemSelected(@NonNull AdapterView<?> pAdapterView, View view, int pPos, long pId) {

@@ -3,9 +3,14 @@ package org.elaya.mytodo.filter;
 import android.support.annotation.NonNull;
 
 /**
- * Created by jeroen on 11/26/17.
+ * Interface used for the filter selection list in the to do overview
  */
 
 public interface FilterSelection {
+
+    /**
+     *
+     * @return SQL condition for the filter
+     */
     @NonNull String getCondition();
 }
