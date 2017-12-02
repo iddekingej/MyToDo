@@ -30,17 +30,18 @@
         android:text="" />
 
     <LinearLayout
+        style="@style/filterRow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/imageButton5"
+            style="@style/filterButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/img_filter"
             android:onClick="openFilter"
-            style="@style/noPaddingButton"
             android:src="@drawable/filter" />
 
         <RadioGroup

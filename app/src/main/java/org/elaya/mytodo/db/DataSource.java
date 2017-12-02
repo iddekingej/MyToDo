@@ -200,14 +200,7 @@ public final class DataSource {
                 lCondition = "and " + lCondition;
             }
         }
-        /*
-        String lCondition="((p.filter_type<>? or t.id_status in (" +
-        "select ps.id_status " +
-                "from project_statusfilters ps " +
-                "where ps.id_project=t.id_project))" +
-                "or (p.date_filter=? and ?>=start_date and not action_type in (3,4))" +
-                "or (p.date_filter=? and ?>=end_date and not action_type in (3,4)) "+
-                ")";*/
+
         Cursor lTodoCursor=db.rawQuery("" +
                 "select t._id " +
                 ",      t.id_project" +

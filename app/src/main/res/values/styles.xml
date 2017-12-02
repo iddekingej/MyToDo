@@ -2,7 +2,7 @@
 
 
 
-
+    <color name='filterColor'>#CCC</color>
 
     <style name="MyEditTextStyle" parent="android:Widget.EditText">
         <item name='android:textSize'>14sp</item>
@@ -59,7 +59,20 @@
     </style>
 
     <style name='numTodoFilter' parent="android:Widget.TextView">
-        <item name="android:background">#BBB</item>
+        <item name="android:background">@color/filterColor</item>
         <item name="android:padding">8dp</item>
     </style>
+
+    <style name="filterRow" >
+        <item name="android:background">@color/filterColor</item>
+
+    </style>
+    <style name="filterButton" parent="android:Widget.Button">
+       <!-- <item name="android:background">#BBB</item> -->
+        <item name="android:layout_margin">0dp</item>
+
+
+    </style>
+
+
 </resources>
