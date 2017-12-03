@@ -41,7 +41,8 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
     private LinearLayout headerElement;
     private RadioButton inFilterElement;
     private RadioButton notInFilterElement;
-    private ArrayAdapter<FilterSelection> filtetListAdapter;
+    private ArrayAdapter<FilterSelection> filterListAdapter;
+    private Spinner todoFilterElement;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +56,11 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         TextView projectName= findViewById(R.id.projectName);
         ListView todoList= findViewById(R.id.todoList);
 
-        Spinner todoFilterElement = findViewById(R.id.todoFilter);
-        filtetListAdapter=new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,getFilterList());
-        todoFilterElement.setAdapter(filtetListAdapter);
-
+        todoFilterElement = findViewById(R.id.todoFilter);
+        ArrayList<FilterSelection> lList=getFilterList();
+        filterListAdapter =new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,lList);
+        todoFilterElement.setAdapter(filterListAdapter);
+        todoFilterElement.setSelection(FilterManager.getSelected(lList));
         todoFilterElement.setOnItemSelectedListener(this);
 
         projectName.setText(projectItem.getProjectName());
@@ -195,9 +197,11 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
     protected void onActivityResult(int pRequestCode,int pResultCode,@NonNull Intent pData) {
         try {
             if(pRequestCode==ACT_FILTER){
-                filtetListAdapter.clear();
-                filtetListAdapter.addAll(getFilterList());
-                filtetListAdapter.notifyDataSetChanged();
+                ArrayList<FilterSelection> lList=getFilterList();
+                filterListAdapter.clear();
+                filterListAdapter.addAll(getFilterList());
+                filterListAdapter.notifyDataSetChanged();
+                todoFilterElement.setSelection(FilterManager.getSelected(lList));
                 refreshListFilter();
             } else {
                 switch (pResultCode) {
@@ -248,9 +252,11 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
     private void refreshList()
     {
 
+
         adapter.getCursor().close();
         adapter.swapCursor(ds.getTodoCursor(id,notFilter));
         adapter.notifyDataSetChanged();
+
         setNumNotInFilter();
         showHeader();
     }

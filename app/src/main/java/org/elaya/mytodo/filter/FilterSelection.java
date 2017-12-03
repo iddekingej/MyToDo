@@ -14,4 +14,5 @@ public interface FilterSelection {
      */
     @NonNull String getCondition();
     boolean hasNot();
+    boolean isSameKind(Object pFilterSelection);
 }

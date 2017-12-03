@@ -4,6 +4,7 @@ import android.content.Context;
 
 import org.elaya.mytodo.R;
 
+import java.util.ArrayList;
 
 
 /**
@@ -31,5 +32,16 @@ public class FilterManager {
     public static FilterSelection makeAllSelection(Context pContext)
     {
         return new FilterConditionSelection(pContext.getString(R.string.ft_all),"",false);
+    }
+
+    public static int getSelected(ArrayList<FilterSelection> pList){
+        if(null != currentFilter) {
+            for (int lCnt = 0; lCnt < pList.size(); lCnt++) {
+                if (pList.get(lCnt).isSameKind(currentFilter)) {
+                    return lCnt;
+                }
+            }
+        }
+        return 0;
     }
 }

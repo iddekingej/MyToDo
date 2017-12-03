@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
  */
 
 public class ProjectItem {
-    public static final String F_ID ="_id";
+    private static final String F_ID ="_id";
     public static final String F_TABLE_NAME ="projects";
     public static final String F_PROJECTNAME ="projectname";
 

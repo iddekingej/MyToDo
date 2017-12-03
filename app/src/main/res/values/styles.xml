@@ -54,10 +54,6 @@
         <item name='android:paddingRight'>5dp</item>
     </style>
 
-    <style name="noPaddingButton" parent="android:Widget.Button">
-        <item name="android:layout_margin">0dp</item>
-    </style>
-
     <style name='numTodoFilter' parent="android:Widget.TextView">
         <item name="android:background">@color/filterColor</item>
         <item name="android:padding">8dp</item>

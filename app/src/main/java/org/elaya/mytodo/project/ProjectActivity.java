@@ -15,7 +15,7 @@ import org.elaya.mytodo.filter.FilterActivity;
 import org.elaya.mytodo.filter.FilterManager;
 import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.R;
-import org.elaya.mytodo.settings.SettingsEditor;
+import org.elaya.mytodo.settings.DateSettingsEditor;
 import org.elaya.mytodo.status.StatusActivity;
 import org.elaya.mytodo.todo.TodoActivity;
 import org.elaya.mytodo.tools.Helpers;
@@ -296,7 +296,7 @@ public class ProjectActivity extends BaseActivity {
 
     private void openSettings()
     {
-        Intent lIntent= new Intent(this,SettingsEditor.class);
+        Intent lIntent= new Intent(this,DateSettingsEditor.class);
         startActivity(lIntent);
     }
 }

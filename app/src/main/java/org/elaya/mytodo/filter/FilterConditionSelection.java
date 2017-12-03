@@ -19,6 +19,14 @@ public class FilterConditionSelection implements FilterSelection {
     }
 
     @Override
+    public boolean isSameKind(Object pFilterSelection) {
+        if(FilterConditionSelection.class.isInstance(pFilterSelection)){
+            return ((FilterConditionSelection)pFilterSelection).condition.equals(condition);
+        }
+        return false;
+    }
+
+    @Override
     @NonNull
     public String getCondition() {
         return condition;

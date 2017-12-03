@@ -7,7 +7,7 @@ import org.elaya.mytodo.R;
 import org.elaya.mytodo.tools.BaseEditActivity;
 
 
-public class SettingsEditor extends BaseEditActivity {
+public class DateSettingsEditor extends BaseEditActivity {
 
     private RadioGroup dateFormatElement;
     private RadioGroup separatorElement;

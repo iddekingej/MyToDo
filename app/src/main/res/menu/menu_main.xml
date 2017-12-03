@@ -9,7 +9,7 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/action_settings"
-        android:title="@string/mo_settings"
+        android:title="@string/menu_date_settings"
         app:showAsAction="never"
         />
     <item
