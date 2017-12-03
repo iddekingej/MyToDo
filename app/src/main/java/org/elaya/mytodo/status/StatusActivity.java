@@ -91,7 +91,7 @@ public class StatusActivity extends BaseActivity {
         long lActionType=pIntent.getLongExtra("actionType",0);
         String lDescription=pIntent.getStringExtra("description");
         boolean lActive=pIntent.getBooleanExtra("active",true);
-        ds.addStatus(lActionType,lPosition,lDescription,lActive);
+        ds.addStatus(lPosition,lActionType,lDescription,lActive);
         refreshList();
     }
 

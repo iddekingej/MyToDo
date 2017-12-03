@@ -80,14 +80,14 @@ public class EditStatusActivity extends BaseEditActivity {
     protected void onSaveClicked()
     {
         String lDescription=descriptionElement.getText().toString();
-        Editable lPositionText=positionElement.getText();
+        String lPositionText=positionElement.getText().toString();
         if("".equals(lDescription)){
             Helpers.warning(this,R.string.warning_status_description_mandatory);
             return;
         }
         long lPosition;
         try {
-            lPosition = Long.valueOf(lPositionText.toString());
+            lPosition = Long.valueOf(lPositionText);
         }catch(NumberFormatException e){
             Helpers.warning(this,R.string.warning_position_number_mandatory);
             return;
