@@ -25,7 +25,7 @@ class TodoListAdapter extends CursorAdapter {
     private final int idStatusIndex;
     private final int titleIndex;
     private final int commentIndex;
-    private final int statusdescIndex;
+    private final int statusDescIndex;
     private final int isFinishedIndex;
     private final int startDateIndex;
     private final int endDateIndex;
@@ -37,7 +37,7 @@ class TodoListAdapter extends CursorAdapter {
         idStatusIndex=pCursor.getColumnIndex(TodoItem.F_ID_STATUS);
         titleIndex=pCursor.getColumnIndex(TodoItem.F_TITLE);
         commentIndex=pCursor.getColumnIndex(TodoItem.F_COMMENT);
-        statusdescIndex=pCursor.getColumnIndex("statusdesc");
+        statusDescIndex =pCursor.getColumnIndex("statusdesc");
         isFinishedIndex=pCursor.getColumnIndex("isfinished");
         startDateIndex=pCursor.getColumnIndex(TodoItem.F_START_DATE);
         endDateIndex=pCursor.getColumnIndex(TodoItem.F_END_DATE);
@@ -69,7 +69,7 @@ class TodoListAdapter extends CursorAdapter {
         long lIdStatus=pCursor.getLong(idStatusIndex);
         String lTitle=pCursor.getString(titleIndex);
         String lComment=pCursor.getString(commentIndex);
-        String lStatus=pCursor.getString(statusdescIndex);
+        String lStatus=pCursor.getString(statusDescIndex);
         TextView lTitleWidget= pView.findViewById(R.id.title);
         lTitleWidget.setText(lTitle);
         if(pCursor.getLong(isFinishedIndex)==1){

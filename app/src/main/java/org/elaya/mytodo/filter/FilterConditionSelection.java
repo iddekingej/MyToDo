@@ -20,10 +20,8 @@ public class FilterConditionSelection implements FilterSelection {
 
     @Override
     public boolean isSameKind(Object pFilterSelection) {
-        if(FilterConditionSelection.class.isInstance(pFilterSelection)){
-            return ((FilterConditionSelection)pFilterSelection).condition.equals(condition);
-        }
-        return false;
+        return FilterConditionSelection.class.isInstance(pFilterSelection) && ((FilterConditionSelection)pFilterSelection).getCondition().equals(condition);
+
     }
 
     @Override

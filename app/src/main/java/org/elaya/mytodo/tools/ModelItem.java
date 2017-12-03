@@ -3,7 +3,7 @@ package org.elaya.mytodo.tools;
 import android.database.Cursor;
 
 /**
- * Created by jeroen on 12/3/17.
+ * Base class for DB objects
  */
 
 public class ModelItem {

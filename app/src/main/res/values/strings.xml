@@ -87,8 +87,7 @@
     <string name="opt_date_mdy">MM-DD-YYYY</string>
     <string name="opt_date_ymd">YYYY-MM-DD</string>
     <string name="menu_save_settings">Save settings</string>
-    <!-- Main menu -->
-    <string name="mo_settings">Settings</string>
+
     <!--- Show to do -->
     <string name="show_edit_todo">Edit todo</string>
     <string name="title_show_todo">Todo details</string>
