@@ -13,4 +13,5 @@ public interface FilterSelection {
      * @return SQL condition for the filter
      */
     @NonNull String getCondition();
+    boolean hasNot();
 }

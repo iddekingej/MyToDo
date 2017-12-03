@@ -64,6 +64,12 @@ public class EditFilterActivity extends BaseEditActivity {
     @Override
     protected void onSaveClicked() {
 
+        String lFilterName=filterNameElement.getText().toString();
+
+        if(lFilterName.isEmpty()){
+            Helpers.warning(this,R.string.err_filter_name);
+            return;
+        }
         int lDateCond=dateCondElement.getCheckedRadioButtonId();
 
         long lDateFilter= DateFilter.DF_NONE;

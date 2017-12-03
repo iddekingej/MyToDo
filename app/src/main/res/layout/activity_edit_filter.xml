@@ -6,72 +6,79 @@
     android:orientation="vertical"
     tools:context="org.elaya.mytodo.filter.EditFilterActivity">
     <include  layout="@layout/app_bar"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/appbarLayout"
-        >
+        android:layout_below="@id/appBar"
+        android:layout_marginTop="10dp">
+
         <LinearLayout
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-    <TextView
-        android:id="@+id/textView21"
-        style="@style/formLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:labelFor="@+id/filterName"
-        android:text="@string/label_filter_name" />
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/filterName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="" />
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/formLabel"
-        android:text="@string/choose_date_status" />
+            <TextView
+                android:id="@+id/textView21"
+                style="@style/formLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:labelFor="@+id/filterName"
+                android:text="@string/label_filter_name" />
 
-    <RadioGroup
-        android:id="@+id/dateCond"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RadioButton
-            android:id="@+id/dateCondNotInclude"
-            android:text="@string/filter_notInclude"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <RadioButton
-            android:id="@+id/dateCondAfterStartDate"
-            android:text="@string/filter_afterStartDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <RadioButton
-            android:id="@+id/dateCondAfterEndDate"
-            android:text="@string/filter_afterEndDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/filterName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/textView16"
+                style="@style/formLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_date_status" />
+
+            <RadioGroup
+                android:id="@+id/dateCond"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/dateCondNotInclude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_notInclude" />
+
+                <RadioButton
+                    android:id="@+id/dateCondAfterStartDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_afterStartDate" />
+
+                <RadioButton
+                    android:id="@+id/dateCondAfterEndDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_afterEndDate" />
 
 
-    </RadioGroup>
+            </RadioGroup>
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/formLabel"
-        android:text="@string/choose_status" />
-    <ListView
-        android:id="@+id/statusList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/textView13"
+                style="@style/formLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_status" />
+
+            <ListView
+                android:id="@+id/statusList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

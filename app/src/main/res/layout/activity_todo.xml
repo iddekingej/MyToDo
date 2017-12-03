@@ -80,7 +80,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/notFilter"
+        android:id="@+id/numTodoFilter"
         style="@style/numTodoFilter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

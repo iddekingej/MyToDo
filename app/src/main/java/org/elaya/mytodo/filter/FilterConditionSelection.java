@@ -9,11 +9,13 @@ import android.support.annotation.NonNull;
 public class FilterConditionSelection implements FilterSelection {
     private final String description;
     private final String condition;
+    private final boolean hasNot;
 
-    public FilterConditionSelection(String pDescription, @NonNull String pCondition)
+    public FilterConditionSelection(String pDescription, @NonNull String pCondition,boolean pHasNot)
     {
         description=pDescription;
         condition=pCondition;
+        hasNot=pHasNot;
     }
 
     @Override
@@ -25,5 +27,10 @@ public class FilterConditionSelection implements FilterSelection {
     public String toString()
     {
         return description;
+    }
+
+    public boolean hasNot()
+    {
+        return hasNot;
     }
 }

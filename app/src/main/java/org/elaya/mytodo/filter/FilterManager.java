@@ -30,6 +30,6 @@ public class FilterManager {
 
     public static FilterSelection makeAllSelection(Context pContext)
     {
-        return new FilterConditionSelection(pContext.getString(R.string.ft_all),"");
+        return new FilterConditionSelection(pContext.getString(R.string.ft_all),"",false);
     }
 }

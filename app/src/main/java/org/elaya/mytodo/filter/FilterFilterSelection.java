@@ -32,4 +32,9 @@ public class FilterFilterSelection implements FilterSelection {
     {
         return filter.getName();
     }
+
+    public boolean hasNot()
+    {
+        return true;
+    }
 }

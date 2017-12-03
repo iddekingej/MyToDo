@@ -37,9 +37,11 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
     @Nullable
     private ProjectItem projectItem;
     private boolean notFilter;
-    private TextView notFilterElement;
+    private TextView numTodoFilterElement;
     private LinearLayout headerElement;
     private RadioButton inFilterElement;
+    private RadioButton notInFilterElement;
+    private ArrayAdapter<FilterSelection> filtetListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +56,8 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         ListView todoList= findViewById(R.id.todoList);
 
         Spinner todoFilterElement = findViewById(R.id.todoFilter);
-        ArrayList<FilterSelection> lList=new ArrayList<>();
-        lList.add(new FilterConditionSelection("All",""));
-        ds.fillFilterSelection(lList);
-        ArrayAdapter<FilterSelection> lAdapter=new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,lList);
-        todoFilterElement.setAdapter(lAdapter);
+        filtetListAdapter=new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,getFilterList());
+        todoFilterElement.setAdapter(filtetListAdapter);
 
         todoFilterElement.setOnItemSelectedListener(this);
 
@@ -73,20 +72,29 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         });
         todoList.setEmptyView(findViewById(R.id.noItemsMessage));
 
-        notFilterElement=findViewById(R.id.notFilter);
+        numTodoFilterElement =findViewById(R.id.numTodoFilter);
         notFilter=false;
 
         inFilterElement = findViewById(R.id.inFilter);
         inFilterElement.setChecked(true);
+        notInFilterElement = findViewById(R.id.notInFilter);
         setNumNotInFilter();
         showHeader();
+    }
+
+    private ArrayList<FilterSelection> getFilterList()
+    {
+        ArrayList<FilterSelection> lList=new ArrayList<>();
+        lList.add(new FilterConditionSelection("All","",false));
+        ds.fillFilterSelection(lList);
+        return lList;
     }
 
     private void setNumNotInFilter()
     {
         long lNum=ds.getNumberOfTodo(id);
         String lTitle=getString(R.string.ft_num_found,adapter.getCount(),lNum-adapter.getCount());
-        notFilterElement.setText(lTitle);
+        numTodoFilterElement.setText(lTitle);
     }
 
     @Override
@@ -186,29 +194,32 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
     }
     protected void onActivityResult(int pRequestCode,int pResultCode,@NonNull Intent pData) {
         try {
-            switch (pResultCode) {
+            if(pRequestCode==ACT_FILTER){
+                filtetListAdapter.clear();
+                filtetListAdapter.addAll(getFilterList());
+                filtetListAdapter.notifyDataSetChanged();
+                refreshListFilter();
+            } else {
+                switch (pResultCode) {
 
-                case RES_DELETE_TODO:
-                    deleteTodo(pData);
-                    break;
+                    case RES_DELETE_TODO:
+                        deleteTodo(pData);
+                        break;
 
-                case RESULT_OK:
-                    switch (pRequestCode) {
-                        case ACT_NEW_TODO:
-                            addTodo(pData);
-                            break;
+                    case RESULT_OK:
+                        switch (pRequestCode) {
+                            case ACT_NEW_TODO:
+                                addTodo(pData);
+                                break;
 
-                        case ACT_FILTER:
-                            refreshListFilter();
-                            break;
+                            case ACT_SHOW_TODO:
+                                refreshList();
+                                break;
 
-                        case ACT_SHOW_TODO:
-                            refreshList();
-                            break;
+                        }
 
-                    }
-
-                    break;
+                        break;
+                }
             }
         }catch(Exception e){
             warning(e.getMessage());
@@ -258,7 +269,9 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         if(projectItem != null) {
             FilterSelection lSelection=(FilterSelection)pAdapterView.getItemAtPosition(pPos);
             FilterManager.setCurrentFilter(lSelection);
+            notInFilterElement.setEnabled(lSelection.hasNot());
             refreshList();
+            inFilterElement.setChecked(true);
         }
 
     }
