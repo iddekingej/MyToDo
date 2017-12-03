@@ -15,29 +15,16 @@ import org.elaya.mytodo.status.StatusItem;
  */
 
 abstract class StatusBaseAdapter extends CursorAdapter {
-    private final int idIndex;
-    private final int positionIndex;
-    private final int actionTypeIndex;
-    private final int descriptionIndex;
-    private final int activeIndex;
+
 
     StatusBaseAdapter(Context pContext, @NonNull Cursor pCursor) {
         super(pContext,pCursor,0);
-        idIndex = pCursor.getColumnIndex("_id");
-        positionIndex=pCursor.getColumnIndex("position");
-        actionTypeIndex=pCursor.getColumnIndex("action_type");
-        descriptionIndex=pCursor.getColumnIndex("description");
-        activeIndex=pCursor.getColumnIndex("active");
     }
 
     @Override
     public void bindView(@NonNull View pView, Context pContext,@NonNull Cursor pCursor) {
-        long lId=pCursor.getLong(idIndex);
-        long lPosition=pCursor.getLong(positionIndex);
-        long lActionType=pCursor.getLong(actionTypeIndex);
-        boolean lActive=pCursor.getLong(activeIndex)==1;
-        String lDescription=pCursor.getString(descriptionIndex);
-        StatusItem lStatusItem=new StatusItem(lId,lPosition,lActionType,lDescription,lActive);
+
+        StatusItem lStatusItem=new StatusItem(pCursor);
         pView.setTag(lStatusItem);
         fillView(pView,lStatusItem);
     }

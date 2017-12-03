@@ -1,15 +1,15 @@
 package org.elaya.mytodo.status;
 
+import android.database.Cursor;
+
+import org.elaya.mytodo.tools.ModelItem;
+
 /**
  * Class representing a Status item
  */
 
-public class StatusItem {
-    /**
-     * Unique ID of status
-     */
+public class StatusItem extends ModelItem {
 
-    private final long id;
     /**
      * position is status selection list
      */
@@ -33,31 +33,18 @@ public class StatusItem {
 
     /**
      * Setup status object
-     * @param pId                Unique ID of status (primary key)
-     * @param pPosition          Position inside status selection list
-     * @param pActionType        Action type
-     * @param pDescription       Status description
-     * @param pActive            true=>Status is active (selectable for new to do's)
      */
-    public StatusItem(long pId,long pPosition,long pActionType,String pDescription,boolean pActive)
+    public StatusItem(Cursor pCursor)
     {
-        id=pId;
-        position=pPosition;
-        description=pDescription;
-        actionType=pActionType;
-        active=pActive;
+        super(pCursor);
+
+        position=getCursorLong(pCursor,"position");
+        description=getCursorString(pCursor,"description");
+        actionType=getCursorLong(pCursor,"action_type");
+        active=getCursorLong(pCursor,"active")==1;
     }
 
-    /**
-     * @return     Get unique ID (pk) of status
-
-     */
-    public long getId()
-    {
-        return id;
-    }
-
-    /**
+      /**
      * Get the current position of the status inside the status select type
      * @return Current position
      */
