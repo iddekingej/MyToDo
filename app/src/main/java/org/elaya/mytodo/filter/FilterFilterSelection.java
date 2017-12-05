@@ -16,7 +16,7 @@ public class FilterFilterSelection implements FilterSelection {
     }
 
     @NonNull
-    public FilterItem getFilterItem()
+    private FilterItem getFilterItem()
     {
         return filter;
     }

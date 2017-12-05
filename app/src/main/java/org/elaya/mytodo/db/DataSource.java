@@ -428,7 +428,7 @@ public final class DataSource {
         deleteById(FilterItem.F_TABLE_NAME,pIdFilter);
     }
 
-    public void fillFilterSelection(ArrayList<FilterSelection> pSelectionList)
+    public void fillFilterSelection(List<FilterSelection> pSelectionList)
     {
         FilterItem lItem;
         Cursor lCursor=db.rawQuery("select * from filters order by name",null);

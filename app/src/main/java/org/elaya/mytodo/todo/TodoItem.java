@@ -1,10 +1,14 @@
 package org.elaya.mytodo.todo;
 
+import android.database.Cursor;
+
+import org.elaya.mytodo.tools.ModelItem;
+
 /**
  * Class representing a to do item belonging to a project
  */
 
-public class TodoItem {
+public class TodoItem extends ModelItem {
 
     public static final String TABLE_NAME="todoitems";
     public static final String F_ID="_id";
@@ -15,7 +19,6 @@ public class TodoItem {
     public static final String F_START_DATE="start_date";
     public static final String F_END_DATE="end_date";
 
-    private final long id;
     private final long idProject;
     private final long idStatus;
     private final String title;
@@ -23,21 +26,18 @@ public class TodoItem {
     private final Long startDate;
     private final Long endDate;
 
-    public TodoItem(long pId,long pIdProject,long pIdStatus,String pTitle,String pComment,Long pStartDate,Long pEndDate)
+    public TodoItem(Cursor pCursor)
     {
-        id=pId;
-        idProject=pIdProject;
-        idStatus=pIdStatus;
-        title=pTitle;
-        comment=pComment;
-        startDate=pStartDate;
-        endDate=pEndDate;
+        super(pCursor);
+
+        idProject=getCursorLong(pCursor,F_ID_PROJECT);
+        idStatus=getCursorLong(pCursor,F_ID_STATUS);
+        title=getCursorString(pCursor,F_TITLE);
+        comment=getCursorString(pCursor,F_COMMENT);
+        startDate=getCursorLongObject(pCursor,F_START_DATE);
+        endDate=getCursorLongObject(pCursor,F_END_DATE);
     }
 
-    public long getId()
-    {
-        return id;
-    }
 
     public long getIdStatus() { return idStatus; }
     public long getIdProject()
@@ -54,6 +54,6 @@ public class TodoItem {
     {
         return comment;
     }
-    public Long endDate(){ return endDate;}
-    public Long startDate(){return startDate;}
+    public Long getEndDate(){ return endDate;}
+    public Long getStartDate(){return startDate;}
 }

@@ -8,9 +8,9 @@ import android.database.Cursor;
 
 public class ModelItem {
 
-    long id;
+    private long id;
 
-    public ModelItem(Cursor pCursor)
+    protected ModelItem(Cursor pCursor)
     {
         id=getCursorLong(pCursor,"_id");
     }
@@ -24,6 +24,16 @@ public class ModelItem {
     {
         int lIndex=pCursor.getColumnIndex(pName);
         return pCursor.getLong(lIndex);
+    }
+
+    protected Long getCursorLongObject(Cursor pCursor,String pName)
+    {
+        int lIndex=pCursor.getColumnIndex(pName);
+        if(pCursor.isNull(lIndex)){
+            return null;
+        }
+        return pCursor.getLong(lIndex);
+
     }
 
     protected String getCursorString(Cursor pCursor,String pName)

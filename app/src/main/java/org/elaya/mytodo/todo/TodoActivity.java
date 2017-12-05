@@ -156,11 +156,11 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         lIntent.putExtra("id_status",lItem.getIdStatus());
         lIntent.putExtra("title",lItem.getTitle());
         lIntent.putExtra("comment",lItem.getComment());
-        if(lItem.startDate() != null){
-            lIntent.putExtra("startDate",lItem.startDate());
+        if(lItem.getStartDate() != null){
+            lIntent.putExtra("startDate",lItem.getStartDate());
         }
-        if(lItem.endDate() != null){
-            lIntent.putExtra("endDate",lItem.endDate());
+        if(lItem.getEndDate() != null){
+            lIntent.putExtra("endDate",lItem.getEndDate());
         }
         startActivityForResult(lIntent,ACT_SHOW_TODO);
     }

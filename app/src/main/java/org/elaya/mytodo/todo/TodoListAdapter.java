@@ -20,27 +20,16 @@ import org.joda.time.DateTime;
 
 class TodoListAdapter extends CursorAdapter {
 
-    private final int idIndex;
-    private final int idProjectIndex;
-    private final int idStatusIndex;
-    private final int titleIndex;
-    private final int commentIndex;
     private final int statusDescIndex;
     private final int isFinishedIndex;
-    private final int startDateIndex;
-    private final int endDateIndex;
+
 
     public TodoListAdapter(Context pContext,@NonNull Cursor pCursor){
         super(pContext,pCursor,0);
-        idIndex=pCursor.getColumnIndex(TodoItem.F_ID);
-        idProjectIndex=pCursor.getColumnIndex(TodoItem.F_ID_PROJECT);
-        idStatusIndex=pCursor.getColumnIndex(TodoItem.F_ID_STATUS);
-        titleIndex=pCursor.getColumnIndex(TodoItem.F_TITLE);
-        commentIndex=pCursor.getColumnIndex(TodoItem.F_COMMENT);
+
         statusDescIndex =pCursor.getColumnIndex("statusdesc");
         isFinishedIndex=pCursor.getColumnIndex("isfinished");
-        startDateIndex=pCursor.getColumnIndex(TodoItem.F_START_DATE);
-        endDateIndex=pCursor.getColumnIndex(TodoItem.F_END_DATE);
+
     }
 
 
@@ -64,29 +53,28 @@ class TodoListAdapter extends CursorAdapter {
 
     @Override
     public void bindView(@NonNull  View pView, @NonNull Context pContext, @NonNull  Cursor pCursor) {
-        long lId=pCursor.getLong(idIndex);
-        long lIdProject=pCursor.getLong(idProjectIndex);
-        long lIdStatus=pCursor.getLong(idStatusIndex);
-        String lTitle=pCursor.getString(titleIndex);
-        String lComment=pCursor.getString(commentIndex);
+
+
+        TodoItem lTodoItem=new TodoItem(pCursor);
+
         String lStatus=pCursor.getString(statusDescIndex);
         TextView lTitleWidget= pView.findViewById(R.id.title);
-        lTitleWidget.setText(lTitle);
+        lTitleWidget.setText(lTodoItem.getTitle());
+
         if(pCursor.getLong(isFinishedIndex)==1){
             lTitleWidget.setBackgroundResource(R.drawable.strike);
         } else {
             lTitleWidget.setBackgroundResource(0);
         }
-        Long lStartDateEpoch=null;
+
+        Long lStartDateEpoch=lTodoItem.getEndDate();
         DateTime lStartDate=null;
-        if(!pCursor.isNull(startDateIndex)){
-            lStartDateEpoch=pCursor.getLong(startDateIndex);
+        if(lStartDateEpoch != null){
             lStartDate=DateHandler.getDateFromLong(lStartDateEpoch);
         }
-        Long lEndDateEpoch=null;
+        Long lEndDateEpoch=lTodoItem.getEndDate();
         DateTime lEndDate=null;
-        if(!pCursor.isNull(endDateIndex)){
-            lEndDateEpoch=pCursor.getLong(endDateIndex);
+        if(lEndDateEpoch != null){
             lEndDate=DateHandler.getDateFromLong(lEndDateEpoch);
         }
         TextView lStatusWidget= pView.findViewById(R.id.status);
@@ -104,7 +92,7 @@ class TodoListAdapter extends CursorAdapter {
         } else if(lStartDate != null && !lStartDate.isAfterNow()){
             lStartView.setTextColor(pContext.getResources().getColor(R.color.after_start));
         }
-        pView.setTag(new TodoItem(lId,lIdProject,lIdStatus,lTitle,lComment,lStartDateEpoch,lEndDateEpoch));
+        pView.setTag(lTodoItem);
 
     }
 }

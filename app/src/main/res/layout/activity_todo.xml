@@ -75,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:gravity="top|left|center_vertical" />
+            android:gravity="top|start|center_vertical" />
 
     </LinearLayout>
 
