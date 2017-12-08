@@ -46,7 +46,7 @@ public class FilterActivity extends BaseActivity{
     @Override
     protected String getHelpName()
     {
-        return "edit_filter";
+        return "filter";
     }
 
     private void addFilter()

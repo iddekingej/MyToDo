@@ -35,6 +35,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract int getContentResource();
     protected abstract int getMenuResource();
+
+    protected void back()
+    {
+        setResult(RESULT_CANCELED);
+        finish();
+
+    }
+
     @Nullable
     protected String getHelpName()
     {
@@ -49,8 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
             return true;
         } else if(pItem.getItemId() == R.id.back){
-            setResult(RESULT_CANCELED);
-            finish();
+            back();
         }
         return super.onOptionsItemSelected(pItem);
 

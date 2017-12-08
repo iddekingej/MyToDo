@@ -62,6 +62,9 @@ public class EditFilterActivity extends BaseEditActivity {
     }
 
     @Override
+    protected String getHelpName(){ return "filter_edit";}
+
+    @Override
     protected void onSaveClicked() {
 
         String lFilterName=filterNameElement.getText().toString();

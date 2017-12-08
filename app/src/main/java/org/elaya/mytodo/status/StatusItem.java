@@ -10,6 +10,11 @@ import org.elaya.mytodo.tools.ModelItem;
 
 public class StatusItem extends ModelItem {
 
+    public static final String TABLE_NAME="satus";
+    public final static String F_POSITION="position";
+    public final static String F_DESCRIPTION="description";
+    public final static String F_ACTION_TYPE="action_type";
+    public final static String F_ACTIVE="active";
     /**
      * position is status selection list
      */
@@ -38,10 +43,10 @@ public class StatusItem extends ModelItem {
     {
         super(pCursor);
 
-        position=getCursorLong(pCursor,"position");
-        description=getCursorString(pCursor,"description");
-        actionType=getCursorLong(pCursor,"action_type");
-        active=getCursorLong(pCursor,"active")==1;
+        position=getCursorLong(pCursor,F_POSITION);
+        description=getCursorString(pCursor,F_DESCRIPTION);
+        actionType=getCursorLong(pCursor,F_ACTION_TYPE);
+        active=getCursorLong(pCursor,F_ACTIVE)==1;
     }
 
       /**

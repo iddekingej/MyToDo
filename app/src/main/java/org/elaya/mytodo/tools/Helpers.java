@@ -31,6 +31,7 @@ public class Helpers {
     public static void openHelp(@NonNull Activity pFrom,@NonNull String pPage){
         Intent lIntent=new Intent(pFrom,HelpActivity.class);
         lIntent.putExtra("page",pPage);
+        lIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         pFrom.startActivity(lIntent);
     }
 

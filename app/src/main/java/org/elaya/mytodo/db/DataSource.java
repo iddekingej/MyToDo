@@ -13,6 +13,7 @@ import org.elaya.mytodo.filter.FilterItem;
 import org.elaya.mytodo.filter.FilterManager;
 import org.elaya.mytodo.filter.FilterSelection;
 import org.elaya.mytodo.project.ProjectItem;
+import org.elaya.mytodo.status.StatusItem;
 import org.elaya.mytodo.todo.TodoItem;
 import org.elaya.mytodo.tools.ActionTypes;
 import org.joda.time.DateTime;
@@ -301,21 +302,22 @@ public final class DataSource {
     public void addStatus(long pPosition,long pActionType,String pDescription,boolean pActive)
     {
         ContentValues lValues = new ContentValues();
-        lValues.put("position",pPosition);
-        lValues.put("action_type",pActionType);
-        lValues.put("description",pDescription);
-        lValues.put("active",pActive?1:0);
-        db.insert("status",null,lValues);
+
+        lValues.put(StatusItem.F_POSITION,pPosition);
+        lValues.put(StatusItem.F_ACTION_TYPE,pActionType);
+        lValues.put(StatusItem.F_DESCRIPTION,pDescription);
+        lValues.put(StatusItem.F_ACTIVE,pActive?1:0);
+        db.insert(StatusItem.TABLE_NAME,null,lValues);
     }
 
     public void updateStatus(long pId,long pPosition,long pActionType,String pDescription,boolean pActive)
     {
         ContentValues lValues = new ContentValues();
-        lValues.put("position",pPosition);
-        lValues.put("action_type",pActionType);
-        lValues.put("description",pDescription);
-        lValues.put("active",pActive?1:0);
-        updateById("status",lValues,pId);
+        lValues.put(StatusItem.F_POSITION,pPosition);
+        lValues.put(StatusItem.F_ACTION_TYPE,pActionType);
+        lValues.put(StatusItem.F_DESCRIPTION,pDescription);
+        lValues.put(StatusItem.F_ACTIVE,pActive?1:0);
+        updateById(StatusItem.TABLE_NAME,lValues,pId);
     }
 
     public boolean statusIsUsed(long pId)
@@ -329,7 +331,7 @@ public final class DataSource {
 
     public void deleteStatus(long pId)
     {
-        deleteById("status",pId);
+        deleteById(StatusItem.TABLE_NAME,pId);
     }
 
     public Cursor getStatusCursor()

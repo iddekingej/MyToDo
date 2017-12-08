@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import org.elaya.mytodo.R;
 
@@ -28,6 +29,14 @@ public class HelpActivity extends Activity {
         setContentView(R.layout.activity_help);
         WebView lHelp= findViewById(R.id.helpHtml);
         Intent lIntent=getIntent();
+        WebViewClient lClient = new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return false;
+            }
+        };
+
+        lHelp.setWebViewClient(lClient);
         lHelp.loadUrl("file:///android_asset/"+lIntent.getStringExtra("page")+".html");
     }
 
