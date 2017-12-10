@@ -66,18 +66,18 @@ public class ShowTodoActivity extends BaseActivity {
 
     private void updateTodo(@NonNull Intent pData)
     {
-        long lId=pData.getLongExtra("_id",-1);
-        long lIdProject=pData.getLongExtra("id_project",-1);
-        long lIdStatus=pData.getLongExtra("id_status",-1);
-        String lTitle=pData.getStringExtra("title");
-        String lComment=pData.getStringExtra("comment");
+        long lId=pData.getLongExtra(EditToDoActivity.P_ID,-1);
+        long lIdProject=pData.getLongExtra(EditToDoActivity.P_ID_PROJECT,-1);
+        long lIdStatus=pData.getLongExtra(EditToDoActivity.P_ID_STATUS,-1);
+        String lTitle=pData.getStringExtra(EditToDoActivity.P_TITLE);
+        String lComment=pData.getStringExtra(EditToDoActivity.P_COMMENT);
         Long lStartDate=null;
-        if(pData.hasExtra("startDate")){
-            lStartDate=pData.getLongExtra("startDate",-1);
+        if(pData.hasExtra(EditToDoActivity.P_STARTDATE)){
+            lStartDate=pData.getLongExtra(EditToDoActivity.P_STARTDATE,-1);
         }
         Long lEndDate=null;
-        if(pData.hasExtra("endDate")){
-            lEndDate=pData.getLongExtra("endDate",-1);
+        if(pData.hasExtra(EditToDoActivity.P_ENDDATE)){
+            lEndDate=pData.getLongExtra(EditToDoActivity.P_ENDDATE,-1);
         }
         ds.updateToDo(lId,lIdProject,lIdStatus,lTitle,lComment,lStartDate,lEndDate);
     }

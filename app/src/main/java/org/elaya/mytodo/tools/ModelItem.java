@@ -8,7 +8,7 @@ import android.database.Cursor;
 
 public class ModelItem {
 
-    private long id;
+    private final long id;
 
     protected ModelItem(Cursor pCursor)
     {

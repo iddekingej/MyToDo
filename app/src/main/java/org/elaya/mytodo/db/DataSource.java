@@ -18,7 +18,6 @@ import org.elaya.mytodo.todo.TodoItem;
 import org.elaya.mytodo.tools.ActionTypes;
 import org.joda.time.DateTime;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -86,11 +85,6 @@ public final class DataSource {
         OpenHelper lHelper=new OpenHelper(pContext);
         db = lHelper.getWritableDatabase();
         db.execSQL("PRAGMA foreign_keys=on");
-    }
-
-    public void close()
-    {
-        db.close();
     }
 
     @Nullable

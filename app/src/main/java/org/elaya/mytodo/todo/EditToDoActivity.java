@@ -25,6 +25,14 @@ import org.joda.time.DateTime;
 
 public class EditToDoActivity extends BaseEditActivity {
 
+    public static final String P_ID="_id";
+    public static final String P_ID_PROJECT="id_project";
+    public static final String P_ID_STATUS="id_status";
+    public static final String P_TITLE="title";
+    public static final String P_COMMENT="comment";
+    public static final String P_STARTDATE="startDate";
+    public static final String P_ENDDATE="endDate";
+
     private boolean isNew=false;
     private long id;
     private EditText title;
@@ -39,25 +47,25 @@ public class EditToDoActivity extends BaseEditActivity {
         super.onCreate(savedInstanceState);
 
         Intent lIntent=getIntent();
-        isNew = !lIntent.hasExtra("_id");
-        id=lIntent.getLongExtra("_id",-1);
-        long lIdProject=lIntent.getLongExtra("id_project",-1);
-        long lIdStatus=lIntent.getLongExtra("id_status",-1);
+        isNew = !lIntent.hasExtra(P_ID);
+        id=lIntent.getLongExtra(P_ID,-1);
+        long lIdProject=lIntent.getLongExtra(P_ID_PROJECT,-1);
+        long lIdStatus=lIntent.getLongExtra(P_ID_STATUS,-1);
 
         title= findViewById(R.id.title);
-        title.setText(lIntent.getStringExtra("title"));
+        title.setText(lIntent.getStringExtra(P_TITLE));
 
         comment= findViewById(R.id.comment);
-        comment.setText(lIntent.getStringExtra("comment"));
+        comment.setText(lIntent.getStringExtra(P_COMMENT));
 
         startDateElement= findViewById(R.id.startDate);
-        if(lIntent.hasExtra("startDate")){
-            startDateElement.setText(DateHandler.getDateTextFromLong(lIntent.getLongExtra("startDate",-1)));
+        if(lIntent.hasExtra(P_STARTDATE)){
+            startDateElement.setText(DateHandler.getDateTextFromLong(lIntent.getLongExtra(P_STARTDATE,-1)));
         }
 
         endDateElement= findViewById(R.id.endDate);
-        if(lIntent.hasExtra("endDate")){
-            endDateElement.setText(DateHandler.getDateTextFromLong(lIntent.getLongExtra("endDate",-1)));
+        if(lIntent.hasExtra(P_ENDDATE)){
+            endDateElement.setText(DateHandler.getDateTextFromLong(lIntent.getLongExtra(P_ENDDATE,-1)));
         }
 
         statusElement= findViewById(R.id.status);
@@ -127,13 +135,13 @@ public class EditToDoActivity extends BaseEditActivity {
         finish();
     }
 
-    public void  startDatePicker(View pView)
+    public void  startDatePicker(@SuppressWarnings("UnusedParameters") View pView)
     {
         DatePickerFragment lFragment=DatePickerFragment.newInstance(startDateElement);
         lFragment.show(getFragmentManager(), "datePicker");
     }
 
-    public void  endDatePicker(View pView)
+    public void  endDatePicker(@SuppressWarnings("UnusedParameters") View pView)
     {
         DatePickerFragment lFragment=DatePickerFragment.newInstance(endDateElement);
         lFragment.show(getFragmentManager(), "datePicker");
@@ -170,17 +178,17 @@ public class EditToDoActivity extends BaseEditActivity {
         ProjectItem lProjectItem=(ProjectItem)projectElement.getSelectedItem();
 
         Intent lIntent = new Intent();
-        lIntent.putExtra("_id",id);
-        lIntent.putExtra("id_project",lProjectItem.getId());
+        lIntent.putExtra(P_ID,id);
+        lIntent.putExtra(P_ID_PROJECT,lProjectItem.getId());
         StatusItem lItem=(StatusItem)statusElement.getSelectedView().getTag();
-        lIntent.putExtra("id_status",lItem.getId());
-        lIntent.putExtra("title",title.getText().toString());
-        lIntent.putExtra("comment",comment.getText().toString());
+        lIntent.putExtra(P_ID_STATUS,lItem.getId());
+        lIntent.putExtra(P_TITLE,title.getText().toString());
+        lIntent.putExtra(P_COMMENT,comment.getText().toString());
         if(lStartDate != null){
-            lIntent.putExtra("startDate",lStartDate.getMillis());
+            lIntent.putExtra(P_STARTDATE,lStartDate.getMillis());
         }
         if(lEndDate != null){
-            lIntent.putExtra("endDate",lEndDate.getMillis());
+            lIntent.putExtra(P_ENDDATE,lEndDate.getMillis());
         }
         setResult(RESULT_OK,lIntent);
         finish();

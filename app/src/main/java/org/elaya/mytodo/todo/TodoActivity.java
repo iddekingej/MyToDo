@@ -227,14 +227,14 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         }
     }
 
-    public void openFilter(View pView)
+    public void openFilter(@SuppressWarnings("UnusedParameters") View pView)
     {
         Intent lIntent=new Intent(this,FilterActivity.class);
         lIntent.putExtra("projectId",id);
         startActivityForResult(lIntent,ACT_FILTER);
     }
 
-    public void negResult(View pView)
+    public void negResult(@SuppressWarnings("UnusedParameters") View pView)
     {
         notFilter=!inFilterElement.isChecked();
         refreshList();

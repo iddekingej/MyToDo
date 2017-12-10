@@ -23,6 +23,11 @@ public class EditFilterActivity extends BaseEditActivity {
     private RadioGroup dateCondElement;
     private ListView statusListElement;
     private StatusCheckListAdapter statusAdapter;
+
+    public static final String P_ID="id";
+    public static final String P_NAME="name";
+    public static final String P_DATE_FILTER="date_filter";
+
     private long id;
     private boolean isNew;
     @Override
@@ -30,12 +35,12 @@ public class EditFilterActivity extends BaseEditActivity {
         super.onCreate(savedInstanceState);
         filterNameElement=findViewById(R.id.filterName);
         Intent lIntent=getIntent();
-        isNew=!lIntent.hasExtra("id");
-        id=lIntent.getLongExtra("id",-1);
-        filterNameElement.setText(lIntent.getStringExtra("name"));
+        isNew=!lIntent.hasExtra(P_ID);
+        id=lIntent.getLongExtra(P_ID,-1);
+        filterNameElement.setText(lIntent.getStringExtra(P_NAME));
         dateCondElement= findViewById(R.id.dateCond);
 
-        long lDateFilter=lIntent.getLongExtra("date_filter",-1);
+        long lDateFilter=lIntent.getLongExtra(P_DATE_FILTER,-1);
 
         if(lDateFilter== DateFilter.DF_AFTER_START){
             dateCondElement.check(R.id.dateCondAfterStartDate);

@@ -17,7 +17,6 @@ public class DbProjectTest  extends DbTest{
     static final private String projectName="TestProject";
     static final private String projectNameOth="TestProjectXXXX";
 
-    long IdProject;
 
     @Test
     public void testAddProject()

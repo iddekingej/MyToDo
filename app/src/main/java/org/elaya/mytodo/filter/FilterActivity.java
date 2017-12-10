@@ -16,6 +16,7 @@ public class FilterActivity extends BaseActivity{
     private static final int ACT_ADD_FILTER =101;
     private static final int ACT_EDIT_FILTER=102;
 
+
     private FilterAdapter adapter;
 
     @Override
@@ -59,9 +60,9 @@ public class FilterActivity extends BaseActivity{
     {
         Intent lIntent=new Intent(this,EditFilterActivity.class);
         FilterItem lFilter=(FilterItem)pView.getTag();
-        lIntent.putExtra("id",lFilter.getId());
-        lIntent.putExtra("name",lFilter.getName());
-        lIntent.putExtra("date_filter",lFilter.getDateFilter());
+        lIntent.putExtra(EditFilterActivity.P_ID,lFilter.getId());
+        lIntent.putExtra(EditFilterActivity.P_NAME,lFilter.getName());
+        lIntent.putExtra(EditFilterActivity.P_DATE_FILTER,lFilter.getDateFilter());
         startActivityForResult(lIntent,ACT_EDIT_FILTER);
     }
 

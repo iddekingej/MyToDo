@@ -69,7 +69,7 @@ public class EditProjectActivity extends BaseEditActivity {
         //Todo: Implement onDeleteClicked
     }
 
-    public void saveGotoTodo(View pView)
+    public void saveGotoTodo(@SuppressWarnings("UnusedParameters") View pView)
     {
         saveProject(true);
     }

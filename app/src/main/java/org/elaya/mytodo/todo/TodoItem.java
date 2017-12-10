@@ -19,7 +19,6 @@ public class TodoItem extends ModelItem {
     public static final String F_START_DATE="start_date";
     public static final String F_END_DATE="end_date";
 
-    private final long idProject;
     private final long idStatus;
     private final String title;
     private final String comment;
@@ -30,7 +29,6 @@ public class TodoItem extends ModelItem {
     {
         super(pCursor);
 
-        idProject=getCursorLong(pCursor,F_ID_PROJECT);
         idStatus=getCursorLong(pCursor,F_ID_STATUS);
         title=getCursorString(pCursor,F_TITLE);
         comment=getCursorString(pCursor,F_COMMENT);
@@ -40,10 +38,6 @@ public class TodoItem extends ModelItem {
 
 
     public long getIdStatus() { return idStatus; }
-    public long getIdProject()
-    {
-        return idProject;
-    }
 
     public String getTitle()
     {

@@ -10,7 +10,7 @@ import org.elaya.mytodo.tools.ModelItem;
 
 public class StatusItem extends ModelItem {
 
-    public static final String TABLE_NAME="satus";
+    public static final String TABLE_NAME="status";
     public final static String F_POSITION="position";
     public final static String F_DESCRIPTION="description";
     public final static String F_ACTION_TYPE="action_type";

@@ -46,7 +46,7 @@ public class HelpActivity extends Activity {
      *
      * @param pButton Not used.
      */
-    public void closePressed(View pButton){
+    public void closePressed(@SuppressWarnings("UnusedParameters") View pButton){
         finish();
     }
 }
