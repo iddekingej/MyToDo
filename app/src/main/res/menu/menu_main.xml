@@ -18,15 +18,15 @@
         app:showAsAction="never"
         />
     <item
-        android:id="@+id/help"
-        android:title="@string/help"
-        android:icon="@drawable/help"
-        app:showAsAction="always"
-        />
-    <item
         android:id="@+id/add_project"
         android:title="@string/action_add_project"
         android:icon="@drawable/add"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/help"
+        android:title="@string/help"
+        android:icon="@drawable/help"
         app:showAsAction="always"
         />
 

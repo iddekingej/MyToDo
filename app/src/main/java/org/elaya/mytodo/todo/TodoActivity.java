@@ -109,6 +109,10 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         return R.menu.menu_todo;
     }
 
+    @Override
+    protected String getHelpName(){
+        return "todo";
+    }
 
     private void showHeader()
     {
@@ -117,17 +121,10 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem pItem) {
-        switch (pItem.getItemId()) {
-            case R.id.back:
-                finish();
-                break;
-
-            case R.id.add_todo:
-                newToDo();
-                break;
-
-            default:
-                return super.onOptionsItemSelected(pItem);
+        if(R.id.add_todo==pItem.getItemId()){
+            newToDo();
+        } else {
+            return super.onOptionsItemSelected(pItem);
         }
 
         return true;

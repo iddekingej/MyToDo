@@ -9,12 +9,7 @@
         android:icon="@drawable/cancel"
         app:showAsAction="always"
         />
-    <item
-        android:id="@+id/help"
-        android:title="@string/help"
-        android:icon="@drawable/help"
-        app:showAsAction="always"
-        />
+
     <item
         android:id="@+id/save"
         android:title="@string/action_save_status"
@@ -25,6 +20,12 @@
         android:id="@+id/delete"
         android:title="@string/action_delete_status"
         android:icon="@drawable/delete"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/help"
+        android:title="@string/help"
+        android:icon="@drawable/help"
         app:showAsAction="always"
         />
 </menu>

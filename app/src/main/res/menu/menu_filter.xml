@@ -9,16 +9,17 @@
         android:icon="@drawable/back"
         app:showAsAction="always"
         />
-    <item
-        android:id="@+id/help"
-        android:title="@string/help"
-        android:icon="@drawable/help"
-        app:showAsAction="always"
-        />
+
     <item
         android:id="@+id/add"
         android:title="@string/add_filter"
         android:icon="@drawable/add"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/help"
+        android:title="@string/help"
+        android:icon="@drawable/help"
         app:showAsAction="always"
         />
 </menu>

@@ -44,7 +44,7 @@ public class ShowTodoActivity extends BaseActivity {
 
     @Override
     protected int getMenuResource() {
-        return R.menu.show_todo;
+        return R.menu.menu_show_todo;
     }
 
     private void editTodo()

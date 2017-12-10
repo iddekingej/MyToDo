@@ -9,20 +9,18 @@
         android:icon="@drawable/cancel"
         app:showAsAction="always"
         />
-    <item
-        android:id="@+id/help"
-        android:title="@string/help"
-        android:icon="@drawable/help"
-        app:showAsAction="always"
-        />
+
     <item
         android:id="@+id/save"
         android:title="@string/menu_save_settings"
         android:icon="@drawable/save"
         app:showAsAction="always"
         />
-
-
-
+    <item
+        android:id="@+id/help"
+        android:title="@string/help"
+        android:icon="@drawable/help"
+        app:showAsAction="always"
+        />
 
 </menu>

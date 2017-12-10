@@ -10,9 +10,9 @@
         app:showAsAction="always"
         />
     <item
-        android:id="@+id/help"
-        android:title="@string/help"
-        android:icon="@drawable/help"
+        android:id="@+id/add_todo"
+        android:title="@string/menu_add_todo"
+        android:icon="@drawable/add"
         app:showAsAction="always"
         />
     <item
@@ -22,9 +22,9 @@
         app:showAsAction="always"
         />
     <item
-        android:id="@+id/add_todo"
-        android:title="@string/menu_add_todo"
-        android:icon="@drawable/add"
+        android:id="@+id/help"
+        android:title="@string/help"
+        android:icon="@drawable/help"
         app:showAsAction="always"
         />
 </menu>

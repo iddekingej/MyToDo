@@ -10,12 +10,6 @@
         app:showAsAction="always"
         />
     <item
-        android:id="@+id/help"
-        android:title="@string/help"
-        android:icon="@drawable/help"
-        app:showAsAction="always"
-        />
-    <item
         android:id="@+id/save"
         android:title="@string/action_save_todo"
         android:icon="@drawable/save"
@@ -27,7 +21,12 @@
         android:icon="@drawable/delete"
         app:showAsAction="always"
         />
-
+    <item
+        android:id="@+id/help"
+        android:title="@string/help"
+        android:icon="@drawable/help"
+        app:showAsAction="always"
+        />
 
 
 </menu>
