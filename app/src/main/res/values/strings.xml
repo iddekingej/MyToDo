@@ -119,6 +119,8 @@
     <string name="label_filter_name">Filter name</string>
     <string name="title_delete_filter">Delete filter</string>
     <string name="err_filter_name">Filter name empty</string>
+    <string name="menu_edit_filter">Edit filter</string>
+
     <!-- Date Settings   -->
     <string name="menu_date_settings">Date settings</string>
 </resources>
