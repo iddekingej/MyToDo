@@ -69,7 +69,7 @@ public class ProjectActivity extends BaseActivity {
 
     @NonNull
     @Override
-    protected String getHelpName(){ return "projects";}
+    protected String getHelpName(){ return "project";}
 
     private void showHeader()
     {

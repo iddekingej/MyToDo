@@ -11,7 +11,6 @@ import org.elaya.mytodo.tools.ModelItem;
 public class TodoItem extends ModelItem {
 
     public static final String TABLE_NAME="todoitems";
-    public static final String F_ID="_id";
     public static final String F_ID_STATUS="id_status";
     public static final String F_ID_PROJECT="id_project";
     public static final String F_TITLE="title";

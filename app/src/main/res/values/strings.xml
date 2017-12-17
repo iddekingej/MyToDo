@@ -103,11 +103,6 @@
     <string name="sel_not_in_filter">Not in filter</string>
     <!-- filter types -->
     <string name="ft_all">All</string>
-    <string name="ft_custom">Custom</string>
-    <string name="ft_active_todo">Active todo\'s</string>
-    <string name="ft_finished">Finished todo\'s</string>
-    <string name="ft_to_late">To late</string>
-    <string name="ft_should_start">Should start</string>
     <string name="ft_num_found">Found %1$d todo\'s, %2$d filtered out</string>
 
     <string name="add_filter">Add filter</string>

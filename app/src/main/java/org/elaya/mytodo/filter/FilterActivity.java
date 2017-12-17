@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.elaya.mytodo.R;
-import org.elaya.mytodo.project.ProjectItem;
 import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.tools.Helpers;
 
@@ -118,6 +117,9 @@ public class FilterActivity extends BaseActivity{
                             break;
                         case R.id.deleteProject:
                             deleteFilter(pView);
+                            break;
+                        default:
+                            return false;
                     }
                     return true;
                 }
