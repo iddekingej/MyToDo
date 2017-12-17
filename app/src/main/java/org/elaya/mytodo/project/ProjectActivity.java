@@ -33,8 +33,8 @@ public class ProjectActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.setTitle(R.string.title_main);
         super.onCreate(savedInstanceState);
-
         FilterManager.setCurrentFilter(FilterManager.makeAllSelection(this));
         projectHeaderElement=findViewById(R.id.projectHeader);
 
