@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import org.elaya.mytodo.R;
+import org.elaya.mytodo.settings.Settings;
 import org.elaya.mytodo.tools.ActionTypes;
 import org.elaya.mytodo.tools.BaseEditActivity;
 import org.elaya.mytodo.tools.Helpers;
@@ -21,6 +22,7 @@ public class EditStatusActivity extends BaseEditActivity {
     private Spinner  actionType;
     private boolean statusIsUsed;
     private CheckBox  activeElement;
+    private CheckBox isDefaultElement;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +57,11 @@ public class EditStatusActivity extends BaseEditActivity {
         boolean lActive=lIntent.getBooleanExtra("active",true);
         activeElement= findViewById(R.id.active);
         activeElement.setChecked(lActive);
-
+        isDefaultElement =findViewById(R.id.isDefault);
+        Long lIdDefault=Settings.getIdDefaultStatus();
+        if(lIdDefault != null) {
+            isDefaultElement.setChecked(lIdDefault == id);
+        }
 
         statusIsUsed=ds.statusIsUsed(id);
     }
@@ -97,6 +103,7 @@ public class EditStatusActivity extends BaseEditActivity {
         lIntent.putExtra("actionType",(long)actionType.getSelectedItemPosition());
         lIntent.putExtra("description",lDescription);
         lIntent.putExtra("active",activeElement.isChecked());
+        lIntent.putExtra( "isDefault", isDefaultElement.isChecked());
         setResult(RESULT_OK,lIntent);
         finish();
     }

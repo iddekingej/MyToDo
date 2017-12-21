@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import org.elaya.mytodo.project.ProjectItem;
+import org.elaya.mytodo.settings.Settings;
 import org.elaya.mytodo.tools.BaseEditActivity;
 import org.elaya.mytodo.tools.DatePickerFragment;
 import org.elaya.mytodo.status.StatusItem;
@@ -50,7 +51,12 @@ public class EditToDoActivity extends BaseEditActivity {
         isNew = !lIntent.hasExtra(P_ID);
         id=lIntent.getLongExtra(P_ID,-1);
         long lIdProject=lIntent.getLongExtra(P_ID_PROJECT,-1);
-        long lIdStatus=lIntent.getLongExtra(P_ID_STATUS,-1);
+        Long lIdStatus;
+        if(isNew){
+            lIdStatus = Settings.getIdDefaultStatus();
+        } else {
+            lIdStatus = lIntent.getLongExtra(P_ID_STATUS, -1);
+        }
 
         title= findViewById(R.id.title);
         title.setText(lIntent.getStringExtra(P_TITLE));
@@ -79,14 +85,15 @@ public class EditToDoActivity extends BaseEditActivity {
         projectElement.setSelection(lCurrentPos);
 
         int lNum=spinnerAdapter.getCount();
-        for(int lCnt=0;lCnt<lNum;lCnt++) {
-            long lId = spinnerAdapter.getItemId(lCnt);
-            if(lId==lIdStatus){
-                statusElement.setSelection(lCnt);
-                break;
+        if(lIdStatus != null) {
+            for (int lCnt = 0; lCnt < lNum; lCnt++) {
+                long lId = spinnerAdapter.getItemId(lCnt);
+                if (lId == lIdStatus) {
+                    statusElement.setSelection(lCnt);
+                    break;
+                }
             }
         }
-
     }
 
     @Override

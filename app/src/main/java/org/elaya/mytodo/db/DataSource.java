@@ -293,7 +293,7 @@ public final class DataSource {
         deleteById("todoitems",pId);
     }
 
-    public void addStatus(long pPosition,long pActionType,String pDescription,boolean pActive)
+    public long addStatus(long pPosition,long pActionType,String pDescription,boolean pActive)
     {
         ContentValues lValues = new ContentValues();
 
@@ -301,7 +301,7 @@ public final class DataSource {
         lValues.put(StatusItem.F_ACTION_TYPE,pActionType);
         lValues.put(StatusItem.F_DESCRIPTION,pDescription);
         lValues.put(StatusItem.F_ACTIVE,pActive?1:0);
-        db.insert(StatusItem.TABLE_NAME,null,lValues);
+        return db.insert(StatusItem.TABLE_NAME,null,lValues);
     }
 
     public void updateStatus(long pId,long pPosition,long pActionType,String pDescription,boolean pActive)

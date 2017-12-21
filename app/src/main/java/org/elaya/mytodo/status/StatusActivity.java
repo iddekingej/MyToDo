@@ -8,10 +8,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import org.elaya.mytodo.settings.Settings;
 import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.R;
 import org.elaya.mytodo.adapters.StatusListAdapter;
 import org.elaya.mytodo.tools.Helpers;
+
+import java.util.Set;
 
 public class StatusActivity extends BaseActivity {
 
@@ -91,7 +94,10 @@ public class StatusActivity extends BaseActivity {
         long lActionType=pIntent.getLongExtra("actionType",0);
         String lDescription=pIntent.getStringExtra("description");
         boolean lActive=pIntent.getBooleanExtra("active",true);
-        ds.addStatus(lPosition,lActionType,lDescription,lActive);
+        long lId=ds.addStatus(lPosition,lActionType,lDescription,lActive);
+        if(pIntent.getBooleanExtra("isDefault",false)){
+            Settings.setIdDefaultStatus(lId);
+        }
         refreshList();
     }
 
@@ -103,6 +109,9 @@ public class StatusActivity extends BaseActivity {
         String lDescription=pIntent.getStringExtra("description");
         boolean lActive=pIntent.getBooleanExtra("active",true);
         ds.updateStatus(lId,lPosition,lActionType,lDescription,lActive);
+        if(pIntent.getBooleanExtra("isDefault",false)) {
+            Settings.setIdDefaultStatus(lId);
+        }
         refreshList();
     }
 

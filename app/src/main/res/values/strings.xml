@@ -63,6 +63,7 @@
     <string name="ask_delete_status">Delete this status?</string>
     <string name="is_status_active">Is status active?</string>
     <string name="status_active">Act.</string>
+    <string name="label_is_default">Is default when adding new todo</string>
     <!-- Generic -->
     <string name="help">Help</string>
     <string name="title_activity_help">Help</string>
@@ -115,7 +116,6 @@
     <string name="title_delete_filter">Delete filter</string>
     <string name="err_filter_name">Filter name empty</string>
     <string name="menu_edit_filter">Edit filter</string>
-
     <!-- Date Settings   -->
     <string name="menu_date_settings">Date settings</string>
 </resources>

@@ -11,14 +11,19 @@ import android.support.annotation.Nullable;
 
 public class Settings {
 
-
+    private static final String KEY_ID_DEFAULT_STATUS="id_default_status";
     private static SharedPreferences settingsFile;
     @Nullable
     private static String dateFormat=null;
+    private static Long idDefaultStatus=null;
+
 
     public static void make(@NonNull Context pContext)
     {
         settingsFile = pContext.getSharedPreferences("main", Context.MODE_PRIVATE);
+        if(settingsFile.contains(KEY_ID_DEFAULT_STATUS)) {
+            idDefaultStatus = settingsFile.getLong(KEY_ID_DEFAULT_STATUS,-1);
+        }
     }
 
 
@@ -73,5 +78,18 @@ public class Settings {
         lEditor.apply();
     }
 
+    public static Long getIdDefaultStatus()
+    {
+        return idDefaultStatus;
+    }
+
+    public static void setIdDefaultStatus(long pIdDefaultStatus)
+    {
+        idDefaultStatus=pIdDefaultStatus;
+        SharedPreferences.Editor lEditor=settingsFile.edit();
+        lEditor.putLong(KEY_ID_DEFAULT_STATUS,pIdDefaultStatus);
+        lEditor.apply();
+
+    }
 
 }
