@@ -11,10 +11,7 @@ import android.widget.ListView;
 import org.elaya.mytodo.settings.Settings;
 import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.R;
-import org.elaya.mytodo.adapters.StatusListAdapter;
 import org.elaya.mytodo.tools.Helpers;
-
-import java.util.Set;
 
 public class StatusActivity extends BaseActivity {
 

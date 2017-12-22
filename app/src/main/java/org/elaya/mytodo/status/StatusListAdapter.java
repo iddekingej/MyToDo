@@ -1,4 +1,4 @@
-package org.elaya.mytodo.adapters;
+package org.elaya.mytodo.status;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import org.elaya.mytodo.tools.ActionTypes;
 import org.elaya.mytodo.R;
-import org.elaya.mytodo.status.StatusItem;
 
 
 /**

@@ -1,4 +1,4 @@
-package org.elaya.mytodo.adapters;
+package org.elaya.mytodo.status;
 
 import android.content.Context;
 import android.database.Cursor;

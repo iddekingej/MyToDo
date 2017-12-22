@@ -16,7 +16,7 @@ import org.elaya.mytodo.settings.Settings;
 import org.elaya.mytodo.tools.BaseEditActivity;
 import org.elaya.mytodo.tools.DatePickerFragment;
 import org.elaya.mytodo.status.StatusItem;
-import org.elaya.mytodo.adapters.StatusSpinnerAdapter;
+import org.elaya.mytodo.status.StatusSpinnerAdapter;
 import org.elaya.mytodo.R;
 import org.elaya.mytodo.tools.DateHandler;
 import org.elaya.mytodo.tools.Helpers;

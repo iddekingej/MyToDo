@@ -10,7 +10,7 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 
 import org.elaya.mytodo.R;
-import org.elaya.mytodo.adapters.StatusCheckListAdapter;
+import org.elaya.mytodo.status.StatusCheckListAdapter;
 import org.elaya.mytodo.status.StatusItem;
 import org.elaya.mytodo.tools.BaseEditActivity;
 import org.elaya.mytodo.tools.Helpers;

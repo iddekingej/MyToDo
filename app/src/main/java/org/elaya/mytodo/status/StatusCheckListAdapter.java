@@ -1,4 +1,4 @@
-package org.elaya.mytodo.adapters;
+package org.elaya.mytodo.status;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.CheckBox;
 
 import org.elaya.mytodo.R;
-import org.elaya.mytodo.status.StatusItem;
 
 import java.util.Set;
 
