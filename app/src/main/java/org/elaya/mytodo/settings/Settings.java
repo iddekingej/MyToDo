@@ -78,6 +78,7 @@ public class Settings {
         lEditor.apply();
     }
 
+    @Nullable
     public static Long getIdDefaultStatus()
     {
         return idDefaultStatus;

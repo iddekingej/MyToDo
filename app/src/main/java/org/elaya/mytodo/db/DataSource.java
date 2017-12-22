@@ -335,9 +335,17 @@ public final class DataSource {
         return lStatusCursor;
     }
 
-    public Cursor getActiveStatusCursor(long pIdCurrent)
+    public Cursor getActiveStatusCursor(Long pIdCurrent)
     {
-        Cursor lStatusCursor=db.rawQuery("select * from status where active=1 or _id=? order by position",new String[]{String.valueOf(pIdCurrent)});
+        String  lParams[]=null;
+        String lQry;
+        if(pIdCurrent != null){
+            lParams=new String[]{String.valueOf(pIdCurrent)};
+            lQry="select * from status where active=1 or _id=? order by position";
+        } else {
+            lQry="select * from status where active=1 order by position";
+        }
+        Cursor lStatusCursor=db.rawQuery(lQry,lParams);
         lStatusCursor.moveToFirst();
         return lStatusCursor;
     }
