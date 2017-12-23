@@ -1,10 +1,12 @@
 package org.elaya.mytodo.filter;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 
 import org.elaya.mytodo.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -24,6 +26,7 @@ public class FilterManager {
         currentFilter=pCurrent;
     }
 
+    @Nullable
     public static FilterSelection getCurrentFilter()
     {
         return currentFilter;
@@ -34,12 +37,14 @@ public class FilterManager {
         return new FilterConditionSelection(pContext.getString(R.string.ft_all),"",false);
     }
 
-    public static int getSelected(ArrayList<FilterSelection> pList){
+    public static int getSelected(List<FilterSelection> pList){
         if(null != currentFilter) {
-            for (int lCnt = 0; lCnt < pList.size(); lCnt++) {
-                if (pList.get(lCnt).isSameKind(currentFilter)) {
+            int lCnt=0;
+            for(FilterSelection lItem:pList){
+                if(lItem.isSameKind(currentFilter)){
                     return lCnt;
                 }
+                lCnt++;
             }
         }
         return 0;

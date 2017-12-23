@@ -14,8 +14,8 @@ import static org.junit.Assert.*;
 
 public class DbProjectTest  extends DbTest{
 
-    static final private String projectName="TestProject";
-    static final private String projectNameOth="TestProjectXXXX";
+    private static final  String projectName="TestProject";
+    private static final  String projectNameOth="TestProjectXXXX";
 
 
     @Test

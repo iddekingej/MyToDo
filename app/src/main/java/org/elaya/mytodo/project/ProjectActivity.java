@@ -142,6 +142,9 @@ public class ProjectActivity extends BaseActivity {
                             break;
                         case R.id.deleteProject:
                             deleteProject(lProject);
+                            break;
+                        default:
+                            return false;
                     }
                     return true;
                 }
@@ -181,8 +184,8 @@ public class ProjectActivity extends BaseActivity {
     private void editProject(@NonNull ProjectItem pProject)
     {
         Intent lIntent= new Intent(this,EditProjectActivity.class);
-        lIntent.putExtra("_id",pProject.getId());
-        lIntent.putExtra("projectName",pProject.getProjectName());
+        lIntent.putExtra(EditProjectActivity.P_ID,pProject.getId());
+        lIntent.putExtra(EditProjectActivity.P_PROJECT_NAME,pProject.getProjectName());
         startActivityForResult(lIntent,ACT_EDIT_PROJECT);
     }
 
@@ -201,12 +204,14 @@ public class ProjectActivity extends BaseActivity {
      * Saves data in database after user entered net project.
      * @param pData Data returned from the project form
      */
-    private void newProject(@NonNull Intent pData)
+    private void insertProject(@NonNull Intent pData)
     {
-        long lIdProject=ds.addProject(pData.getStringExtra("projectName"));
-        refreshList();
-        if(pData.getBooleanExtra("addTodo",false)){
+        long lIdProject=ds.addProject(pData.getStringExtra(EditProjectActivity.P_PROJECT_NAME));
+
+        if(pData.getBooleanExtra(EditProjectActivity.P_ADD_TODO,false)){
             openProjectById(lIdProject);
+        } else {
+            refreshList();
         }
     }
 
@@ -214,8 +219,14 @@ public class ProjectActivity extends BaseActivity {
      * Saves data in databases after user edited the project
      * @param pData Data returned from the project form
      */
-    private void editProject(@NonNull Intent pData){
-        ds.editProject(pData.getLongExtra("_id",-1),pData.getStringExtra("projectName"));
+    private void updateProject(@NonNull Intent pData){
+        long lIdProject=pData.getLongExtra(EditProjectActivity.P_ID,-1);
+        ds.editProject(lIdProject,pData.getStringExtra(EditProjectActivity.P_PROJECT_NAME));
+        if(pData.getBooleanExtra(EditProjectActivity.P_ADD_TODO,false)){
+            openProjectById(lIdProject);
+        } else {
+            refreshList();
+        }
     }
 
     /**
@@ -232,14 +243,13 @@ public class ProjectActivity extends BaseActivity {
             {
                 case ACT_NEW_PROJECT:
                     if(pData.getExtras() != null) {
-                        newProject(pData);
+                        insertProject(pData);
                     }
 
                     break;
 
                 case ACT_EDIT_PROJECT:
-                    editProject(pData);
-                    refreshList();
+                    updateProject(pData);
                     break;
 
             }

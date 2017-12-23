@@ -166,11 +166,11 @@ public final class DataSource {
             return lDescription;
     }
 
-    public long getNumberOfTodo(long pIdProject)
+    public int getNumberOfTodo(long pIdProject)
     {
         Cursor lNumCursor=db.rawQuery("select count(1) num from todoitems where id_project=?",new String[]{String.valueOf(pIdProject)});
         lNumCursor.moveToFirst();
-        long lNum=lNumCursor.getLong(0);
+        int lNum=lNumCursor.getInt(0);
         lNumCursor.close();
         return lNum;
     }
@@ -335,9 +335,9 @@ public final class DataSource {
         return lStatusCursor;
     }
 
-    public Cursor getActiveStatusCursor(Long pIdCurrent)
+    public Cursor getActiveStatusCursor(@Nullable  Long pIdCurrent)
     {
-        String  lParams[]=null;
+        String[] lParams=null;
         String lQry;
         if(pIdCurrent != null){
             lParams=new String[]{String.valueOf(pIdCurrent)};
@@ -380,7 +380,7 @@ public final class DataSource {
         return lCursor;
     }
 
-    private void insertFilterStatus(long pIdFilter,List<Long> pStatus){
+    private void insertFilterStatus(long pIdFilter,@NonNull  List<Long> pStatus){
         ContentValues lStatusValues = new ContentValues();
         lStatusValues.put("id_filter", pIdFilter);
         for(long lStatus:pStatus){
@@ -389,7 +389,7 @@ public final class DataSource {
         }
     }
 
-    public void addFilter(String pName,long pDateFilter,List<Long> pStatus)
+    public void addFilter(String pName,long pDateFilter,@NonNull  List<Long> pStatus)
     {
         db.beginTransaction();
         try {
@@ -406,7 +406,7 @@ public final class DataSource {
         }
     }
 
-    public void editFilter(long pIdFilter,String pName,long pDateFilter,List<Long> pStatus)
+    public void editFilter(long pIdFilter,String pName,long pDateFilter,@NonNull  List<Long> pStatus)
     {
         db.beginTransaction();
         try {
@@ -432,7 +432,7 @@ public final class DataSource {
         deleteById(FilterItem.F_TABLE_NAME,pIdFilter);
     }
 
-    public void fillFilterSelection(List<FilterSelection> pSelectionList)
+    public void fillFilterSelection(@NonNull List<FilterSelection> pSelectionList)
     {
         FilterItem lItem;
         Cursor lCursor=db.rawQuery("select * from filters order by name",null);

@@ -63,7 +63,9 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         todoFilterElement.setSelection(FilterManager.getSelected(lList));
         todoFilterElement.setOnItemSelectedListener(this);
 
-        projectName.setText(projectItem.getProjectName());
+        if(projectItem != null) {
+            projectName.setText(projectItem.getProjectName());
+        }
 
         adapter=new TodoListAdapter(this,ds.getTodoCursor(id,false));
         todoList.setAdapter(adapter);
@@ -94,8 +96,11 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
 
     private void setNumNotInFilter()
     {
-        long lNum=ds.getNumberOfTodo(id);
-        String lTitle=getString(R.string.ft_num_found,adapter.getCount(),lNum-adapter.getCount());
+        int lNum=ds.getNumberOfTodo(id);
+
+        int lFiltered=adapter.getCount();
+
+        String lTitle=getResources().getQuantityString(R.plurals.ft_num_found,lFiltered,lFiltered,lNum-lFiltered);
         numTodoFilterElement.setText(lTitle);
     }
 

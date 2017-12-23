@@ -16,6 +16,12 @@ import org.elaya.mytodo.tools.Helpers;
 
 public class EditStatusActivity extends BaseEditActivity {
 
+    public static final String P_ID="id";
+    public static final String P_POSITION="position";
+    public static final String P_DESCRIPTION="description";
+    public static final String P_ACTION_TYPE="action_type";
+    public static final String P_ACTIVE="active";
+    public static final String P_IS_DEFAULT="is_default";
     private long id;
     private EditText descriptionElement;
     private EditText positionElement;
@@ -33,28 +39,28 @@ public class EditStatusActivity extends BaseEditActivity {
 
         id=lIntent.getLongExtra("id",-1);
 
-        if(lIntent.hasExtra("position")) {
-            positionElement.setText(String.valueOf(lIntent.getLongExtra("position", 0)));
+        if(lIntent.hasExtra(P_POSITION)) {
+            positionElement.setText(String.valueOf(lIntent.getLongExtra(P_POSITION, 0)));
         } else {
             positionElement.setText("");
         }
 
         descriptionElement= findViewById(R.id.description);
-        descriptionElement.setText(lIntent.getStringExtra("description"));
+        descriptionElement.setText(lIntent.getStringExtra(P_DESCRIPTION));
 
         ArrayAdapter actionTypeAdapter=new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, ActionTypes.getActionTypes(this));
 
         actionType= findViewById(R.id.actionType);
         actionType.setAdapter(actionTypeAdapter);
 
-        long lActionType=lIntent.getLongExtra("actionType",0);
+        long lActionType=lIntent.getLongExtra(P_ACTION_TYPE,0);
 
         if(lActionType >= ActionTypes.MAX){
             lActionType = 0;
         }
         actionType.setSelection((int)lActionType);
 
-        boolean lActive=lIntent.getBooleanExtra("active",true);
+        boolean lActive=lIntent.getBooleanExtra(P_ACTIVE,true);
         activeElement= findViewById(R.id.active);
         activeElement.setChecked(lActive);
         isDefaultElement =findViewById(R.id.isDefault);
@@ -98,12 +104,12 @@ public class EditStatusActivity extends BaseEditActivity {
             return;
         }
         Intent lIntent = new Intent();
-        lIntent.putExtra("id",id);
-        lIntent.putExtra("position",lPosition);
-        lIntent.putExtra("actionType",(long)actionType.getSelectedItemPosition());
-        lIntent.putExtra("description",lDescription);
-        lIntent.putExtra("active",activeElement.isChecked());
-        lIntent.putExtra( "isDefault", isDefaultElement.isChecked());
+        lIntent.putExtra(P_ID,id);
+        lIntent.putExtra(P_POSITION,lPosition);
+        lIntent.putExtra(P_ACTION_TYPE,(long)actionType.getSelectedItemPosition());
+        lIntent.putExtra(P_DESCRIPTION,lDescription);
+        lIntent.putExtra(P_ACTIVE,activeElement.isChecked());
+        lIntent.putExtra( P_IS_DEFAULT, isDefaultElement.isChecked());
         setResult(RESULT_OK,lIntent);
         finish();
     }

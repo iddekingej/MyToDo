@@ -71,11 +71,11 @@ public class StatusActivity extends BaseActivity {
     private void editStatusClicked(@NonNull StatusItem pItem)
     {
         Intent lIntent=new Intent(this,EditStatusActivity.class);
-        lIntent.putExtra("id",pItem.getId());
-        lIntent.putExtra("position",pItem.getPosition());
-        lIntent.putExtra("actionType",pItem.getActionType());
-        lIntent.putExtra("description",pItem.getDescription());
-        lIntent.putExtra("active",pItem.getActive());
+        lIntent.putExtra(EditStatusActivity.P_ID,pItem.getId());
+        lIntent.putExtra(EditStatusActivity.P_POSITION,pItem.getPosition());
+        lIntent.putExtra(EditStatusActivity.P_ACTION_TYPE,pItem.getActionType());
+        lIntent.putExtra(EditStatusActivity.P_DESCRIPTION,pItem.getDescription());
+        lIntent.putExtra(EditStatusActivity.P_ACTIVE,pItem.getActive());
         startActivityForResult(lIntent,RES_EDIT_STATUS);
     }
 
@@ -87,12 +87,12 @@ public class StatusActivity extends BaseActivity {
 
     private void saveNewStatus(@NonNull Intent pIntent)
     {
-        long lPosition=pIntent.getLongExtra("position",0);
-        long lActionType=pIntent.getLongExtra("actionType",0);
-        String lDescription=pIntent.getStringExtra("description");
-        boolean lActive=pIntent.getBooleanExtra("active",true);
+        long lPosition=pIntent.getLongExtra(EditStatusActivity.P_POSITION,0);
+        long lActionType=pIntent.getLongExtra(EditStatusActivity.P_ACTION_TYPE,0);
+        String lDescription=pIntent.getStringExtra(EditStatusActivity.P_DESCRIPTION);
+        boolean lActive=pIntent.getBooleanExtra(EditStatusActivity.P_ACTIVE,true);
         long lId=ds.addStatus(lPosition,lActionType,lDescription,lActive);
-        if(pIntent.getBooleanExtra("isDefault",false)){
+        if(pIntent.getBooleanExtra(EditStatusActivity.P_IS_DEFAULT,false)){
             Settings.setIdDefaultStatus(lId);
         }
         refreshList();
@@ -100,13 +100,13 @@ public class StatusActivity extends BaseActivity {
 
     private void updateStatus(@NonNull Intent pIntent)
     {
-        long lId=pIntent.getLongExtra("id",0);
-        long lPosition=pIntent.getLongExtra("position",0);
-        long lActionType=pIntent.getLongExtra("actionType",0);
-        String lDescription=pIntent.getStringExtra("description");
-        boolean lActive=pIntent.getBooleanExtra("active",true);
+        long lId=pIntent.getLongExtra(EditStatusActivity.P_ID,0);
+        long lPosition=pIntent.getLongExtra(EditStatusActivity.P_POSITION,0);
+        long lActionType=pIntent.getLongExtra(EditStatusActivity.P_ACTION_TYPE,0);
+        String lDescription=pIntent.getStringExtra(EditStatusActivity.P_DESCRIPTION);
+        boolean lActive=pIntent.getBooleanExtra(EditStatusActivity.P_ACTIVE,true);
         ds.updateStatus(lId,lPosition,lActionType,lDescription,lActive);
-        if(pIntent.getBooleanExtra("isDefault",false)) {
+        if(pIntent.getBooleanExtra(EditStatusActivity.P_IS_DEFAULT,false)) {
             Settings.setIdDefaultStatus(lId);
         }
         refreshList();

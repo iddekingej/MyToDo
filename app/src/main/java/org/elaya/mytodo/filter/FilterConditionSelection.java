@@ -19,7 +19,7 @@ public class FilterConditionSelection implements FilterSelection {
     }
 
     @Override
-    public boolean isSameKind(Object pFilterSelection) {
+    public boolean isSameKind(@NonNull Object pFilterSelection) {
         return FilterConditionSelection.class.isInstance(pFilterSelection) && ((FilterConditionSelection)pFilterSelection).getCondition().equals(condition);
 
     }

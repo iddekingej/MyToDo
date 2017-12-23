@@ -47,6 +47,7 @@
     <string name="head_title_finished">F</string>
     <string name="head_title_active">A</string>
     <string name="head_title_wait">W</string>
+    <string name="ERR_PROJECT_NAME_EMPTY">Project name can\'t be empty</string>
 
     <!-- Status -->
 
@@ -104,8 +105,12 @@
     <string name="sel_not_in_filter">Not in filter</string>
     <!-- filter types -->
     <string name="ft_all">All</string>
-    <string name="ft_num_found">Found %1$d todo\'s, %2$d filtered out</string>
+    <plurals name="ft_num_found">
+        <item quantity="zero">Found no todo\'s, %2$d filtered out</item>
+        <item quantity="one">Found one todo, %2$d filtered out</item>
+        <item quantity="other">Found %1$d todo\'s, %2$d filtered out</item>
 
+    </plurals>
     <string name="add_filter">Add filter</string>
     <string name="no_filters_found">No filters found</string>
     <string name="menu_todo_filters">Todo filters</string>

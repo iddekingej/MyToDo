@@ -13,6 +13,10 @@ import org.elaya.mytodo.tools.Helpers;
 
 public class EditProjectActivity extends BaseEditActivity {
 
+    public static String P_ID="id";
+    public static String P_PROJECT_NAME="project_name";
+    public static String P_ADD_TODO="add_todo";
+
     private TextView projectName;
     private long     id;
 
@@ -28,8 +32,8 @@ public class EditProjectActivity extends BaseEditActivity {
 
         projectName= findViewById(R.id.projectName);
         Intent lIntent=getIntent();
-        id=lIntent.getLongExtra("_id",-1);
-        projectName.setText(lIntent.getStringExtra("projectName"));
+        id=lIntent.getLongExtra(P_ID,-1);
+        projectName.setText(lIntent.getStringExtra(P_PROJECT_NAME));
     }
 
     @Override
@@ -50,11 +54,16 @@ public class EditProjectActivity extends BaseEditActivity {
      */
     private void saveProject(boolean pAddTodo)
     {
+
         Intent lIntent = new Intent();
         String lText=projectName.getText().toString();
-        lIntent.putExtra("_id",id);
-        lIntent.putExtra("projectName",lText);
-        lIntent.putExtra("addTodo",pAddTodo);
+        if(lText.isEmpty()){
+            Helpers.warning(this,R.string.ERR_PROJECT_NAME_EMPTY);
+            return;
+        }
+        lIntent.putExtra(P_ID,id);
+        lIntent.putExtra(P_PROJECT_NAME,lText);
+        lIntent.putExtra(P_ADD_TODO,pAddTodo);
         setResult(RESULT_OK,lIntent);
         finish();
     }

@@ -42,7 +42,7 @@ public class FilterFilterSelection implements FilterSelection {
         return true;
     }
 
-    public boolean isSameKind(Object pFilterSelection)
+    public boolean isSameKind(@NonNull Object pFilterSelection)
     {
         if(FilterFilterSelection.class.isInstance(pFilterSelection)){
             if(((FilterFilterSelection)pFilterSelection).getFilterItem().getId()==filter.getId()){
