@@ -1,6 +1,7 @@
 package org.elaya.mytodo.status;
 
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 
 import org.elaya.mytodo.tools.ModelItem;
 
@@ -11,10 +12,10 @@ import org.elaya.mytodo.tools.ModelItem;
 public class StatusItem extends ModelItem {
 
     public static final String TABLE_NAME="status";
-    public final static String F_POSITION="position";
-    public final static String F_DESCRIPTION="description";
-    public final static String F_ACTION_TYPE="action_type";
-    public final static String F_ACTIVE="active";
+    public static final String F_POSITION="position";
+    public static final String F_DESCRIPTION="description";
+    public static final String F_ACTION_TYPE="action_type";
+    public static final String F_ACTIVE="active";
     /**
      * position is status selection list
      */
@@ -39,7 +40,7 @@ public class StatusItem extends ModelItem {
     /**
      * Setup status object
      */
-    public StatusItem(Cursor pCursor)
+    public StatusItem(@NonNull Cursor pCursor)
     {
         super(pCursor);
 

@@ -85,7 +85,7 @@ public class StatusActivity extends BaseActivity {
         startActivityForResult(lIntent,RES_NEW_STATUS);
     }
 
-    private void saveNewStatus(@NonNull Intent pIntent)
+    private void insertStatus(@NonNull Intent pIntent)
     {
         long lPosition=pIntent.getLongExtra(EditStatusActivity.P_POSITION,0);
         long lActionType=pIntent.getLongExtra(EditStatusActivity.P_ACTION_TYPE,0);
@@ -124,17 +124,22 @@ public class StatusActivity extends BaseActivity {
 
                 switch (pRequestCode) {
                     case RES_NEW_STATUS:
-                        saveNewStatus(pData);
+                        insertStatus(pData);
                         break;
 
                     case RES_EDIT_STATUS:
                         updateStatus(pData);
                         break;
+                    default:
+                        super.onActivityResult(pRequestCode,pResultCode,pData);
                 }
                 break;
 
             case RESULT_DELETE_STATUS:
                 deleteStatus(pData);
+                break;
+            default:
+                super.onActivityResult(pRequestCode,pResultCode,pData);
 
         }
     }

@@ -28,7 +28,7 @@ class TodoListAdapter extends CursorAdapter {
         super(pContext,pCursor,0);
 
         statusDescIndex =pCursor.getColumnIndex("statusdesc");
-        isFinishedIndex=pCursor.getColumnIndex("isfinished");
+        isFinishedIndex=pCursor.getColumnIndex( "isfinished");
 
     }
 

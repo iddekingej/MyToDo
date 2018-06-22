@@ -131,7 +131,7 @@ public class FilterActivity extends BaseActivity{
     }
 
 
-    private void deleteFilter(final View pView)
+    private void deleteFilter(@NonNull final View pView)
     {
         Helpers.confirmDelete(this,R.string.title_delete_filter,new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface pDialog, int pId) {

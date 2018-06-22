@@ -9,7 +9,7 @@ import org.junit.Before;
  * Base class for a DataSource tests
  */
 
-public abstract class DbTest {
+abstract class DbTest {
     DataSource ds;
 
     @Before

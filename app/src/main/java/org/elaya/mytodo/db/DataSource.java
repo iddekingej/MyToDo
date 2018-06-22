@@ -213,7 +213,7 @@ public final class DataSource {
                 lCondition+
                 "order by " +
                 "   case " +
-                "   when end_date <?  and not action_type in (3,4) then 1" +
+                "   when end_date <?  and not (action_type in (3,4)) then 1" +
                 "   when start_date < ?  and not action_type in (3,4) then 2"+
                 "   when action_type=2 then 3 " +
                 "   when action_type in (0,1,4) then 4 " +
@@ -237,7 +237,7 @@ public final class DataSource {
      */
     public long addProject(String pProjectName){
         ContentValues lValues=new ContentValues();
-        lValues.put( ProjectItem.F_PROJECTNAME,pProjectName);
+        lValues.put( ProjectItem.F_PROJECT_NAME,pProjectName);
         return db.insert(ProjectItem.F_TABLE_NAME,null,lValues);
     }
 
@@ -250,7 +250,7 @@ public final class DataSource {
     public void editProject(long pId,String pProjectName)
     {
         ContentValues lValues = new ContentValues();
-        lValues.put(ProjectItem.F_PROJECTNAME,pProjectName);
+        lValues.put(ProjectItem.F_PROJECT_NAME,pProjectName);
 
         updateById(ProjectItem.F_TABLE_NAME,lValues,pId);
     }

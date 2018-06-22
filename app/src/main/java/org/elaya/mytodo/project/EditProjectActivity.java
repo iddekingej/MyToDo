@@ -13,9 +13,9 @@ import org.elaya.mytodo.tools.Helpers;
 
 public class EditProjectActivity extends BaseEditActivity {
 
-    public static String P_ID="id";
-    public static String P_PROJECT_NAME="project_name";
-    public static String P_ADD_TODO="add_todo";
+    public static final String P_ID="id";
+    public static final String P_PROJECT_NAME="project_name";
+    public static final String P_ADD_TODO="add_todo";
 
     private TextView projectName;
     private long     id;

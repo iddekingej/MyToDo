@@ -98,9 +98,13 @@ public class EditStatusActivity extends BaseEditActivity {
         }
         long lPosition;
         try {
-            lPosition = Long.valueOf(lPositionText);
+            lPosition =  Long.parseLong(lPositionText);
         }catch(NumberFormatException e){
             Helpers.warning(this,R.string.warning_position_number_mandatory);
+            return;
+        }
+        if(!activeElement.isChecked() && isDefaultElement.isChecked()){
+            Helpers.warning(this,R.string.warning_status_no_default_not_active);
             return;
         }
         Intent lIntent = new Intent();

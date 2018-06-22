@@ -10,7 +10,7 @@ import android.support.annotation.NonNull;
 public class ProjectItem {
     private static final String F_ID ="_id";
     public static final String F_TABLE_NAME ="projects";
-    public static final String F_PROJECTNAME ="projectname";
+    public static final String F_PROJECT_NAME ="projectname";
 
 
     private final String projectName;
@@ -19,7 +19,7 @@ public class ProjectItem {
     {
         int lIndex=pCursor.getColumnIndex(F_ID);
         id=pCursor.getLong(lIndex);
-        lIndex=pCursor.getColumnIndex(F_PROJECTNAME);
+        lIndex=pCursor.getColumnIndex(F_PROJECT_NAME);
         projectName=pCursor.getString(lIndex);
 
 

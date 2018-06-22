@@ -2,4 +2,5 @@
 <resources>
     <color name='after_start'>#008000</color>
     <color name='after_end'>#FF0000</color>
+    <color name="main_bg_toolbar">#c7b1b1</color>
 </resources>

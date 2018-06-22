@@ -1,6 +1,8 @@
 package org.elaya.mytodo.tools;
 
 import android.database.Cursor;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 /**
  * Base class for DB objects
@@ -10,7 +12,7 @@ public class ModelItem {
 
     private final long id;
 
-    protected ModelItem(Cursor pCursor)
+    protected ModelItem(@NonNull Cursor pCursor)
     {
         id=getCursorLong(pCursor,"_id");
     }
@@ -20,13 +22,14 @@ public class ModelItem {
         return id;
     }
 
-    protected long getCursorLong(Cursor pCursor,String pName)
+    protected long getCursorLong(@NonNull Cursor pCursor, @NonNull String pName)
     {
         int lIndex=pCursor.getColumnIndex(pName);
         return pCursor.getLong(lIndex);
     }
 
-    protected Long getCursorLongObject(Cursor pCursor,String pName)
+    @Nullable
+    protected Long getCursorLongObject(@NonNull Cursor pCursor,@NonNull String pName)
     {
         int lIndex=pCursor.getColumnIndex(pName);
         if(pCursor.isNull(lIndex)){
@@ -36,7 +39,7 @@ public class ModelItem {
 
     }
 
-    protected String getCursorString(Cursor pCursor,String pName)
+    protected String getCursorString(@NonNull Cursor pCursor,@NonNull String pName)
     {
         int lIndex=pCursor.getColumnIndex(pName);
         return pCursor.getString(lIndex);

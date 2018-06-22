@@ -36,7 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract int getContentResource();
     protected abstract int getMenuResource();
 
-    protected void back()
+    private void back()
     {
         setResult(RESULT_CANCELED);
         finish();

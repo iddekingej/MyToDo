@@ -251,7 +251,8 @@ public class ProjectActivity extends BaseActivity {
                 case ACT_EDIT_PROJECT:
                     updateProject(pData);
                     break;
-
+                default:
+                    super.onActivityResult(pRequestCode,pResultCode,pData);
             }
         } else {
             // After Status or TO DO page the process list must be refreshed because

@@ -31,8 +31,8 @@ public class EditToDoActivity extends BaseEditActivity {
     public static final String P_ID_STATUS="id_status";
     public static final String P_TITLE="title";
     public static final String P_COMMENT="comment";
-    public static final String P_STARTDATE="startDate";
-    public static final String P_ENDDATE="endDate";
+    public static final String P_START_DATE ="startDate";
+    public static final String P_END_DATE ="endDate";
 
     private boolean isNew=false;
     private long id;
@@ -65,13 +65,13 @@ public class EditToDoActivity extends BaseEditActivity {
         comment.setText(lIntent.getStringExtra(P_COMMENT));
 
         startDateElement= findViewById(R.id.startDate);
-        if(lIntent.hasExtra(P_STARTDATE)){
-            startDateElement.setText(DateHandler.getDateTextFromLong(lIntent.getLongExtra(P_STARTDATE,-1)));
+        if(lIntent.hasExtra(P_START_DATE)){
+            startDateElement.setText(DateHandler.getDateTextFromLong(lIntent.getLongExtra(P_START_DATE,-1)));
         }
 
         endDateElement= findViewById(R.id.endDate);
-        if(lIntent.hasExtra(P_ENDDATE)){
-            endDateElement.setText(DateHandler.getDateTextFromLong(lIntent.getLongExtra(P_ENDDATE,-1)));
+        if(lIntent.hasExtra(P_END_DATE)){
+            endDateElement.setText(DateHandler.getDateTextFromLong(lIntent.getLongExtra(P_END_DATE,-1)));
         }
 
         statusElement= findViewById(R.id.status);
@@ -192,10 +192,10 @@ public class EditToDoActivity extends BaseEditActivity {
         lIntent.putExtra(P_TITLE,title.getText().toString());
         lIntent.putExtra(P_COMMENT,comment.getText().toString());
         if(lStartDate != null){
-            lIntent.putExtra(P_STARTDATE,lStartDate.getMillis());
+            lIntent.putExtra(P_START_DATE,lStartDate.getMillis());
         }
         if(lEndDate != null){
-            lIntent.putExtra(P_ENDDATE,lEndDate.getMillis());
+            lIntent.putExtra(P_END_DATE,lEndDate.getMillis());
         }
         setResult(RESULT_OK,lIntent);
         finish();

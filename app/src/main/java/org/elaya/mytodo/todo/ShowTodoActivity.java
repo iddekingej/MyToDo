@@ -1,20 +1,26 @@
 package org.elaya.mytodo.todo;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.R;
+import org.elaya.mytodo.tools.BaseActivity;
 import org.elaya.mytodo.tools.DateHandler;
 
 public class ShowTodoActivity extends BaseActivity {
 
     private  static final int REQ_EDIT =100;
 
-
+    public final static String P_ID="_id";
+    public final static String P_ID_PROJECT="id_project";
+    public final static String P_TITLE="title";
+    public final static String P_ID_STATUS="id_status";
+    public final static String P_START_DATE ="startDate";
+    public final static String P_END_DATE ="endDate";
+    public final static String P_COMMENT="comment";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,15 +32,15 @@ public class ShowTodoActivity extends BaseActivity {
         TextView lCommentElement= findViewById(R.id.comment);
 
         Intent lIntent=getIntent();
-        lTitleElement.setText(lIntent.getStringExtra("title"));
-        lStatusElement.setText(ds.getStatusTextById(lIntent.getLongExtra("id_status",-1)));
-        if(lIntent.hasExtra("startDate")) {
-            lStartDateElement.setText(DateHandler.getDateTextFromLong(lIntent.getLongExtra("startDate",-1)));
+        lTitleElement.setText(lIntent.getStringExtra(P_TITLE));
+        lStatusElement.setText(ds.getStatusTextById(lIntent.getLongExtra(P_ID_STATUS,-1)));
+        if(lIntent.hasExtra(P_START_DATE)) {
+            lStartDateElement.setText(DateHandler.getDateTextFromLong(lIntent.getLongExtra(P_START_DATE,-1)));
         }
-        if(lIntent.hasExtra("endDate")){
-            lEndDateElement.setText(DateHandler.getDateTextFromLong(lIntent.getLongExtra("endDate",-1)));
+        if(lIntent.hasExtra(P_END_DATE)){
+            lEndDateElement.setText(DateHandler.getDateTextFromLong(lIntent.getLongExtra(P_END_DATE,-1)));
         }
-        lCommentElement.setText(lIntent.getStringExtra("comment"));
+        lCommentElement.setText(lIntent.getStringExtra(P_COMMENT));
     }
 
     @Override
@@ -72,12 +78,12 @@ public class ShowTodoActivity extends BaseActivity {
         String lTitle=pData.getStringExtra(EditToDoActivity.P_TITLE);
         String lComment=pData.getStringExtra(EditToDoActivity.P_COMMENT);
         Long lStartDate=null;
-        if(pData.hasExtra(EditToDoActivity.P_STARTDATE)){
-            lStartDate=pData.getLongExtra(EditToDoActivity.P_STARTDATE,-1);
+        if(pData.hasExtra(EditToDoActivity.P_START_DATE)){
+            lStartDate=pData.getLongExtra(EditToDoActivity.P_START_DATE,-1);
         }
         Long lEndDate=null;
-        if(pData.hasExtra(EditToDoActivity.P_ENDDATE)){
-            lEndDate=pData.getLongExtra(EditToDoActivity.P_ENDDATE,-1);
+        if(pData.hasExtra(EditToDoActivity.P_END_DATE)){
+            lEndDate=pData.getLongExtra(EditToDoActivity.P_END_DATE,-1);
         }
         ds.updateToDo(lId,lIdProject,lIdStatus,lTitle,lComment,lStartDate,lEndDate);
     }

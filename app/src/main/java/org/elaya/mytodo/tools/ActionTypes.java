@@ -22,7 +22,7 @@ public final class ActionTypes {
     public static final long REMOVED=4;
     public static final long MAX=4;
     @NonNull
-    public static  String[] getActionTypes(@NonNull Activity pActivity){
+    public static synchronized   String[] getActionTypes(@NonNull Activity pActivity){
         if(actionTypesCache == null){
             actionTypesCache =new String[actionTypesId.length];
 

@@ -15,8 +15,8 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/main_bg_toolbar"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
@@ -44,39 +44,39 @@
             android:onClick="openFilter"
             android:src="@drawable/filter" />
 
-        <RadioGroup
-            android:id="@+id/filterUse"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:onClick="negResult"
-            android:orientation="vertical"
-            android:paddingEnd="5dp"
-            android:paddingStart="5dp">
-
-            <RadioButton
-                android:id="@+id/inFilter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="negResult"
-                android:text="@string/sel_in_filter" />
-
-            <RadioButton
-                android:id="@+id/notInFilter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="negResult"
-                android:text="@string/sel_not_in_filter" />
-        </RadioGroup>
-
-        <Spinner
-            android:id="@+id/todoFilter"
+        <LinearLayout
+            style="@style/filterRow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="top|start|center_vertical" />
+            android:orientation="vertical">
 
+
+            <LinearLayout
+                style="@style/filterRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_label"
+                    android:paddingStart="10dp"/>
+
+                <Spinner
+                    android:id="@+id/filterType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/filter_type" />
+                <Spinner
+                    android:id="@+id/todoFilter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top|start|center_vertical" />
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 
     <TextView

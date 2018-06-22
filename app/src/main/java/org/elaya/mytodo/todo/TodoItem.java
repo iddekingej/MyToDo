@@ -1,6 +1,7 @@
 package org.elaya.mytodo.todo;
 
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 
 import org.elaya.mytodo.tools.ModelItem;
 
@@ -24,7 +25,7 @@ public class TodoItem extends ModelItem {
     private final Long startDate;
     private final Long endDate;
 
-    public TodoItem(Cursor pCursor)
+    public TodoItem(@NonNull Cursor pCursor)
     {
         super(pCursor);
 

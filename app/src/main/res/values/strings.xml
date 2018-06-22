@@ -65,6 +65,7 @@
     <string name="is_status_active">Is status active?</string>
     <string name="status_active">Act.</string>
     <string name="label_is_default">Is default when adding new todo</string>
+    <string name="warning_status_no_default_not_active">Status can\'t be a default status when it\'s not active</string>
     <!-- Generic -->
     <string name="help">Help</string>
     <string name="title_activity_help">Help</string>
@@ -103,8 +104,13 @@
     <string name="filter_afterStartDate">Include after \"start date\"</string>
     <string name="sel_in_filter">In filter</string>
     <string name="sel_not_in_filter">Not in filter</string>
+    <string name="filter_label">Display filter:</string>
+    <string-array name="filter_type">
+        <item>in filter</item>
+        <item>not in filter</item>
+    </string-array>
     <!-- filter types -->
-    <string name="ft_all">All</string>
+    <string name="ft_all">All todo\'s</string>
     <plurals name="ft_num_found">
         <item quantity="zero">Found no todo\'s, %2$d filtered out</item>
         <item quantity="one">Found one todo, %2$d filtered out</item>

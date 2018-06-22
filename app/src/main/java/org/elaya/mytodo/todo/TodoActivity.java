@@ -39,8 +39,6 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
     private boolean notFilter;
     private TextView numTodoFilterElement;
     private LinearLayout headerElement;
-    private RadioButton inFilterElement;
-    private RadioButton notInFilterElement;
     private ArrayAdapter<FilterSelection> filterListAdapter;
     private Spinner todoFilterElement;
     @Override
@@ -63,6 +61,9 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         todoFilterElement.setSelection(FilterManager.getSelected(lList));
         todoFilterElement.setOnItemSelectedListener(this);
 
+        Spinner filterType=findViewById(R.id.filterType);
+        filterType.setOnItemSelectedListener(this);
+
         if(projectItem != null) {
             projectName.setText(projectItem.getProjectName());
         }
@@ -79,9 +80,6 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         numTodoFilterElement =findViewById(R.id.numTodoFilter);
         notFilter=false;
 
-        inFilterElement = findViewById(R.id.inFilter);
-        inFilterElement.setChecked(true);
-        notInFilterElement = findViewById(R.id.notInFilter);
         setNumNotInFilter();
         showHeader();
     }
@@ -153,21 +151,21 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
     private void openShowToDo(@NonNull View pItem){
         TodoItem lItem=(TodoItem)pItem.getTag();
         Intent lIntent= new Intent(this,ShowTodoActivity.class);
-        lIntent.putExtra("_id",lItem.getId());
-        lIntent.putExtra("id_project",id);
-        lIntent.putExtra("id_status",lItem.getIdStatus());
-        lIntent.putExtra("title",lItem.getTitle());
-        lIntent.putExtra("comment",lItem.getComment());
+        lIntent.putExtra(ShowTodoActivity.P_ID,lItem.getId());
+        lIntent.putExtra(ShowTodoActivity.P_ID_PROJECT,id);
+        lIntent.putExtra(ShowTodoActivity.P_ID_STATUS,lItem.getIdStatus());
+        lIntent.putExtra(ShowTodoActivity.P_TITLE,lItem.getTitle());
+        lIntent.putExtra(ShowTodoActivity.P_COMMENT,lItem.getComment());
         if(lItem.getStartDate() != null){
-            lIntent.putExtra("startDate",lItem.getStartDate());
+            lIntent.putExtra(ShowTodoActivity.P_START_DATE,lItem.getStartDate());
         }
         if(lItem.getEndDate() != null){
-            lIntent.putExtra("endDate",lItem.getEndDate());
+            lIntent.putExtra(ShowTodoActivity.P_END_DATE,lItem.getEndDate());
         }
         startActivityForResult(lIntent,ACT_SHOW_TODO);
     }
 
-    private void addTodo(@NonNull  Intent pData)
+    private void insertTodo(@NonNull  Intent pData)
     {
         long lIdProject=pData.getLongExtra("id_project",-1);
         long lIdStatus=pData.getLongExtra("id_status",-1);
@@ -215,16 +213,20 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
                     case RESULT_OK:
                         switch (pRequestCode) {
                             case ACT_NEW_TODO:
-                                addTodo(pData);
+                                insertTodo(pData);
                                 break;
 
                             case ACT_SHOW_TODO:
                                 refreshList();
                                 break;
+                            default:
+                                super.onActivityResult(pRequestCode,pResultCode,pData);
+
 
                         }
-
                         break;
+                    default:
+                        super.onActivityResult(pRequestCode,pResultCode,pData);
                 }
             }
         }catch(Exception e){
@@ -239,17 +241,16 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
         startActivityForResult(lIntent,ACT_FILTER);
     }
 
-    public void negResult(@SuppressWarnings("UnusedParameters") View pView)
-    {
-        notFilter=!inFilterElement.isChecked();
-        refreshList();
-    }
 
     private void refreshListFilter()
     {
         projectItem=ds.getProjectById(id);
         refreshList();
     }
+
+    /**
+     * Refresh the to do list
+     */
 
     private void refreshList()
     {
@@ -268,20 +269,22 @@ public class TodoActivity extends BaseActivity implements AdapterView.OnItemSele
      * this method is called
      *
      * @param pAdapterView  Adapter of the spinner
-     * @param view The view within the adapter view that was clicked
+     * @param pView The view within the adapter view that was clicked
      * @param pPos  Position selected
      * @param pId   The row id that was selected
      */
     @Override
-    public void onItemSelected(@NonNull AdapterView<?> pAdapterView, View view, int pPos, long pId) {
+    public void onItemSelected(@NonNull AdapterView<?> pAdapterView, View pView, int pPos, long pId) {
         if(projectItem != null) {
-            FilterSelection lSelection=(FilterSelection)pAdapterView.getItemAtPosition(pPos);
-            FilterManager.setCurrentFilter(lSelection);
-            notInFilterElement.setEnabled(lSelection.hasNot());
-            refreshList();
-            inFilterElement.setChecked(true);
+            if (pAdapterView.getId() == R.id.todoFilter) {
+                FilterSelection lSelection = (FilterSelection) pAdapterView.getItemAtPosition(pPos);
+                FilterManager.setCurrentFilter(lSelection);
+                refreshList();
+            } else if(pAdapterView.getId()== R.id.filterType){
+                notFilter=pPos ==1;
+                refreshList();
+            }
         }
-
     }
 
     @Override
